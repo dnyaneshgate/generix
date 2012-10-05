@@ -1,0 +1,6 @@
+default 0
+timeout 5
+title kernel-1.0 (Text Mode)
+	kernel /boot/kernel-1.0
+	module /boot/initrd.img
+	quiet
