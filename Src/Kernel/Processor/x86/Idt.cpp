@@ -193,7 +193,7 @@ VOID GIdt::Install() {
 	struct {
 		USHORT limit;
 		ULONG base;
-	} PACKED idtPtr;
+	} __PACKED__ idtPtr;
 
 	idtPtr.limit = sizeof(IDTENTRY) * 256 - 1;
 	idtPtr.base = (ULONG) &idt;

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+PWD=`pwd`
 ECHO="echo -e"
 
 if [[ $# != 1 ]]; then
@@ -8,7 +9,7 @@ if [[ $# != 1 ]]; then
 fi
 
 EMU=$1
-PROJECTPATH=/media/SOFTWARE/Generix
+PROJECTPATH=$PWD
 BOOT=$PROJECTPATH/Boot
 
 if [[ $EMU -eq "bochs" ]]; then

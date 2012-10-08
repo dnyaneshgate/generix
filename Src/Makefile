@@ -2,6 +2,7 @@ include config.mk
 include rules.mk
 include Klib/libraries.mk
 include Kernel/kernel.mk
+include Mem/Memory.mk
 include Drivers/drivers.mk
 
 .PHONY: world lib kernel driver usage

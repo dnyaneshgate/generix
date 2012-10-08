@@ -47,7 +47,7 @@ typedef struct strucGDTENTRY {
 	UINT access :8;
 	UINT granularity :8;
 	UINT baseHigh :8;
-}PACKED GDTENTRY, *PGDTENTRY;
+}__PACKED__ GDTENTRY, *PGDTENTRY;
 
 typedef struct strucIDTENTRY {
 	USHORT offset_1;                             // offset bits 0..15
@@ -55,7 +55,7 @@ typedef struct strucIDTENTRY {
 	UCHAR zero;                                 // unused, set to 0
 	UCHAR type_attr;                           // type and attributes, see below
 	USHORT offset_2;                             // offset bits 16..31
-}PACKED IDTENTRY, *PIDTENTRY;
+}__PACKED__ IDTENTRY, *PIDTENTRY;
 
 EXTERN GDTENTRY gdt[];
 

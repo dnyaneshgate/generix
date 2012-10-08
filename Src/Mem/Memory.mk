@@ -1,0 +1,1 @@
+MEMOBJ := $(patsubst %.cpp,%.o,$(wildcard Mem/*.cpp))

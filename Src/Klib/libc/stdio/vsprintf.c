@@ -54,7 +54,7 @@ static char * number(char * str, int num, int base, int size, int precision
 	if (base<2 || base>36)
 		return 0;
 	c = (type & ZEROPAD) ? '0' : ' ' ;
-	if (type&SIGN && num<0) {
+	if ((type&SIGN) && (num<0)) {
 		sign='-';
 		num = -num;
 	} else

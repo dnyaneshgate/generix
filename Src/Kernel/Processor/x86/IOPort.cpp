@@ -115,7 +115,7 @@ GIOPort::LoadGdtr(Type base, USHORT limit)
 	{
 		USHORT limit;
 		ULONG  base;
-	} PACKED Gdtr;
+	} __PACKED__ Gdtr;
 	
 	Gdtr.limit = limit;
 	Gdtr.base  = (ULONG)base;
@@ -130,7 +130,7 @@ GIOPort::LoadIdtr(Type base, USHORT limit)
 	{
 		USHORT limit;
 		ULONG  base;
-	} PACKED Idtr;
+	} __PACKED__ Idtr;
 	
 	Idtr.limit = limit;
 	Idtr.base  = (ULONG)base;

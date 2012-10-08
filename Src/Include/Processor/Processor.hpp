@@ -7,6 +7,8 @@
 #	include "x86/Gdt.hpp"
 #	include "x86/Idt.hpp"
 #	include "x86/Timer.hpp"
+#else
+#error "Unsupported Architecture"
 #endif
 
 namespace Generix {
@@ -35,6 +37,6 @@ private:
 	GTimer m_timer;
 };
 
-}
+};
 
 #endif //__GENERIX_PROCESSOR_HPP__

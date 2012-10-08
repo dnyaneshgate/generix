@@ -5,8 +5,8 @@
  *      Author: dnyanesh
  */
 
-#ifndef __GENERIX_MEMORY_HPP__
-#define __GENERIX_MEMORY_HPP__
+#ifndef __GENERIX_MEM_MEMORY_HPP__
+#define __GENERIX_MEM_MEMORY_HPP__
 
 #include <Types.hpp>
 #include <Macros.hpp>
@@ -23,4 +23,4 @@ private:
 };
 
 } /* namespace Generix */
-#endif //__GENERIX_MEMORY_HPP__
+#endif //__GENERIX_MEM_MEMORY_HPP__

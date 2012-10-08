@@ -5,7 +5,7 @@ namespace Generix {
 GKernel GKernel::m_Instance;
 
 GKernel::GKernel() : m_MBH(ZERO), m_MBI(ZERO) {
-	m_cpu = GProcessor::Instance();
+	m_cpu = Generix::GProcessor::Instance();
 }
 
 GKernel::~GKernel() {

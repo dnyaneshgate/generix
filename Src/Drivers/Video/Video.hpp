@@ -8,7 +8,7 @@
 class GVideo : public GDriver
 {
 public:
-	STATIC GVideo& Instance() { return m_GVideo; }
+	STATIC GVideo* Instance() { return &m_GVideo; }
 	INT Write(const CHAR *buffer);
 	VOID Put(const CHAR ch);
 	VOID ClrScr();

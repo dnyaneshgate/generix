@@ -43,7 +43,7 @@ VOID GGdt::Install()
 	{
 		USHORT limit;
 		ULONG base;
-	} PACKED gdtPtr;
+	} __PACKED__ gdtPtr;
 
 	gdtPtr.limit = (sizeof(GDTENTRY) * 6) - 1;
 	gdtPtr.base  = (ULONG) &gdt;

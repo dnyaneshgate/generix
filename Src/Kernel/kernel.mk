@@ -4,5 +4,5 @@ KERNELOBJ := $(sort $(patsubst %.asm,%.o,$(wildcard Kernel/Processor/$(ARCH)/Asm
 			 $(patsubst %.cpp,%.o,$(wildcard Kernel/Processor/*.cpp)) \
 			 $(patsubst %.cpp,%.o,$(wildcard Kernel/*.cpp)) 
 
-kernel: $(KERNELOBJ)
-	$(LD) $(LDFLAGS) -o $(KERNEL) $(KERNELOBJ) $(DRIVEROBJ) $(LIBPATH)$(LIBS)
+kernel: $(KERNELOBJ) $(MEMOBJ)
+	$(LD) $(LDFLAGS) -o $(KERNEL) $(KERNELOBJ) $(MEMOBJ) $(DRIVEROBJ) $(LIBPATH)$(LIBS)

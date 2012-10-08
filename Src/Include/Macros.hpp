@@ -7,12 +7,12 @@
 #define FORWORD                STATIC
 #define PUBLIC
 
-#define PACKED                 __attribute__((packed))
-#define SECTION(x)             __attribute__((section(x)))
-#define USED                   __attribute__((used))
-#define UNUSED                 __attribute__((unused))
+#define __PACKED__             __attribute__((packed))
+#define __SECTION__(x)         __attribute__((section(x)))
+#define __USED__               __attribute__((used))
+#define __UNUSED__             __attribute__((unused))
 
-#define __INIT__               SECTION((".initGenerix"))
+#define __INIT__               __SECTION__((".initGenerix"))
 
 #define MAX(x,y)               (((x) > (y)) ? (x) : (y))
 #define MIN(x,y)               (((x) < (y)) ? (x) : (y))

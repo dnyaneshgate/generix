@@ -1,5 +1,6 @@
 #!/bin/bash
 
+PWD=`pwd`
 ECHO="echo -e"
 CP="cp"
 RM="rm"
@@ -11,7 +12,7 @@ if [[ $# != 1 ]]; then
 	exit;
 fi
 
-PROJECTDIR=/media/SOFTWARE/Generix
+PROJECTDIR=$PWD
 BOOT=$PROJECTDIR/Boot
 ISOPATH=$BOOT/Iso
 ISO=$BOOT/Generix.iso
