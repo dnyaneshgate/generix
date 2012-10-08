@@ -16,7 +16,7 @@ INCLUDE             := -I./ \
 					   -I./Include/Klib/libposix \
 					   -I./Drivers
 
-WARNINGS            := -Wall #-Wextra #-Werror
+WARNINGS            := -Wall -Wextra #-Werror
 
 ifeq ($(ARCH),x86)
 

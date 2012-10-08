@@ -8,6 +8,7 @@ using namespace Generix;
 
 EXTERN MULTIBOOTHEADER _MBOOT_HEADER;
 EXTERN ULONG __KERNEL_END;
+ULONG  __INIT_ESP;
 
 EXTERN "C" VOID __init(void) {
 	EXTERN VOID (*__INIT_START__)(), (*__INIT_END__)();
@@ -28,6 +29,8 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 	__ctors(); //invoke constructors of static/global objects
 	__init();  //invoke functions resident in .initGenerix section
 
+	__INIT_ESP = esp;
+
 	GKernel *kernel = GKernel::Instance();      //get kernel instance
 	kernel->SetMultiBootHeader(&_MBOOT_HEADER);
 	kernel->SetMultiBootInfo(mbi);
@@ -37,8 +40,11 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 	CPU->InstallIdt();                          //setup idt
 	CPU->InstallPit();                          //setup timer
 
-	Console::Write("Welcome to Generix\n");
-	Console::Write("Version 1.0\n");
+	Console::Writeln("Welcome to Generix");
+	Console::Writeln("Version 1.0");
+
+	Console::Write("Processor : ");
+	Console::Writeln(CPU->GetVendorName());
 
 	__dtors(); //invoke destructors of static/global objects
 	return EXIT_SUCCESS;

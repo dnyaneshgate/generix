@@ -28,13 +28,13 @@ protected:
 private:
 	GTextMode();
 	virtual ~GTextMode();
-	GTextMode(const GTextMode&){};
-	USHORT* m_ScrHardwareBuffer;
-	USHORT m_CrtcMem;
-	UINT m_u_X;
-	UINT m_u_Y;
-	UINT m_u_Width;
-	UINT m_u_Height;
+	//GTextMode(const GTextMode&){};
+	USHORT *m_ScrHardwareBuffer;
+	USHORT  m_CrtcMem;
+	UINT    m_u_X;
+	UINT    m_u_Y;
+	UINT    m_u_Width;
+	UINT    m_u_Height;
 	Console::Color m_FontColor;
 	Console::Color m_BackColor;
 

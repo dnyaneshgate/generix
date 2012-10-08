@@ -8,6 +8,7 @@
 namespace Console {
 
 EXTERN "C" INT Write(const CHAR *str);
+EXTERN "C" INT Writeln(const CHAR *str);
 EXTERN "C" VOID Putch(const CHAR ch);
 EXTERN "C" VOID Clear();
 EXTERN "C" VOID SetColor(Color fgColor, Color bgColor);

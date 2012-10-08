@@ -19,18 +19,14 @@ endif
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -o $@ $<
-	@echo ""
 
 .c.o:
 	$(CXX) $(CXXFLAGS)    -o $@ $<
-	@echo ""
 
 %.o: %.asm
 	$(AS)  $(ASFLAGS)  -o $@ $<
-	@echo ""
 
 .s.o:
 	$(AS)  $(ASFLAGS)  -o $@ $<
-	@echo ""
 
 

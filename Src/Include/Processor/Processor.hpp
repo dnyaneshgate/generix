@@ -22,6 +22,7 @@ public:
 	BOOL RegInterrupt(INT No, IsrHandler isr);
 	BOOL SetTimerFreq(UINT Frequency = 1000);
 	BOOL GetTickCount(UINT &tick);
+	const CHAR *GetVendorName() const;
 protected:
 private:
 	GProcessor();
@@ -35,6 +36,8 @@ private:
 	GGdt m_gdt;
 	GIdt m_idt;
 	GTimer m_timer;
+
+	CHAR m_VendorName[13];
 };
 
 };

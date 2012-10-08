@@ -103,12 +103,19 @@ UINT GetHeight()
 	return HEIGHT;
 }
 
-INT Write(const CHAR* S)
+INT Write(const CHAR *S)
 {
 	const CHAR* str = S;
 	while( *str )
 		Putch(*str++);
 	return S-str;
+}
+
+INT Writeln(const CHAR *S)
+{
+	INT n = Write(S);
+	Putch('\n');
+	return ++n;
 }
 
 VOID Putch(const CHAR ch)

@@ -1,27 +1,32 @@
 include config.mk
 include rules.mk
-include Klib/libraries.mk
-include Mem/Memory.mk
-include Kernel/kernel.mk
-include Drivers/drivers.mk
 
-.PHONY: world lib kernel driver usage
+.PHONY: all world lib kernel driver usage
 
 all: world
 
 world: drivers kernel
 
+include Klib/libraries.mk
+include Mem/Memory.mk
+include Drivers/drivers.mk
+include Kernel/kernel.mk
+
 driverclean:
-	rm -f $(DRIVEROBJ)
+	@rm -f $(DRIVEROBJ) && echo "[RM]       $(DRIVEROBJ)";
 
 distclean: clean
-	rm -f $(KERNEL)
+	@rm -f $(KERNEL) && && echo "[RM]       $(KERNEL)";
 
 libclean:
-	rm -f $(addprefix $(LIBPATH),$(LIBS))
+	@for i in $(addprefix $(LIBPATH),$(LIBS)) $(LIBC) $(LIBCPP) $(LIBPOSIX) $(LIBALLOC); do \
+		rm -f $$i && echo "[RM]       $$i"; \
+	done
 
 clean:
-	$(RM) $(LIBC) $(LIBCPP) $(LIBPOSIX) $(LIBALLOC) $(MEMOBJ) $(KERNELOBJ) $(DRIVEROBJ)
+	@for i in $(DRIVEROBJ) $(KERNELOBJ) $(MEMOBJ); do \
+		rm -f $$i && echo "[RM]       $$i"; \
+	done
 
 usage:
 	@echo "make clean lib driver kernel"
