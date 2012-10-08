@@ -1,8 +1,8 @@
 include config.mk
 include rules.mk
 include Klib/libraries.mk
-include Kernel/kernel.mk
 include Mem/Memory.mk
+include Kernel/kernel.mk
 include Drivers/drivers.mk
 
 .PHONY: world lib kernel driver usage
@@ -21,7 +21,7 @@ libclean:
 	rm -f $(addprefix $(LIBPATH),$(LIBS))
 
 clean:
-	$(RM) $(LIBC) $(LIBCPP) $(LIBPOSIX) $(LIBALLOC) $(KERNELOBJ) $(DRIVEROBJ)
+	$(RM) $(LIBC) $(LIBCPP) $(LIBPOSIX) $(LIBALLOC) $(MEMOBJ) $(KERNELOBJ) $(DRIVEROBJ)
 
 usage:
 	@echo "make clean lib driver kernel"
