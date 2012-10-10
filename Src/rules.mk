@@ -9,13 +9,13 @@ VERSION             := "0.0.1"
 
 ARCH                := x86
 
-INCLUDE             := -I./ \
-					   -I./Include \
-					   -I./Include/Klib/libc \
-					   -I./Include/Klib/libc++ \
-					   -I./Include/Klib/liballoc \
-					   -I./Include/Klib/libposix \
-					   -I./Drivers
+INCLUDE             :=  -I./ \ 
+			-I./Include \
+			-I./Include/Klib/libc \
+			-I./Include/Klib/libc++ \
+			-I./Include/Klib/liballoc \
+			-I./Include/Klib/libposix \
+			-I./Drivers
 
 WARNINGS            := -Wall -Wextra #-Werror
 
