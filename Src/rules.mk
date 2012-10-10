@@ -5,6 +5,7 @@ DRIVERPATH          := Drivers
 BOOTPATH            := Boot
 LINKERPATH          := Linker
 SHELL               := /bin/bash
+VERSION             := "0.0.1"
 
 ARCH                := x86
 
@@ -37,7 +38,7 @@ LDFLAGS             := -T$(LINKERPATH)/Linker64.ld -melf_x86_64
 endif
 
 CFLAGS              += $(CPPFLAGS) $(INCLUDE) $(WARNINGS) -nostdlib -fno-builtin -nostartfiles -nodefaultlibs
-CXXFLAGS            := $(CFLAGS) -DCPP -fno-stack-protector -fno-exceptions -fno-rtti -std=c++11
+CXXFLAGS            := $(CFLAGS) -DCPP -D__GENERIX__-DVERSION=$(VERSION) -fno-stack-protector -fno-exceptions -fno-rtti -std=c++11
 DFLAGS              := -g3 -O0 -D__DEBUG__
 ARFLAGS             := rcs
 

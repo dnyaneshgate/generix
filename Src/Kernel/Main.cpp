@@ -49,4 +49,3 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 	__dtors(); //invoke destructors of static/global objects
 	return EXIT_SUCCESS;
 }
-

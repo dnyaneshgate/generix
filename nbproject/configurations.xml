@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="84">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df name="Src" root="Src">
+      <df name="Drivers">
+        <df name="Video">
+          <df name="Text">
+            <in>TextMode.cpp</in>
+            <in>TextMode.hpp</in>
+          </df>
+          <in>Video.cpp</in>
+          <in>Video.hpp</in>
+        </df>
+      </df>
+      <df name="Include">
+        <df name="Klib">
+          <df name="libc">
+            <in>ctype.h</in>
+            <in>errno.h</in>
+            <in>limits.h</in>
+            <in>stdarg.h</in>
+            <in>stdio.h</in>
+            <in>stdlib.h</in>
+            <in>string.h</in>
+            <in>va_list.h</in>
+          </df>
+          <df name="libc++">
+            <in>Singleton.hpp</in>
+          </df>
+          <df name="libposix">
+            <df name="sys">
+              <in>types.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="Processor">
+          <df name="x86">
+            <in>CPU.hpp</in>
+            <in>Gdt.hpp</in>
+            <in>IOPort.hpp</in>
+            <in>Idt.hpp</in>
+            <in>Timer.hpp</in>
+          </df>
+          <in>Processor.hpp</in>
+          <in>ProcessorInfo.hpp</in>
+        </df>
+        <in>Assert.hpp</in>
+        <in>Bitmap.hpp</in>
+        <in>ColorCode.hpp</in>
+        <in>Device.hpp</in>
+        <in>Driver.hpp</in>
+        <in>Init.hpp</in>
+        <in>Kernel.hpp</in>
+        <in>Macros.hpp</in>
+        <in>MemoryManager.hpp</in>
+        <in>Multiboot.hpp</in>
+        <in>ScreenIo.hpp</in>
+        <in>Support.hpp</in>
+        <in>Types.hpp</in>
+      </df>
+      <df name="Kernel">
+        <df name="Processor">
+          <df name="x86">
+            <df name="Asm">
+              <in>Boot.asm</in>
+              <in>DescriptorTableFlush.asm</in>
+              <in>Interrupt.asm</in>
+            </df>
+            <in>Gdt.cpp</in>
+            <in>IOPort.cpp</in>
+            <in>Idt.cpp</in>
+            <in>Timer.cpp</in>
+          </df>
+          <in>Processor.cpp</in>
+        </df>
+        <in>Device.cpp</in>
+        <in>Driver.cpp</in>
+        <in>Kernel.cpp</in>
+        <in>Main.cpp</in>
+        <in>MemoryManager.cpp</in>
+        <in>New.cpp</in>
+        <in>ScreenIo.cpp</in>
+        <in>Support.cpp</in>
+      </df>
+      <df name="Klib">
+        <df name="libc">
+          <df name="stdio">
+            <in>printf.c</in>
+            <in>sprintf.c</in>
+            <in>vsprintf.c</in>
+          </df>
+          <df name="stdlib">
+            <in>atoi.c</in>
+            <in>itoa.c</in>
+          </df>
+          <df name="string">
+            <in>bzero.c</in>
+            <in>memcpy.c</in>
+            <in>memmove.c</in>
+            <in>memset.c</in>
+            <in>strcat.c</in>
+            <in>strchr.c</in>
+            <in>strcmp.c</in>
+            <in>strcpy.c</in>
+            <in>strcspn.c</in>
+            <in>strlen.c</in>
+            <in>strlwr.c</in>
+            <in>strncat.c</in>
+            <in>strncmp.c</in>
+            <in>strncpy.c</in>
+            <in>strpbrk.c</in>
+            <in>strrchr.c</in>
+            <in>strrev.c</in>
+            <in>strspn.c</in>
+            <in>strtok.c</in>
+            <in>strupr.c</in>
+            <in>strxfrm.c</in>
+          </df>
+          <in>ctype.c</in>
+          <in>errno.c</in>
+        </df>
+      </df>
+      <df name="Linker">
+      </df>
+      <df name="Mem">
+        <in>Memory.cpp</in>
+        <in>Memory.hpp</in>
+        <in>PhysicalMemory.cpp</in>
+        <in>PhysicalMemory.hpp</in>
+        <in>VirtualMemory.cpp</in>
+        <in>VirtualMemory.hpp</in>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Src/Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>Src</Elem>
+  </sourceRootList>
+  <projectmakefile>Src/Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>Src</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile all</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>Src/Include/Klib/libc++</pElem>
+              <pElem>Src/Include/Klib/libc</pElem>
+              <pElem>Src</pElem>
+              <pElem>Src/Include/Klib/libposix</pElem>
+              <pElem>Src/Include/Klib/liballoc</pElem>
+              <pElem>Src/Include</pElem>
+              <pElem>Src/Drivers</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>CPP</Elem>
+              <Elem>__x86__</Elem>
+            </preprocessorList>
+            <undefinedList>
+              <Elem>__EXCEPTIONS</Elem>
+              <Elem>__GXX_RTTI</Elem>
+            </undefinedList>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="Src/Drivers/Video/Text/TextMode.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Drivers/Video/Video.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Include/Assert.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Include/Bitmap.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Include/Device.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Include/Klib/libc++/Singleton.hpp"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="Src/Include/Klib/libc/errno.h" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Include/Klib/libc/limits.h" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Include/MemoryManager.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Kernel/Device.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Driver.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Kernel.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Main.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/MemoryManager.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/New.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/Processor.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/x86/Asm/Boot.asm"
+            ex="true"
+            tool="4"
+            flavor2="0">
+      </item>
+      <item path="Src/Kernel/Processor/x86/Asm/DescriptorTableFlush.asm"
+            ex="true"
+            tool="4"
+            flavor2="0">
+      </item>
+      <item path="Src/Kernel/Processor/x86/Asm/Interrupt.asm"
+            ex="true"
+            tool="4"
+            flavor2="0">
+      </item>
+      <item path="Src/Kernel/Processor/x86/Gdt.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/x86/IOPort.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/x86/Idt.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/x86/Timer.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/ScreenIo.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Support.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Klib/libc/ctype.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/errno.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/stdio/printf.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/stdio/sprintf.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/stdio/vsprintf.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/stdlib/atoi.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/stdlib/itoa.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/bzero.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/memcpy.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/memmove.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/memset.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strcat.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strchr.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strcmp.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strcpy.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strcspn.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strlen.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strlwr.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strncat.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strncmp.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strncpy.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strpbrk.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strrchr.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strrev.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strspn.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strtok.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strupr.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Klib/libc/string/strxfrm.c" ex="true" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Src/Mem/Memory.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Mem/PhysicalMemory.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Mem/VirtualMemory.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Mem/VirtualMemory.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
