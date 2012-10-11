@@ -52,6 +52,7 @@
         <in>Init.hpp</in>
         <in>Kernel.hpp</in>
         <in>Macros.hpp</in>
+        <in>Main.hpp</in>
         <in>MemoryManager.hpp</in>
         <in>Multiboot.hpp</in>
         <in>ScreenIo.hpp</in>

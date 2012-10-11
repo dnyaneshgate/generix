@@ -1,3 +1,4 @@
+#include <Main.hpp>
 #include <Support.hpp>
 #include <Kernel.hpp>
 #include <stdlib.h>
@@ -43,7 +44,12 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 
 	kernel->MemoryInit();
 
-	Console::Writeln("Welcome to Generix");
+	Console::Writeln(WELCOMELOGO);
+	Console::Write("\nWelcome to ");
+	Console::Color fgCol = Console::GetFontColor();
+	Console::SetFontColor(Console::MAGENTA);
+	Console::Writeln("Generix");
+	Console::SetFontColor(fgCol);
 	Console::Write("Version : ");
 	Console::Writeln(__GENERIX_VERSION__);
 
