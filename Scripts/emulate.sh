@@ -9,11 +9,13 @@ if [[ $# != 1 ]]; then
 fi
 
 EMU=$1
+GENERIX="GeneriXOS-0.0.1"
+ISO=$GENERIX.iso
 PROJECTPATH=$PWD
 BOOT=$PROJECTPATH/Boot
 
 if [[ $EMU -eq "bochs" ]]; then
-	$EMU -q "ata0-master:type=cdrom,path=$BOOT/Generix.iso,status=inserted" \
+	$EMU -q "ata0-master:type=cdrom,path=$BOOT/$ISO,status=inserted" \
 			'megs:512' \
 			'boot:cdrom' \
 			'cpu:count=1,ips=4000000,reset_on_triple_fault=1,ignore_bad_msrs=1' \

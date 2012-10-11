@@ -12,10 +12,11 @@ if [[ $# != 1 ]]; then
 	exit;
 fi
 
+GENERIX="GeneriXOS-0.0.1"
 PROJECTDIR=$PWD
 BOOT=$PROJECTDIR/Boot
 ISOPATH=$BOOT/Iso
-ISO=$BOOT/Generix.iso
+ISO=$BOOT/$GENERIX.iso
 KERNEL=$1
 GRUB=$BOOT/Grub
 
@@ -24,17 +25,17 @@ if [ ! -d $ISOPATH ]; then
 fi
 
 ret=`$CP $GRUB/* $ISOPATH/boot/grub/ && \
-	 $CP $KERNEL $ISOPATH/boot/Generix-1.0 && \
+	 $CP $KERNEL $ISOPATH/boot/$GENERIX && \
 	 $ECHO "default 0"                   > $ISOPATH/boot/grub/menu.lst && \
 	 $ECHO "timeout 5\n\n"              >> $ISOPATH/boot/grub/menu.lst && \
-	 $ECHO "title Generix-1.0"          >> $ISOPATH/boot/grub/menu.lst && \
-	 $ECHO "\tkernel /boot/Generix-1.0" >> $ISOPATH/boot/grub/menu.lst`
+	 $ECHO "title $GENERIX"             >> $ISOPATH/boot/grub/menu.lst && \
+	 $ECHO "\tkernel /boot/$GENERIX"    >> $ISOPATH/boot/grub/menu.lst`
 
 if [[ $ret ]]; then
 	$ECHO "Error: $ret"
 else
 	$ECHO "Generating Iso Image : $ISO"
-	$MKISO -R -b boot/grub/stage2_eltorito -no-emul-boot -boot-load-size 4 -boot-info-table -o $ISO $BOOT/Iso/ #2> /dev/null
+	$MKISO -R -b boot/grub/stage2_eltorito -no-emul-boot -boot-load-size 4 -boot-info-table -o $ISO $ISOPATH #2> /dev/null
 fi
 
 $RM -rf $ISOPATH
