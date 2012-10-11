@@ -4,20 +4,19 @@
 #include <Types.hpp>
 #include <Macros.hpp>
 
-class GIOPort
-{
+class GIOPort {
 public:
-	STATIC BOOL ReadByte(PortId port,UCHAR  *result);
-	STATIC BOOL ReadWord(PortId port,USHORT *result);
-	STATIC BOOL ReadLong(PortId port,ULONG  *result);
-	
-	STATIC BOOL WriteByte(PortId port,UCHAR  value);
-	STATIC BOOL WriteWord(PortId port,USHORT value);
-	STATIC BOOL WriteLong(PortId port,ULONG  value);
-	
-	STATIC BOOL ReadCRX(INT X,ULONG *result);
-	STATIC BOOL WriteCRX(INT X,ULONG value);
-	
+	STATIC BOOL ReadByte(PortId port, UCHAR *result);
+	STATIC BOOL ReadWord(PortId port, USHORT *result);
+	STATIC BOOL ReadLong(PortId port, ULONG *result);
+
+	STATIC BOOL WriteByte(PortId port, UCHAR value);
+	STATIC BOOL WriteWord(PortId port, USHORT value);
+	STATIC BOOL WriteLong(PortId port, ULONG value);
+
+	STATIC BOOL ReadCRX(INT X, ULONG *result);
+	STATIC BOOL WriteCRX(INT X, ULONG value);
+
 	STATIC BOOL LoadIdtr(Type base, USHORT limit);
 	STATIC BOOL LoadGdtr(Type base, USHORT limit);
 protected:

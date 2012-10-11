@@ -11,7 +11,7 @@ else
 CC                  = @echo "[CC]       $<" && gcc
 CXX                 = @echo "[CXX]      $<" && g++
 AS                  = @echo "[NASM]     $<" && nasm
-LD                  = @echo "[LD]       $@" && ld
+LD                  = @echo "[LD]       $(KERNEL)" && ld
 AR                  = @echo "[AR]       $@" && gcc-ar
 RANLIB              = @echo "[RANLIB]   $@" && gcc-ranlib
 RM                  = @echo "Cleaning...  " && rm -f

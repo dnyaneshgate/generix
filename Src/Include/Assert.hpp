@@ -4,13 +4,10 @@
 #include <ScreenIo.hpp>
 #include <Processor/Processor.hpp>
 
-inline 
-static void
-_assert(const char *file, const int line, const char *expr)
-{
+inline static void _assert(const char *file, const int line, const char *expr) {
 	CLI();
 	Console::SetFontColor(Console::CYAN);
-	printk("{%s:%d} Assertion \"%s\" failed",file,line,expr);
+	printk("{%s:%d} Assertion \"%s\" failed", file, line, expr);
 	HLT();
 }
 

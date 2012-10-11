@@ -6,5 +6,18 @@
  */
 
 
+#include <MemoryManager.hpp>
 
+namespace Generix {
 
+	GMemoryManager::GMemoryManager() {
+	}
+
+	GMemoryManager::~GMemoryManager() {
+	}
+
+	VOID GMemoryManager::Init() {
+		m_Mem.Init();
+	}
+
+}

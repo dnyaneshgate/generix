@@ -1,12 +1,10 @@
 #include <string.h>
 
-size_t strcspn(const char *s1, const char *s2)
-{
+size_t strcspn(const char *s1, const char *s2) {
 	const char *p, *spanp;
 	char c, sc;
 
-	for (p = s1;;)
-	{
+	for (p = s1;;) {
 		c = *p++;
 		spanp = s2;
 		do {

@@ -5,17 +5,18 @@ DRIVERPATH          := Drivers
 BOOTPATH            := Boot
 LINKERPATH          := Linker
 SHELL               := /bin/bash
-VERSION             := "0.0.1"
+VERSION             := "\"0.0.1\""
 
 ARCH                := x86
 
-INCLUDE             :=  -I./ \ 
-			-I./Include \
-			-I./Include/Klib/libc \
-			-I./Include/Klib/libc++ \
-			-I./Include/Klib/liballoc \
-			-I./Include/Klib/libposix \
-			-I./Drivers
+INCLUDE             :=  -I./ \
+						-I./Include \
+						-I./Include/Klib/libc \
+						-I./Include/Klib/libc++ \
+						-I./Include/Klib/liballoc \
+						-I./Include/Klib/libposix \
+						-I./Mem \
+						-I./Drivers
 
 WARNINGS            := -Wall -Wextra #-Werror
 
@@ -37,8 +38,9 @@ LDFLAGS             := -T$(LINKERPATH)/Linker64.ld -melf_x86_64
 
 endif
 
+CPPFLAGS            += -D__GENERIX__ -D__GENERIX_VERSION__=$(VERSION)
 CFLAGS              += $(CPPFLAGS) $(INCLUDE) $(WARNINGS) -nostdlib -fno-builtin -nostartfiles -nodefaultlibs
-CXXFLAGS            := $(CFLAGS) -DCPP -D__GENERIX__-DVERSION=$(VERSION) -fno-stack-protector -fno-exceptions -fno-rtti -std=c++11
+CXXFLAGS            := $(CFLAGS) -DCPP -fno-stack-protector -fno-exceptions -fno-rtti -std=c++11
 DFLAGS              := -g3 -O0 -D__DEBUG__
 ARFLAGS             := rcs
 

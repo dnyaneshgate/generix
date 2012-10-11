@@ -1,7 +1,6 @@
 #include <string.h>
 
-char* strrev(char *str)
-{
+char* strrev(char *str) {
 	char *p1, *p2;
 
 	if (!str || !*str)

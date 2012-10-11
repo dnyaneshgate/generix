@@ -1,12 +1,12 @@
 #include <string.h>
 
-char *strupr (char *s) {
+char *strupr(char *s) {
 	char *p;
 
-	p=s;
+	p = s;
 	while (*p) {
-		if ((*p>='a') && (*p<='z'))
-			*p -= 'a'-'A';
+		if ((*p >= 'a') && (*p <= 'z'))
+			*p -= 'a' - 'A';
 		p++;
 	};
 

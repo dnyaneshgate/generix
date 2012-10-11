@@ -1,8 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-char *strtok(char *s, const char *delim)
-{
+char *strtok(char *s, const char *delim) {
 	const char *spanp;
 	int c, sc;
 	char *tok;
@@ -13,8 +12,8 @@ char *strtok(char *s, const char *delim)
 		return (NULL);
 
 	/*
-	* Skip (span) leading delimiters (s += strspn(s, delim), sort of).
-	*/
+	 * Skip (span) leading delimiters (s += strspn(s, delim), sort of).
+	 */
 cont:
 	c = *s++;
 	for (spanp = delim; (sc = *spanp++) != 0;) {
@@ -22,16 +21,16 @@ cont:
 			goto cont;
 	}
 
-	if (c == 0) {			/* no non-delimiter characters */
+	if (c == 0) { /* no non-delimiter characters */
 		last = NULL;
 		return (NULL);
 	}
 	tok = s - 1;
 
 	/*
-	* Scan token (scan for delimiters: s += strcspn(s, delim), sort of).
-	* Note that delim must have one NUL; we stop if we see that, too.
-	*/
+	 * Scan token (scan for delimiters: s += strcspn(s, delim), sort of).
+	 * Note that delim must have one NUL; we stop if we see that, too.
+	 */
 	for (;;) {
 		c = *s++;
 		spanp = delim;

@@ -25,11 +25,14 @@
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"cd .. &amp;&amp; Scripts/iso.sh Src/Kernel32.elf &amp;&amp; Scripts/emulate.sh bochs &amp;&amp; cd Src"</runcommandpicklistitem>
+          <runcommandpicklistitem>"Scripts/iso.sh Src/Kernel32.elf &amp;&amp; Scripts/emulate.sh bochs"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
-        <rundir>Src</rundir>
+        <runcommand>"Scripts/iso.sh Src/Kernel32.elf &amp;&amp; Scripts/emulate.sh bochs"</runcommand>
+        <rundir></rundir>
         <buildfirst>true</buildfirst>
-        <terminal-type>0</terminal-type>
+        <console-type>1</console-type>
+        <terminal-type>1</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>
         <environment>
         </environment>

@@ -1,23 +1,24 @@
 #include <Driver.hpp>
 #include <string.h>
 
-GDriver::GDriver(UINT Id, const CHAR *Name)
-{
-	m_Id = Id;
-	strcpy(m_Name,Name);
-}
+namespace Generix {
 
-GDriver::~GDriver()
-{}
+	GDriver::GDriver(UINT Id, const CHAR *Name) {
+		m_Id = Id;
+		strcpy(m_Name, Name);
+	}
 
-CHAR*
-GDriver::getName()
-{
-	return m_Name;
-}
+	GDriver::~GDriver() {
+	}
 
-UINT
-GDriver::getId()
-{
-	return m_Id;
+	CHAR*
+	GDriver::getName() {
+		return m_Name;
+	}
+
+	UINT
+	GDriver::getId() {
+		return m_Id;
+	}
+
 }

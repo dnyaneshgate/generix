@@ -1,12 +1,12 @@
 #include <string.h>
 
-char *strlwr (char *s) {
+char *strlwr(char *s) {
 	char *p;
 
-	p=s;
+	p = s;
 	while (*p) {
-		if ((*p>='A') && (*p<='Z'))
-			*p += 'a'-'A';
+		if ((*p >= 'A') && (*p <= 'Z'))
+			*p += 'a' - 'A';
 		p++;
 	};
 

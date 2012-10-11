@@ -5,8 +5,8 @@
 extern "C" {
 #endif
 
-extern int printf(const char* fmt,...) __attribute__((format(printf,1,2)));
-extern int sprintf(char* buff, const char* fmt,...) __attribute__((format(printf,2,3)));
+	extern int printf(const char* fmt, ...) __attribute__((format(printf, 1, 2)));
+	extern int sprintf(char* buff, const char* fmt, ...) __attribute__((format(printf, 2, 3)));
 
 #ifdef __cplusplus
 }

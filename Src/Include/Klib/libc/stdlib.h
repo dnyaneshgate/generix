@@ -19,11 +19,11 @@
 extern "C" {
 #endif
 
-extern int atoi(const char *nptr);
-//extern long atol(const char *nptr);
-//extern long long atoll(const char *nptr);
-//extern long long atoq(const char *nptr);
-extern void itoa(char *buf, int base, long long d);
+	extern int atoi(const char *nptr);
+	//extern long atol(const char *nptr);
+	//extern long long atoll(const char *nptr);
+	//extern long long atoq(const char *nptr);
+	extern void itoa(char *buf, int base, long long d);
 
 #ifdef __cplusplus
 }

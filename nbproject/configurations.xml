@@ -166,9 +166,12 @@
               <pElem>Src/Include/Klib/liballoc</pElem>
               <pElem>Src/Include</pElem>
               <pElem>Src/Drivers</pElem>
+              <pElem>Src/Mem</pElem>
             </incDir>
             <preprocessorList>
               <Elem>CPP</Elem>
+              <Elem>__GENERIX_VERSION__="0.0.1"</Elem>
+              <Elem>__GENERIX__</Elem>
               <Elem>__x86__</Elem>
             </preprocessorList>
             <undefinedList>
@@ -200,9 +203,13 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="Src/Include/Klib/libc/ctype.h" ex="true" tool="3" flavor2="0">
+      </item>
       <item path="Src/Include/Klib/libc/errno.h" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Klib/libc/limits.h" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Include/Klib/libc/stdio.h" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/MemoryManager.hpp" ex="true" tool="3" flavor2="0">
       </item>

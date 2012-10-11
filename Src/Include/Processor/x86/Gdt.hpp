@@ -13,14 +13,14 @@
 
 namespace Generix {
 
-class GGdt {
-	friend class GProcessor;
-private:
-	GGdt();
-	virtual ~GGdt();
-	VOID SetGdtEntry(INT n, ULONG base, ULONG limit, UCHAR access, UCHAR gran);
-	VOID Install();
-};
+	class GGdt {
+		friend class GProcessor;
+	private:
+		GGdt();
+		virtual ~GGdt();
+		VOID SetGdtEntry(INT n, ULONG base, ULONG limit, UCHAR access, UCHAR gran);
+		VOID Install();
+	};
 
 }
 

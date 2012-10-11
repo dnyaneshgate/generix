@@ -38,24 +38,24 @@
 
 namespace Generix {
 
-typedef VOID (*IsrHandler)(REG reg);
+	typedef VOID(*IsrHandler)(REG reg);
 
-class GIdt {
-	friend class GProcessor;
-private:
-	GIdt();
-	~GIdt();
-	VOID Install();
-	VOID SetVector(INT x, ULONG func, UCHAR control);
-	VOID SetVector(INT x, IsrHandler isr);
-	VOID SetExceptions();
-	VOID EnableIrq(INT x, IsrHandler irq);
-	VOID DisableIrq(INT x);
+	class GIdt {
+		friend class GProcessor;
+	private:
+		GIdt();
+		~GIdt();
+		VOID Install();
+		VOID SetVector(INT x, ULONG func, UCHAR control);
+		VOID SetVector(INT x, IsrHandler isr);
+		VOID SetExceptions();
+		VOID EnableIrq(INT x, IsrHandler irq);
+		VOID DisableIrq(INT x);
 
-	STATIC IDTENTRY idt[256];
-	STATIC INT SelectorCode;
-	STATIC LONG CurrentMask;
-};
+		STATIC IDTENTRY idt[256];
+		STATIC INT SelectorCode;
+		STATIC LONG CurrentMask;
+	};
 
 }
 

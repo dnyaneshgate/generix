@@ -5,31 +5,33 @@
 #include <Macros.hpp>
 
 template<class T>
-class GSingleton
-{
+class GSingleton {
 public:
+
 	STATIC T*
-	Instance()
-	{
-		if(m_pObj == ZERO)
+	Instance() {
+		if (m_pObj == ZERO)
 			m_pObj = new T();
 		return m_pObj;
 	}
-	
+
 	STATIC VOID
-	Release()
-	{
-		if(m_pObj == ZERO)
+	Release() {
+		if (m_pObj == ZERO)
 			return;
 		delete m_pObj;
 	}
-	
+
 protected:
-	GSingleton<T>(){};
-	virtual ~GSingleton<T>(){};
+
+	GSingleton<T>() {
+	};
+
+	virtual ~GSingleton<T>() {
+	};
 private:
-	STATIC T          *m_pObj;
-	STATIC UINT       m_iCnt;
+	STATIC T *m_pObj;
+	STATIC UINT m_iCnt;
 };
 
 template <class T>

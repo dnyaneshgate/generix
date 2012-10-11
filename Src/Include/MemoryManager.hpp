@@ -10,11 +10,20 @@
 
 #include <Mem/Memory.hpp>
 
-class GMemoryManager
-{
-public:
-protected:
-private:
-};
+namespace Generix {
+
+	class GMemoryManager {
+		friend class GKernel;
+	public:
+	protected:
+	private:
+		GMemoryManager();
+		~GMemoryManager();
+		VOID Init();
+
+		GMemory m_Mem;
+	};
+
+}
 
 #endif //__GENERIX_MEMORYMANAGER_HPP__

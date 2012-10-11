@@ -14,20 +14,20 @@
 
 namespace Generix {
 
-class GTimer {
-	friend class GProcessor;
-private:
-	GTimer();
-	~GTimer();
-	VOID Initialise();
-	VOID SetFrequency(ULONG freq);
-	ULONG GetFrequency();
-	STATIC VOID TimerHandler(REG reg);
-	UINT GetTickCount();
+	class GTimer {
+		friend class GProcessor;
+	private:
+		GTimer();
+		~GTimer();
+		VOID Initialise();
+		VOID SetFrequency(ULONG freq);
+		ULONG GetFrequency();
+		STATIC VOID TimerHandler(REG reg);
+		UINT GetTickCount();
 
-	STATIC UINT m_TickCount;
-	ULONG m_Frequency;
-};
+		STATIC UINT m_TickCount;
+		ULONG m_Frequency;
+	};
 
 }
 
