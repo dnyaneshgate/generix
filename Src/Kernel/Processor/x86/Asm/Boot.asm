@@ -18,7 +18,7 @@ MBOOT_HEADER_MAGIC         equ            0x1BADB002
 MBOOT_HEADER_FLAGS         equ            MBOOT_PAGE_ALIGN | MBOOT_MEM_INFO | MBOOT_VBE_INFO ;| MBOOT_AOUT_KLUDGE
 MBOOT_HEADER_CHECKSUM      equ            -(MBOOT_HEADER_MAGIC + MBOOT_HEADER_FLAGS)
 
-GLOBAL  _start
+GLOBAL  _Start
 GLOBAL  _MBOOT_HEADER
 EXTERN  _TEXT_START ,_BSS_START, _KERNEL_END
 EXTERN  _kmain
@@ -35,7 +35,7 @@ _MBOOT_HEADER:
 	dd _KERNEL_END                          ;kernel end
 	dd _start                               ;entry point of kernel
 
-_start:
+_Start:
 	mov esp, StackEnd
 	mov esp, StackEnd
 	

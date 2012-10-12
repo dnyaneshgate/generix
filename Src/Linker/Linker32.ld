@@ -12,7 +12,7 @@ OUTPUT_FORMAT("elf32-i386")
 
 /* Set the entry point to 'start'. This is an assembly function, so there's
 * no name mangling */
-ENTRY(_start)
+ENTRY(_Start)
 SECTIONS
 {
 	/* The executable is to be loaded by GrUB at 1 Mib */

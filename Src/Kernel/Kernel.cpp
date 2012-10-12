@@ -23,20 +23,12 @@ namespace Generix {
 		m_MBI = mbi;
 	}
 
-	VOID GKernel::SetKernelEnd(ULONG End) {
-		m_KernelEnd = End;
-	}
-
 	PMULTIBOOTHEADER GKernel::GetMultiBootHeader() {
 		return m_MBH;
 	}
 
 	PMULTIBOOTINFO GKernel::GetMultiBootInfo() {
 		return m_MBI;
-	}
-
-	ULONG GKernel::GetKernelEnd() {
-		return m_KernelEnd;
 	}
 
 	GProcessor* GKernel::GetCpu() {

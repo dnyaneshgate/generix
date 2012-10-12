@@ -8,7 +8,6 @@
 using namespace Generix;
 
 EXTERN MULTIBOOTHEADER _MBOOT_HEADER;
-EXTERN ULONG __KERNEL_END;
 ULONG __INIT_ESP;
 
 EXTERN "C" VOID __init(void) {
@@ -33,7 +32,6 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 	__INIT_ESP = esp;
 
 	GKernel *kernel = GKernel::Instance(); //get kernel instance
-	kernel->SetKernelEnd(__KERNEL_END); //save kernel end
 	kernel->SetMultiBootHeader(&_MBOOT_HEADER); //save multibootheader
 	kernel->SetMultiBootInfo(mbi); //save multibootinfo
 

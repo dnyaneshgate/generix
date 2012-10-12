@@ -16,10 +16,8 @@ namespace Generix {
 		VOID MemoryInit();
 		VOID SetMultiBootHeader(PMULTIBOOTHEADER mbh);
 		VOID SetMultiBootInfo(PMULTIBOOTINFO mbi);
-		VOID SetKernelEnd(ULONG End);
 		PMULTIBOOTHEADER GetMultiBootHeader();
 		PMULTIBOOTINFO GetMultiBootInfo();
-		ULONG GetKernelEnd();
 		GProcessor* GetCpu();
 	protected:
 	private:
@@ -30,7 +28,6 @@ namespace Generix {
 		GMemoryManager m_MemMngr;
 		PMULTIBOOTHEADER m_MBH;
 		PMULTIBOOTINFO m_MBI;
-		ULONG m_KernelEnd;
 	};
 
 }
