@@ -14,7 +14,6 @@ namespace Generix {
 
 	VOID GPhysicalMemory::Init() {
 		GKernel *kernel = GKernel::Instance();
-		ULONG KEnd = kernel->GetKernelEnd();
 		PMULTIBOOTINFO mbi = kernel->GetMultiBootInfo();
 		m_TotalMemory = mbi->MemoryHigh + mbi->MemoryLow;
 		ULONG mmap = mbi->MemoryMapAddress;
@@ -36,4 +35,4 @@ namespace Generix {
 		}
 	}
 
-}
+} /*namespace Generix*/

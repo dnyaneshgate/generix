@@ -33,7 +33,7 @@ _MBOOT_HEADER:
 	dd _TEXT_START                          ;start of kernel '.text' code section
 	dd _BSS_START                           ;start of kernel '.data' section
 	dd _KERNEL_END                          ;kernel end
-	dd _start                               ;entry point of kernel
+	dd _Start                               ;entry point of kernel
 
 _Start:
 	mov esp, StackEnd

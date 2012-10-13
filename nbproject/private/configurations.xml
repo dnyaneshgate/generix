@@ -27,9 +27,14 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
           <runcommandpicklistitem>"cd .. &amp;&amp; Scripts/iso.sh Src/Kernel32.elf &amp;&amp; Scripts/emulate.sh bochs &amp;&amp; cd Src"</runcommandpicklistitem>
           <runcommandpicklistitem>"Scripts/iso.sh Src/Kernel32.elf &amp;&amp; Scripts/emulate.sh bochs"</runcommandpicklistitem>
+          <runcommandpicklistitem>Scripts/iso.sh Src/Kernel32.elf &amp;&amp; Scripts/emulate.sh bochs</runcommandpicklistitem>
+          <runcommandpicklistitem>`Scripts/iso.sh Src/Kernel32.elf &amp;&amp; Scripts/emulate.sh bochs`</runcommandpicklistitem>
+          <runcommandpicklistitem>Run.sh</runcommandpicklistitem>
+          <runcommandpicklistitem>/Run.sh</runcommandpicklistitem>
+          <runcommandpicklistitem>./Run.sh</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"Scripts/iso.sh Src/Kernel32.elf &amp;&amp; Scripts/emulate.sh bochs"</runcommand>
-        <rundir></rundir>
+        <runcommand>./Run.sh</runcommand>
+        <rundir>/media/SOFTWARE/Generix/.</rundir>
         <buildfirst>true</buildfirst>
         <console-type>1</console-type>
         <terminal-type>1</terminal-type>
