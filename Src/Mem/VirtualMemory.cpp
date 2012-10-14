@@ -13,6 +13,52 @@ namespace x86Paging {
 
 	PPAGEDIRECTORY KernelDirectory = ZERO;
 	PPAGEDIRECTORY CurrentDirectory = ZERO;
+
+	INT MAPPAGE(PAddress pAddr, VAddress vAddr) {
+		INT table = PAGE_DIR_INDEX(vAddr);
+		INT page = PAGE_TABLE_INDEX(vAddr);
+
+		if (AND(CurrentDirectory[table],PAGE_PRESENT)) {
+			ULONG *pageTable = (ULONG*) (0xffc00000 + (table * PAGESIZE));
+			if (!AND(pageTable[page], PAGE_PRESENT)) {
+				pageTable[page] = OR(pAddr, 3);
+			} else {
+				return -1;
+			}
+		} else {
+			ULONG *newPageTable = (ULONG*) (Generix::GPhysicalMemory::Instance()->Alloc());
+			ULONG *pageTable = (ULONG*) (0xffc00000 + (table * PAGESIZE));
+			CurrentDirectory[table] = OR(newPageTable, 3);
+			pageTable[page] = OR(pAddr, 3);
+		}
+		return 0;
+	}
+
+	INT UNMAPPAGE(VAddress vAddr) {
+		INT table = PAGE_DIR_INDEX(vAddr);
+		INT page = PAGE_TABLE_INDEX(vAddr);
+		
+		if(AND(CurrentDirectory[table],PAGE_PRESENT))
+		{
+			ULONG *pageTable = (ULONG*)(0xffc00000 + (table*PAGESIZE));
+			if(AND(pageTable[page],PAGE_PRESENT))
+			{
+				pageTable[page] = 2;
+			}
+			INT i;
+			for(i=0;i<1024;i++)
+				if(AND(pageTable[i],PAGE_PRESENT))
+					break;
+			
+			if( i == 1024 )
+			{
+				Generix::GPhysicalMemory::Instance()->Free(AND(CurrentDirectory[table],PAGEMASK));
+				CurrentDirectory[table] = 2;
+			}
+				
+		}
+		return 0;
+	}
 }
 
 using namespace x86Paging;

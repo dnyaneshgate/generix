@@ -69,6 +69,4 @@ typedef void VOID;
 typedef VOID* Type;
 typedef bool BOOL;
 
-#define CONST                      const;
-
 #endif //__GENERIX_TYPES_HPP__

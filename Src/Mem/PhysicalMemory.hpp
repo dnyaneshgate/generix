@@ -13,27 +13,26 @@ namespace Generix {
 	class GPhysicalMemory {
 		friend class GMemory;
 		friend class GVirtualMemory;
-	private:
-		GPhysicalMemory();
-		~GPhysicalMemory();
-		VOID Init();
-
+	public:
 		STATIC GPhysicalMemory *Instance() {
 			return &m_Instance;
 		}
-
-		VOID MapMark(UINT bit);
-		VOID MapUnmark(UINT bit);
-		BOOL MapTest(UINT bit);
-		INT  MapFirstFree();
-
 		ULONG GetTotalMemory();
 		ULONG GetMaxBlocks();
 		ULONG GetUsedBlocks();
 		ULONG GetFreeBlocks();
 
 		ULONG Alloc();
-		VOID  Free(VOID *ddr);
+		VOID Free(VOID *ddr);
+	private:
+		GPhysicalMemory();
+		~GPhysicalMemory();
+		VOID Init();
+
+		VOID MapMark(UINT bit);
+		VOID MapUnmark(UINT bit);
+		BOOL MapTest(UINT bit);
+		INT MapFirstFree();
 
 		STATIC GPhysicalMemory m_Instance;
 		ULONG m_TotalMemory;

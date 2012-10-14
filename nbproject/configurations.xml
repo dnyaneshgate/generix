@@ -8,16 +8,12 @@
             <in>TextMode.cpp</in>
             <in>TextMode.hpp</in>
           </df>
-          <df name="Vesa">
-          </df>
           <in>Video.cpp</in>
           <in>Video.hpp</in>
         </df>
       </df>
       <df name="Include">
         <df name="Klib">
-          <df name="liballoc">
-          </df>
           <df name="libc">
             <in>ctype.h</in>
             <in>errno.h</in>
@@ -51,8 +47,6 @@
             <in>IOPort.hpp</in>
             <in>Idt.hpp</in>
             <in>Timer.hpp</in>
-          </df>
-          <df name="x86_64">
           </df>
           <in>Processor.hpp</in>
           <in>ProcessorInfo.hpp</in>
@@ -96,8 +90,6 @@
             <in>Idt.cpp</in>
             <in>Timer.cpp</in>
           </df>
-          <df name="x86_64">
-          </df>
           <in>Processor.cpp</in>
         </df>
         <in>Device.cpp</in>
@@ -110,8 +102,6 @@
         <in>Support.cpp</in>
       </df>
       <df name="Klib">
-        <df name="liballoc">
-        </df>
         <df name="libc">
           <df name="stdio">
             <in>printf.c</in>
@@ -147,10 +137,6 @@
           </df>
           <in>ctype.c</in>
           <in>errno.c</in>
-        </df>
-        <df name="libc++">
-        </df>
-        <df name="libposix">
         </df>
       </df>
       <df name="Linker">

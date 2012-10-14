@@ -98,7 +98,7 @@ namespace Generix {
 
 	ULONG GPhysicalMemory::Alloc()
 	{
-		if(GetFreeBlocks() < 0)
+		if((INT)GetFreeBlocks() < 0)
 			return 0;
 
 		INT frame = MapFirstFree();

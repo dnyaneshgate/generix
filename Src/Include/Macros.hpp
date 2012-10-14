@@ -21,6 +21,11 @@
 
 #define ZERO                   0
 
+#define AND(x,y)               ( (x) & (y) )
+#define OR(x,y)                ( (x) | (y) )
+#define XOR(x,y)               ( (x) ^ (y) )
+#define NEG(x)                 ( ~(x) )
+
 #define SHL(x,i)               ((x) << (i))
 #define SHR(x,i)               ((x) >> (i))
 
@@ -31,12 +36,29 @@
 #define ROL(x,i)               (((x) << (i)) | ((x) >> (64-(i))))
 #define ROR(x,i)               (((x) >> (i)) | ((x) << (64-(i))))
 #else
-#error "Unspported Architecture"
+#error "Unsupported Architecture"
 #endif
 
 #define __ASM__                asm
 #define __VOLATILE__           volatile
 
 #define BREAK                  break
+#define CONST                  const
+
+#define SWAP(x,y) \
+		{ \
+			if((x) != (y)) { \
+				x ^= y; \
+				y ^= x; \
+				x ^= y; \
+			} \
+		}
+
+#define PSWAP(type,x,y) \
+		{ \
+			type t = *x; \
+			*x = *y; \
+			*y = temp; \
+		}
 
 #endif //__GENERIX_MACROS_HPP__
