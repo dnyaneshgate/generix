@@ -5,14 +5,15 @@ namespace Generix {
 	GKernel GKernel::m_Instance;
 
 	GKernel::GKernel() : m_MBH(ZERO), m_MBI(ZERO) {
-		m_cpu = Generix::GProcessor::Instance();
+		m_cpu = GProcessor::Instance();
+		m_MemMngr = GMemoryManager::Instance();
 	}
 
 	GKernel::~GKernel() {
 	}
 
 	VOID GKernel::MemoryInit() {
-		m_MemMngr.Init();
+		m_MemMngr->Init();
 	}
 
 	VOID GKernel::SetMultiBootHeader(PMULTIBOOTHEADER mbh) {

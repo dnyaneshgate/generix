@@ -38,6 +38,13 @@
           </df>
         </df>
         <df name="Processor">
+          <df name="Arch">
+            <in>CPU.hpp</in>
+            <in>Gdt.hpp</in>
+            <in>IOPort.hpp</in>
+            <in>Idt.hpp</in>
+            <in>Timer.hpp</in>
+          </df>
           <df name="x86">
             <in>CPU.hpp</in>
             <in>Gdt.hpp</in>
@@ -67,6 +74,17 @@
       </df>
       <df name="Kernel">
         <df name="Processor">
+          <df name="Arch">
+            <df name="Asm">
+              <in>Boot.asm</in>
+              <in>DescriptorTableFlush.asm</in>
+              <in>Interrupt.asm</in>
+            </df>
+            <in>Gdt.cpp</in>
+            <in>IOPort.cpp</in>
+            <in>Idt.cpp</in>
+            <in>Timer.cpp</in>
+          </df>
           <df name="x86">
             <df name="Asm">
               <in>Boot.asm</in>

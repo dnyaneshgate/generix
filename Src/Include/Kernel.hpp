@@ -25,7 +25,7 @@ namespace Generix {
 		~GKernel();
 		STATIC GKernel m_Instance;
 		GProcessor *m_cpu;
-		GMemoryManager m_MemMngr;
+		GMemoryManager *m_MemMngr;
 		PMULTIBOOTHEADER m_MBH;
 		PMULTIBOOTINFO m_MBI;
 	};

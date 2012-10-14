@@ -5,9 +5,9 @@
  *      Author: dnyanesh
  */
 
-#include <Processor/x86/Timer.hpp>
-#include <Processor/x86/Idt.hpp>
-#include <Processor/x86/IOPort.hpp>
+#include <Processor/Arch/Timer.hpp>
+#include <Processor/Arch/Idt.hpp>
+#include <Processor/Arch/IOPort.hpp>
 
 namespace Generix {
 

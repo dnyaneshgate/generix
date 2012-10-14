@@ -4,22 +4,42 @@
 #include <Types.hpp>
 #include <Macros.hpp>
 
+#define BLOCKS_PER_BYTE 8
 #define PHY_PAGE_SIZE          0x1000
 #define PHY_PAGE_MASK          0xFFFFF000
-#define PHY_PAGE_F_MASK        0x00000FFF
 
 namespace Generix {
 
 	class GPhysicalMemory {
-	public:
-		VOID Init();
+		friend class GMemory;
+		friend class GVirtualMemory;
+	private:
 		GPhysicalMemory();
 		~GPhysicalMemory();
-	protected:
-	private:
+		VOID Init();
+
+		STATIC GPhysicalMemory *Instance() {
+			return &m_Instance;
+		}
+
+		VOID MapMark(UINT bit);
+		VOID MapUnmark(UINT bit);
+		BOOL MapTest(UINT bit);
+		INT  MapFirstFree();
+
+		ULONG GetTotalMemory();
+		ULONG GetMaxBlocks();
+		ULONG GetUsedBlocks();
+		ULONG GetFreeBlocks();
+
+		ULONG Alloc();
+		VOID  Free(VOID *ddr);
+
+		STATIC GPhysicalMemory m_Instance;
 		ULONG m_TotalMemory;
-		ULONG m_UsedMemory;
-		ULONG m_PhyMemStack;
+		ULONG m_UsedBlocks;
+		ULONG m_MaxBlocks;
+		ULONG *m_PhyMemMap;
 	};
 
 }

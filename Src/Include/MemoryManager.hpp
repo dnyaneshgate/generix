@@ -20,8 +20,13 @@ namespace Generix {
 		GMemoryManager();
 		~GMemoryManager();
 		VOID Init();
+		STATIC GMemoryManager *Instance()
+		{
+			return &m_Instance;
+		}
 
-		GMemory m_Mem;
+		STATIC GMemoryManager m_Instance;
+		GMemory *m_Mem;
 	};
 
 }

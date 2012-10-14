@@ -5,8 +5,8 @@
  *      Author: dnyanesh
  */
 
-#include <Processor/x86/Idt.hpp>
-#include <Processor/x86/IOPort.hpp>
+#include <Processor/Arch/Idt.hpp>
+#include <Processor/Arch/IOPort.hpp>
 #include <ScreenIo.hpp>
 #include <Init.hpp>
 #include <string.h>

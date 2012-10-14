@@ -22,6 +22,9 @@ WARNINGS            := -Wall -Wextra #-Werror
 
 ifeq ($(ARCH),x86)
 
+$(shell ln -nsf x86/ Include/Processor/Arch)    #create architecture dependant symbolic links
+$(shell ln -nsf x86/ Kernel/Processor/Arch)    #create architecture dependant symbolic links
+
 KERNEL              := Kernel32.elf
 CPPFLAGS            := -D__x86__
 CFLAGS              := -c -m32
@@ -29,6 +32,9 @@ ASFLAGS             := -felf32
 LDFLAGS             := -T$(LINKERPATH)/Linker32.ld -melf_i386
 
 else ifeq ($(ARCH),x86_64)
+
+$(shell ln -nsf x86_64/ Include/Processor/Arch)    #create architecture dependant symbolic links
+$(shell ln -nsf x86_64/ Kernel/Processor/Arch)    #create architecture dependant symbolic links
 
 KERNEL              := Kernel64.elf
 CPPFLAGS            := -D__x86_64__
@@ -43,4 +49,3 @@ CFLAGS              += $(CPPFLAGS) $(INCLUDE) $(WARNINGS) -nostdlib -fno-builtin
 CXXFLAGS            := $(CFLAGS) -DCPP -fno-stack-protector -fno-exceptions -fno-rtti -std=c++11
 DFLAGS              := -g3 -O0 -D__DEBUG__
 ARFLAGS             := rcs
-

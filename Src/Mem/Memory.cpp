@@ -12,8 +12,12 @@ ULONG KEndAddress = (ULONG)&__KERNEL_END;
 
 namespace Generix {
 
+	GMemory GMemory::m_Instance;
+
 	GMemory::GMemory() {
 		// TODO Auto-generated constructor stub
+		m_PhyMem = GPhysicalMemory::Instance();
+		m_VirtMem = GVirtualMemory::Instance();
 	}
 
 	GMemory::~GMemory() {
@@ -21,7 +25,7 @@ namespace Generix {
 	}
 
 	VOID GMemory::Init() {
-		m_PhyMem.Init();
+		m_PhyMem->Init();
 	}
 
 } /* namespace Generix */

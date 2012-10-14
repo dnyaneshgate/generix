@@ -1,6 +1,6 @@
 
-#include <Processor/x86/IOPort.hpp>
-#include <Processor/x86/CPU.hpp>
+#include <Processor/Arch/IOPort.hpp>
+#include <Processor/Arch/CPU.hpp>
 
 GIOPort::GIOPort() {
 }

@@ -5,8 +5,8 @@
  *      Author: dnyanesh
  */
 
-#include <Processor/x86/Gdt.hpp>
-#include <Processor/x86/CPU.hpp>
+#include <Processor/Arch/Gdt.hpp>
+#include <Processor/Arch/CPU.hpp>
 
 namespace Generix {
 

@@ -24,8 +24,15 @@
 #define SHL(x,i)               ((x) << (i))
 #define SHR(x,i)               ((x) >> (i))
 
+#ifdef __x86__
 #define ROL(x,i)               (((x) << (i)) | ((x) >> (32-(i))))
 #define ROR(x,i)               (((x) >> (i)) | ((x) << (32-(i))))
+#elif __x86_64__
+#define ROL(x,i)               (((x) << (i)) | ((x) >> (64-(i))))
+#define ROR(x,i)               (((x) >> (i)) | ((x) << (64-(i))))
+#else
+#error "Unspported Architecture"
+#endif
 
 #define __ASM__                asm
 #define __VOLATILE__           volatile

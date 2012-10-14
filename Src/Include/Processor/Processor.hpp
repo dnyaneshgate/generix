@@ -1,15 +1,11 @@
 #ifndef __GENERIX_PROCESSOR_HPP__
 #define __GENERIX_PROCESSOR_HPP__
 
-#if defined(__x86__)
-#include "x86/IOPort.hpp"
-#include "x86/CPU.hpp"
-#include "x86/Gdt.hpp"
-#include "x86/Idt.hpp"
-#include "x86/Timer.hpp"
-#else
-#error "Unsupported Architecture"
-#endif
+#include "Arch/IOPort.hpp"
+#include "Arch/CPU.hpp"
+#include "Arch/Gdt.hpp"
+#include "Arch/Idt.hpp"
+#include "Arch/Timer.hpp"
 
 namespace Generix {
 

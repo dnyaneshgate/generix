@@ -18,15 +18,17 @@ namespace Generix {
 
 	class GMemory {
 		friend class GMemoryManager;
-	public:
-	protected:
 	private:
 		GMemory();
 		~GMemory();
 		VOID Init();
-
-		GPhysicalMemory m_PhyMem;
-
+		STATIC GMemory *Instance()
+		{
+			return &m_Instance;
+		}
+		STATIC GMemory m_Instance;
+		GPhysicalMemory *m_PhyMem;
+		GVirtualMemory  *m_VirtMem;
 	};
 
 } /* namespace Generix */

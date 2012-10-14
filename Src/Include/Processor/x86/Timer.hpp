@@ -10,7 +10,7 @@
 
 #include <Types.hpp>
 #include <Macros.hpp>
-#include <Processor/x86/CPU.hpp>
+#include <Processor/Arch/CPU.hpp>
 
 namespace Generix {
 
