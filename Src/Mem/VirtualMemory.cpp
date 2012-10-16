@@ -8,7 +8,7 @@ namespace x86Paging {
 	} PAGETABLE, *PPAGETABLE;
 
 	typedef struct strucPAGEDIRECTORY {
-		PAGETABLE tables[1024];
+		PPAGETABLE tables[1024];
 	} PAGEDIRECTORY, *PPAGEDIRECTORY;
 
 	PPAGEDIRECTORY KernelDirectory = ZERO;
@@ -18,7 +18,7 @@ namespace x86Paging {
 		INT table = PAGE_DIR_INDEX(vAddr);
 		INT page = PAGE_TABLE_INDEX(vAddr);
 
-		if (AND(CurrentDirectory[table],PAGE_PRESENT)) {
+		if (AND(CurrentDirectory->tables[table],PAGE_PRESENT)) {
 			ULONG *pageTable = (ULONG*) (0xffc00000 + (table * PAGESIZE));
 			if (!AND(pageTable[page], PAGE_PRESENT)) {
 				pageTable[page] = OR(pAddr, 3);
@@ -28,7 +28,7 @@ namespace x86Paging {
 		} else {
 			ULONG *newPageTable = (ULONG*) (Generix::GPhysicalMemory::Instance()->Alloc());
 			ULONG *pageTable = (ULONG*) (0xffc00000 + (table * PAGESIZE));
-			CurrentDirectory[table] = OR(newPageTable, 3);
+			CurrentDirectory->tables[table] = OR(newPageTable, 3);
 			pageTable[page] = OR(pAddr, 3);
 		}
 		return 0;
@@ -38,7 +38,7 @@ namespace x86Paging {
 		INT table = PAGE_DIR_INDEX(vAddr);
 		INT page = PAGE_TABLE_INDEX(vAddr);
 		
-		if(AND(CurrentDirectory[table],PAGE_PRESENT))
+		if(AND(CurrentDirectory->tables[table],PAGE_PRESENT))
 		{
 			ULONG *pageTable = (ULONG*)(0xffc00000 + (table*PAGESIZE));
 			if(AND(pageTable[page],PAGE_PRESENT))
@@ -52,8 +52,8 @@ namespace x86Paging {
 			
 			if( i == 1024 )
 			{
-				Generix::GPhysicalMemory::Instance()->Free(AND(CurrentDirectory[table],PAGEMASK));
-				CurrentDirectory[table] = 2;
+				Generix::GPhysicalMemory::Instance()->Free(AND(CurrentDirectory->tables[table],PAGEMASK));
+				CurrentDirectory->tables[table] = 2;
 			}
 				
 		}

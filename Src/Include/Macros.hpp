@@ -41,6 +41,8 @@
 
 #define __ASM__                asm
 #define __VOLATILE__           volatile
+#define __INTEL_INLINE_ASSEMBLY__ __ASM__(".intel_syntax noprefix")
+#define __ATNT_INLINE_ASSEMBLY__  __ASM__(".att_syntax prefix")
 
 #define BREAK                  break
 #define CONST                  const

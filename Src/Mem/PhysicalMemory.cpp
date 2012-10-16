@@ -76,7 +76,7 @@ namespace Generix {
 		while(i < limit)
 		{
 			PMEMORYMAP me = (PMEMORYMAP) i;
-			dprintk("region=%-3dbase=%-20xlength=%-20dtype=%d\n",region++,me->BaseAddressLow,me->LengthLow,me->Type);
+			dprintk("region=%-3d base=%-20x length=%-20d type=%d\n",region++,me->BaseAddressLow,me->LengthLow,me->Type);
 			if(me->Type == 1)
 			{
 				INT align = me->BaseAddressLow / PHY_PAGE_SIZE;
@@ -88,6 +88,15 @@ namespace Generix {
 				}
 			}
 			i += me->Size + sizeof(UINT);
+		}
+		
+		i = 0x100000;
+		limit = PAGE_ROUND_UP(KEndAddress + (m_MaxBlocks/BLOCKS_PER_BYTE));
+		while( i < limit )
+		{
+			MapMark(i);
+			m_UsedBlocks++;
+			i += PHY_PAGE_SIZE;
 		}
 
 		dprintk("total memory = %d\n",m_TotalMemory/1024);
