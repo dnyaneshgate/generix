@@ -26,6 +26,7 @@ namespace Generix {
 
 	VOID GMemory::Init() {
 		m_PhyMem->Init();
+		m_VirtMem->Init();
 	}
 
 } /* namespace Generix */

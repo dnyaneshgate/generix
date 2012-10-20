@@ -3,6 +3,8 @@
 
 #include <Types.hpp>
 #include <Macros.hpp>
+#include <Mem/Paging.hpp>
+#include <Processor/Arch/CPU.hpp>
 
 #define USER_STACK_BOTTOM  0xB0000000
 #define USER_STACK_TOP     0xC0000000
@@ -19,19 +21,7 @@
 
 #define VMM_PAGES_PER_TABLE 1024
 
-#define PAGESIZE      0x1000
-#define PAGEMASK      0xfffff000
-#define PAGE_PRESENT  BIT(0)
-#define PAGE_WRITE    BIT(1)
-#define PAGE_USER     BIT(2)
-#define PAGE_ACCESS   BIT(5)
-#define PAGE_DIRTY    BIT(6)
-
-#define PAGE_ROUND(x)            AND(x,PAGEMASK)
-#define PAGE_ROUND_UP(x)         (AND(x,PAGEMASK)+PAGESIZE)
-#define PAGE_DIR_INDEX(x)        AND(SHR(x,22),0x3ff)
-#define PAGE_TABLE_INDEX(x)      AND(SHR(x,12),0x3ff)
-#define SETATTRIBUTE(page,flag)  OR(page,flag)
+EXTERN BOOL isPagingEnabled;
 
 namespace Generix {
 
@@ -47,6 +37,7 @@ namespace Generix {
 		GVirtualMemory();
 		~GVirtualMemory();
 		VOID Init();
+		STATIC VOID PageFaultHandler(REG reg);
 
 		STATIC GVirtualMemory m_Instance;
 	};

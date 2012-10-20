@@ -12,6 +12,7 @@
 #define NULL (void*)0
 #endif
 
+#define UNDEFINED NULL
 #define EXIT_FAILURE -1
 #define EXIT_SUCCESS 0
 

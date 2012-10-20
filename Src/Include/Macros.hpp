@@ -17,14 +17,29 @@
 #define MAX(x,y)               (((x) > (y)) ? (x) : (y))
 #define MIN(x,y)               (((x) < (y)) ? (x) : (y))
 
+#define AND                    &
+#define OR                     |
+#define XOR                    ^
+#define NEG(x)                 ~(x)
+#define LT                     <
+#define GT                     >
+#define LTE                    <=
+#define GTE                    >=
+#define EQU                    ==
+#define NOT                    !
+
 #define BIT(i)                 (1 << (i))
+#define BITSET(x,i)            x = (x) OR (i)
+#define BITRESET(x,i)          x = (x) AND NEG(i)
 
 #define ZERO                   0
 
+/*
 #define AND(x,y)               ( (x) & (y) )
 #define OR(x,y)                ( (x) | (y) )
 #define XOR(x,y)               ( (x) ^ (y) )
 #define NEG(x)                 ( ~(x) )
+*/
 
 #define SHL(x,i)               ((x) << (i))
 #define SHR(x,i)               ((x) >> (i))

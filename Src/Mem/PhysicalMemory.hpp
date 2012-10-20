@@ -5,14 +5,13 @@
 #include <Macros.hpp>
 
 #define BLOCKS_PER_BYTE 8
-#define PHY_PAGE_SIZE          0x1000
-#define PHY_PAGE_MASK          0xFFFFF000
 
 namespace Generix {
 
 	class GPhysicalMemory {
 		friend class GMemory;
 		friend class GVirtualMemory;
+		friend class GKMalloc;
 	public:
 		STATIC GPhysicalMemory *Instance() {
 			return &m_Instance;
@@ -23,7 +22,7 @@ namespace Generix {
 		ULONG GetFreeBlocks();
 
 		ULONG Alloc();
-		VOID Free(VOID *ddr);
+		VOID Free(VOID *addr);
 	private:
 		GPhysicalMemory();
 		~GPhysicalMemory();

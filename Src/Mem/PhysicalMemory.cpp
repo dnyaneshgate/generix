@@ -63,24 +63,24 @@ namespace Generix {
 		GKernel *kernel = GKernel::Instance();
 		PMULTIBOOTINFO mbi = kernel->GetMultiBootInfo();
 		m_TotalMemory = mbi->MemoryLow + mbi->MemoryHigh + 1024;
-		m_MaxBlocks   =( m_TotalMemory*1024) / PHY_PAGE_SIZE;
-		m_UsedBlocks  = m_MaxBlocks;
+		m_MaxBlocks   =( m_TotalMemory*1024) / PAGESIZE;
+		m_UsedBlocks  = 0;//m_MaxBlocks;
 		m_PhyMemMap   = (ULONG*)PAGE_ROUND_UP(KEndAddress);
-		memset(m_PhyMemMap,0xf,m_MaxBlocks/BLOCKS_PER_BYTE);
+		memset(m_PhyMemMap,0,m_MaxBlocks/BLOCKS_PER_BYTE);
 
 		PMEMORYMAP map_addr = (PMEMORYMAP)mbi->MemoryMapAddress;
 		UINT map_len = mbi->MemoryMapLength;
 		UINT limit = (UINT)map_addr + map_len;
 		UINT i = (UINT)map_addr;
-		UINT region = 0;
+		/*UINT region = 0;
 		while(i < limit)
 		{
 			PMEMORYMAP me = (PMEMORYMAP) i;
-			dprintk("region=%-3d base=%-20x length=%-20d type=%d\n",region++,me->BaseAddressLow,me->LengthLow,me->Type);
+			printk("region=%-3d base=%-20x length=%-20d type=%d\n",region++,me->BaseAddressLow,me->LengthLow,me->Type);
 			if(me->Type == 1)
 			{
-				INT align = me->BaseAddressLow / PHY_PAGE_SIZE;
-				INT blocks = me->LengthLow / PHY_PAGE_SIZE;
+				INT align = me->BaseAddressLow / PAGESIZE;
+				INT blocks = me->LengthLow / PAGESIZE;
 				for(;blocks>=0;blocks--)
 				{
 					MapUnmark(align++);
@@ -88,21 +88,22 @@ namespace Generix {
 				}
 			}
 			i += me->Size + sizeof(UINT);
-		}
-		
-		i = 0x100000;
-		limit = PAGE_ROUND_UP(KEndAddress + (m_MaxBlocks/BLOCKS_PER_BYTE));
+		}*/
+
+		i = 0;//0x100000;
+		KEndAddress += (m_MaxBlocks/BLOCKS_PER_BYTE);
+		limit = PAGE_ROUND_UP(KEndAddress) / PAGESIZE;
 		while( i < limit )
 		{
-			MapMark(i);
+			MapMark( i );
 			m_UsedBlocks++;
-			i += PHY_PAGE_SIZE;
+			i++;
 		}
 
-		dprintk("total memory = %d\n",m_TotalMemory/1024);
-		dprintk("max blocks = %d\n",m_MaxBlocks);
-		dprintk("used blocks = %d\n",m_UsedBlocks);
-		dprintk("free blocks = %d\n",GetFreeBlocks());
+		dprintk("total memory = %d\n",UINT(m_TotalMemory/1024));
+		dprintk("max blocks = %d\n",UINT(m_MaxBlocks));
+		dprintk("used blocks = %d\n",UINT(m_UsedBlocks));
+		dprintk("free blocks = %d\n",UINT(GetFreeBlocks()));
 	}
 
 	ULONG GPhysicalMemory::Alloc()
@@ -116,7 +117,7 @@ namespace Generix {
 			return 0;
 
 		MapMark(frame);
-		ULONG addr = frame * PHY_PAGE_SIZE;
+		ULONG addr = frame * PAGESIZE;
 		m_UsedBlocks++;
 
 		return addr;
@@ -125,7 +126,7 @@ namespace Generix {
 	VOID GPhysicalMemory::Free(VOID *p)
 	{
 		ULONG addr = (ULONG)p;
-		INT frame = addr / PHY_PAGE_SIZE;
+		INT frame = addr / PAGESIZE;
 		MapUnmark(frame);
 		m_UsedBlocks--;
 	}
