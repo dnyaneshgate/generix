@@ -3,11 +3,13 @@
 #include <Processor/Arch/CPU.hpp>
 #include <Processor/Arch/IOPort.hpp>
 #include <string.h>
+#include <ScreenIo.hpp>
 
 using namespace Generix;
 
 #ifdef __x86__
 namespace x86Paging {
+
 	PPAGEDIRECTORY KernelDirectory = ZERO;
 	PPAGEDIRECTORY CurrentDirectory = ZERO;
 
@@ -63,11 +65,9 @@ namespace x86Paging {
 			return -1;
 
 		CurrentDirectory = dir;
-
-		GIOPort::WriteCRX(3,ULONG(&dir->tables));
-
+		GIOPort::WriteCRX(3,ULONG(dir));
 		GIOPort::ReadCRX(0,&cr0);
-		BITSET(cr0,PAGEBIT);
+		cr0 = BITSET(cr0,PAGEBIT);
 		GIOPort::WriteCRX(0,cr0);
 		return 0;
 	}

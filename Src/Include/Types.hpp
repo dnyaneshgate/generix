@@ -2,7 +2,6 @@
 #define __GENERIX_TYPES_HPP__
 
 #ifndef __cplusplus
-
 typedef enum {
 	false, true
 } bool;

@@ -11,6 +11,7 @@
 #define __SECTION__(x)         __attribute__((section(x)))
 #define __USED__               __attribute__((used))
 #define __UNUSED__             __attribute__((unused))
+#define __ALIGN__(x)           __attribute__((align((x))))
 
 #define __INIT__               __SECTION__((".initGenerix"))
 
@@ -29,8 +30,8 @@
 #define NOT                    !
 
 #define BIT(i)                 (1 << (i))
-#define BITSET(x,i)            x = (x) OR (i)
-#define BITRESET(x,i)          x = (x) AND NEG(i)
+#define BITSET(x,i)            UINT((x)) OR (i)
+#define BITRESET(x,i)          UINT((x)) AND NEG(i)
 
 #define ZERO                   0
 

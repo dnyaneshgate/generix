@@ -60,6 +60,12 @@ namespace Generix {
 	}
 
 	VOID GPhysicalMemory::Init() {
+
+		Console::Color col = Console::GetFontColor();
+		Console::SetFontColor(Console::DARKGRAY);
+		Console::Writeln("%-30s : Initializing Physical Memory","GPhysicalMemory::Init()");
+		Console::SetFontColor(col);
+
 		GKernel *kernel = GKernel::Instance();
 		PMULTIBOOTINFO mbi = kernel->GetMultiBootInfo();
 		m_TotalMemory = mbi->MemoryLow + mbi->MemoryHigh + 1024;
@@ -73,6 +79,7 @@ namespace Generix {
 		UINT limit = (UINT)map_addr + map_len;
 		UINT i = (UINT)map_addr;
 		/*UINT region = 0;
+
 		while(i < limit)
 		{
 			PMEMORYMAP me = (PMEMORYMAP) i;
@@ -99,11 +106,6 @@ namespace Generix {
 			m_UsedBlocks++;
 			i++;
 		}
-
-		dprintk("total memory = %d\n",UINT(m_TotalMemory/1024));
-		dprintk("max blocks = %d\n",UINT(m_MaxBlocks));
-		dprintk("used blocks = %d\n",UINT(m_UsedBlocks));
-		dprintk("free blocks = %d\n",UINT(GetFreeBlocks()));
 	}
 
 	ULONG GPhysicalMemory::Alloc()

@@ -3,6 +3,11 @@
 #include <stdarg.h>
 #include "ScreenIo.hpp"
 
+EXTERN "C" INT vsprintf(char * buf, const char * fmt, va_list args);
+
+#define BUFFSIZE 512
+STATIC CHAR BUFF[BUFFSIZE];
+
 namespace Console {
 
 #define ATTRIBUTE(F,B) ( SHL(B,4) | (F & 0xF) )
@@ -87,7 +92,7 @@ namespace Console {
 		return HEIGHT;
 	}
 
-	INT Write(const CHAR *S) {
+	/*INT Write(const CHAR *S) {
 		const CHAR* str = S;
 		while (*str)
 			Putch(*str++);
@@ -96,6 +101,28 @@ namespace Console {
 
 	INT Writeln(const CHAR *S) {
 		INT n = Write(S);
+		Putch('\n');
+		return ++n;
+	}*/
+
+	INT Write(const CHAR *format, ...) {
+		va_list args;
+		va_start(args, format);
+		vsprintf(BUFF, format, args);
+		va_end(args);
+
+		const CHAR* str = BUFF;
+		while (*str)
+			Putch(*str++);
+		return BUFF - str;
+	}
+
+	INT Writeln(const CHAR *format, ...) {
+		va_list args;
+		va_start(args, format);
+		vsprintf(BUFF, format, args);
+		va_end(args);
+		INT n = Write(BUFF);
 		Putch('\n');
 		return ++n;
 	}
@@ -146,10 +173,7 @@ namespace Console {
 
 }
 
-extern "C" int vsprintf(char * buf, const char * fmt, va_list args);
-
 INT printk(const CHAR* format, ...) {
-	CHAR BUFF[256];
 	va_list args;
 	va_start(args, format);
 	vsprintf(BUFF, format, args);
@@ -160,12 +184,15 @@ INT printk(const CHAR* format, ...) {
 INT dprintk(const CHAR* format, ...) {
 	INT n = 0;
 #ifdef __DEBUG__
-	CHAR BUFF[256];
 	va_list args;
 	va_start(args, format);
 	n = vsprintf(BUFF, format, args);
 	va_end(args);
+	
+	Console::Color col = Console::GetFontColor();
+	Console::SetFontColor(Console::DARKGRAY);
 	n = Console::Write(BUFF);
+	Console::SetFontColor(col);
 #endif
 	return n;
 }

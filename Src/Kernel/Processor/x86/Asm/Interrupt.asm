@@ -37,6 +37,7 @@
 
 %macro REGISTER_SAVE 0
 	pushad                    ; Pushes edi,esi,ebp,esp,ebx,edx,ecx,eax
+	push ss
 	push ds
 	push es
 	push fs
@@ -58,6 +59,7 @@
 	pop fs
 	pop es
 	pop ds
+	pop ss
 	popad                     ; Pops edi,esi,ebp...
 %endmacro
 

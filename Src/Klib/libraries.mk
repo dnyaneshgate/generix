@@ -1,9 +1,9 @@
 LIBS     := libc.a
 LIBPATH  := Klib/
-LIBC     := $(patsubst %.c,%.o,$(wildcard Klib/libc/*.c)) $(patsubst %.c,%.o,$(wildcard Klib/libc/*/*.c))
-LIBCPP   := $(patsubst %.cpp,%.o,$(wildcard Klib/libc++/*.cpp)) $(patsubst %.cpp,%.o,$(wildcard Klib/libc++/*/*.cpp))
-LIBPOSIX := $(patsubst %.cpp,%.o,$(wildcard Klib/libposix/*.cpp))
-LIBALLOC := $(patsubst %.cpp,%.o,$(wildcard Klib/liballoc/*.cpp))
+LIBC     := $(patsubst %.c,%.o,$(shell find Klib/libc -name "*.c"))
+LIBCPP   := $(patsubst %.cpp,%.o,$(shell find Klib/libc++/ -name "*.cpp"))
+LIBPOSIX := $(patsubst %.cpp,%.o,$(shell find Klib/libposix/ -name "*.cpp"))
+LIBALLOC := $(patsubst %.cpp,%.o,$(shell find Klib/liballoc/ -name "*.cpp"))
 
 lib: $(LIBS)
 
@@ -22,4 +22,3 @@ libposix.a: $(LIBPOSIX)
 liballoc.a: $(LIBALLOC)
 			$(AR) $(ARFLAGS) $(LIBPATH)$@ $^
 			$(RANLIB) $(LIBPATH)$@
-

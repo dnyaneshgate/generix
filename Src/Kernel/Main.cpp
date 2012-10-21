@@ -29,7 +29,7 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 	__ctors(); //invoke constructors of static/global objects
 	__init(); //invoke functions resident in .initGenerix section
 
-	__INIT_ESP = esp;
+	__INIT_ESP = esp; //save initial stack pointer
 
 	GKernel *kernel = GKernel::Instance(); //get kernel instance
 	kernel->SetMultiBootHeader(&_MBOOT_HEADER); //save multibootheader
@@ -38,6 +38,7 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 	GProcessor *CPU = kernel->GetCpu(); //get processor instance
 	CPU->InstallGdt(); //setup gdt
 	CPU->InstallIdt(); //setup idt
+
 	CPU->InstallPit(); //setup timer
 
 	kernel->MemoryInit();

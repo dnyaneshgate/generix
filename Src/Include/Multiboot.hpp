@@ -2,7 +2,7 @@
 /*
  * cpp-kernel
  * Copyright (C) Dnyanesh Gate 2012 <dnyanesh@localhost.localdomain>
- * 
+ *
  */
 
 #ifndef __GENERIX_MULTIBOOT_HPP__
@@ -12,33 +12,36 @@
 #define MULTIBOOT_SEARCH                        8192
 
 /* The magic field should contain this. */
-#define MULTIBOOT_HEADER_MAGIC                  0x1BADB002
+#define MULTIBOOT_HEADER_MAGIC1                  0x1BADB002
+#define MULTIBOOT_HEADER_MAGIC2                  0x1BADB002
+
+#define MULTIBOOT_HEADER_MAGIC                   MULTIBOOT_HEADER_MAGIC1
 
 /* This should be in %eax. */
-#define MULTIBOOT_BOOTLOADER_MAGIC              0x2BADB002
+#define MULTIBOOT_BOOTLOADER_MAGIC               0x2BADB002
 
 /* The bits in the required part of flags field we don't support. */
-#define MULTIBOOT_UNSUPPORTED                   0x0000fffc
+#define MULTIBOOT_UNSUPPORTED                    0x0000fffc
 
 /* Alignment of multiboot modules. */
-#define MULTIBOOT_MOD_ALIGN                     0x00001000
+#define MULTIBOOT_MOD_ALIGN                      0x00001000
 
 /* Alignment of the multiboot info structure. */
-#define MULTIBOOT_INFO_ALIGN                    0x00000004
+#define MULTIBOOT_INFO_ALIGN                     0x00000004
 
 /* Flags set in the 'flags' member of the multiboot header. */
 
 /* Align all boot modules on i386 page (4KB) boundaries. */
-#define MULTIBOOT_PAGE_ALIGN                    0x00000001
+#define MULTIBOOT_PAGE_ALIGN                     0x00000001
 
 /* Must pass memory information to OS. */
-#define MULTIBOOT_MEMORY_INFO                   0x00000002
+#define MULTIBOOT_MEMORY_INFO                    0x00000002
 
 /* Must pass video information to OS. */
-#define MULTIBOOT_VIDEO_MODE                    0x00000004
+#define MULTIBOOT_VIDEO_MODE                     0x00000004
 
 /* This flag indicates the use of the address fields in the header. */
-#define MULTIBOOT_AOUT_KLUDGE                   0x00010000
+#define MULTIBOOT_AOUT_KLUDGE                    0x00010000
 
 /* Flags to be set in the 'flags' member of the multiboot info structure. */
 
@@ -77,6 +80,11 @@
 #define MULTIBOOT_INFO_VIDEO_INFO               0x00000800
 
 #define MULTIBOOT_MEM_FLAG_FREE                 0x1
+
+#define MULTIBOOT_HEADER_FLAGS                  MULTIBOOT_PAGE_ALIGN | MULTIBOOT_MEMORY_INFO | MULTIBOOT_VIDEO_MODE
+#define MULTIBOOT_HEADER_CHECKSUM               -(MULTIBOOT_HEADER_MAGIC + MULTIBOOT_HEADER_FLAGS)
+
+#ifndef __ASSEMBLER__
 
 typedef struct strucELFHEADERTABLE {
 	unsigned int num; //Number of section headers
@@ -267,5 +275,7 @@ typedef struct strucMULTIBOOTHEADER {
 	int height;
 	int depth;
 } __attribute__((packed)) MULTIBOOTHEADER, *PMULTIBOOTHEADER;
+
+#endif //__ASSEMBLER__
 
 #endif //__GENERIX_MULTIBOOT_HPP__

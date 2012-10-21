@@ -23,7 +23,10 @@
 #define PAGE_ROUND_UP(x)         ((x AND PAGEMASK)+PAGESIZE)
 #define PAGE_DIR_INDEX(x)        (SHR(x,22) AND 0x3ff)
 #define PAGE_TABLE_INDEX(x)      (SHR(x,12) AND 0x3ff)
-#define SETATTRIBUTE(page,flag)  (page OR flag)
+#define SETATTRIBUTE(page,flag)  (page = (page OR flag))
+
+#define TABLES_PER_DIRECTORY     1024
+#define PAGES_PER_TABLE          1024
 
 #define PAGEBIT                  0x80000000
 

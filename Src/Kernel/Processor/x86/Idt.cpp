@@ -240,8 +240,7 @@ namespace Generix {
 		HLT();
 	}
 
-	EXTERN "C"
-	VOID isr_handler(REG reg) {
+	EXTERN "C" VOID isr_handler(REG reg) {
 		printk("Interrupt Received : %d\n", reg.vector);
 		IsrHandler handler = VectorList[reg.vector];
 		if (handler)
@@ -250,8 +249,7 @@ namespace Generix {
 			faultHandler(&reg);
 	}
 
-	EXTERN "C"
-	VOID irq_handler(REG reg) {
+	EXTERN "C" VOID irq_handler(REG reg) {
 		if (reg.vector >= 40)
 			OUTB(0xA0, 0x20);
 		OUTB(0x20, 0x20);

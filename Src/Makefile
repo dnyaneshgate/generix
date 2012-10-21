@@ -1,39 +1,37 @@
 include config.mk
 include rules.mk
 
+##.SILENT:
 .PHONY: all world lib kernel driver usage
 
 all: world link
 
 world: kernel drivers
 
+
 include Klib/libraries.mk
 include Mem/Memory.mk
 include Drivers/drivers.mk
 include Kernel/kernel.mk
 
+
 link:
 	$(LD) $(LDFLAGS) -o $(KERNEL) $(KERNELOBJ) $(MEMOBJ) $(DRIVEROBJ) $(LIBPATH)$(LIBS)
 
 driverclean:
-	@rm -f $(DRIVEROBJ) && echo "[RM]       $(DRIVEROBJ)";
+	@rm -f $(DRIVEROBJ) && echo -e "\031[33m[RM]\033[36m       $(DRIVEROBJ)\033[0m";
 
-distclean: clean
-	@rm -f $(KERNEL) && echo "[RM]       $(KERNEL)";
+distclean:
+	@rm -f $(KERNEL) && echo -e "\033[31m[RM]\033[36m       $(KERNEL)\033[0m";
 
 libclean:
 	@for i in $(addprefix $(LIBPATH),$(LIBS)) $(LIBC) $(LIBCPP) $(LIBPOSIX) $(LIBALLOC); do \
-		rm -f $$i && echo "[RM]       $$i"; \
+		rm -f $$i && echo -e "\033[31m[RM]\033[36m       $$i\033[0m"; \
 	done
 
 clean:
 	@for i in $(LIBC) $(LIBCPP) $(LIBPOSIX) $(LIBALLOC) $(KERNELOBJ) $(MEMOBJ) $(DRIVEROBJ); do \
-		rm -f $$i && echo "[RM]       $$i"; \
+		rm -f $$i && echo -e "\033[31m[RM]\033[36m       $$i\033[0m"; \
 	done
 
-cleanall: distclean libclean
-	
-usage:
-	@echo "make clean lib driver kernel"
-	@echo "make clean lib world"
-	@echo "make libclean driverclean distclen"
+clean-all: distclean libclean clean
