@@ -26,11 +26,6 @@ namespace Generix {
 
 	VOID GVirtualMemory::Init() {
 
-		Console::Color col = Console::GetFontColor();
-		Console::SetFontColor(Console::DARKGRAY);
-		Console::Writeln("%-30s : Initializing Virtual Memory","GVirtualMemory::Init()");
-		Console::SetFontColor(col);
-
 		UINT i, frame, virt;
 
 		PPAGETABLE IdentityPageTable = ZERO;

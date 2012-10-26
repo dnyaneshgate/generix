@@ -10,7 +10,7 @@ STATIC CHAR BUFF[BUFFSIZE];
 
 namespace Console {
 
-#define ATTRIBUTE(F,B) ( SHL(B,4) | (F & 0xF) )
+#define ATTRIBUTE(F,B) ( SHL(B,4) OR (F AND 0xF) )
 
 	const PRIVATE UINT WIDTH = 80, HEIGHT = 25;
 	const PRIVATE UINT BUFFERSIZE = WIDTH * HEIGHT;
@@ -33,7 +33,7 @@ namespace Console {
 		OUTB(0x3D4 + 1, temp);
 	}
 
-	PRIVATE VOID PartRefresh() {
+	PRIVATE VOID PartialRefresh() {
 		TEXTBUFFER[ Xpos + Ypos * WIDTH ] = DBUFFER[ Xpos + Ypos * WIDTH ];
 	}
 
@@ -147,11 +147,8 @@ namespace Console {
 				break;
 			case '\b':
 				--Xpos;
-				DBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (' '
-						| SHL(ATTRIBUTE(FontColor, BackColor), 8));
-				PartRefresh();
-				break;
-			case '\a':
+				DBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (' ' OR SHL(ATTRIBUTE(FontColor, BackColor), 8));
+				PartialRefresh();
 				break;
 			default:
 				if (Xpos >= WIDTH) {
@@ -164,7 +161,7 @@ namespace Console {
 
 				DBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (ch
 						| SHL(ATTRIBUTE(FontColor, BackColor), 8));
-				PartRefresh();
+				PartialRefresh();
 				++Xpos;
 				break;
 		}
@@ -181,18 +178,22 @@ INT printk(const CHAR* format, ...) {
 	return Console::Write(BUFF);
 }
 
-INT dprintk(const CHAR* format, ...) {
+INT dprintk(INT flag, const CHAR* file, const INT line, const CHAR* format, ...) {
 	INT n = 0;
-#ifdef __DEBUG__
+
 	va_list args;
 	va_start(args, format);
 	n = vsprintf(BUFF, format, args);
 	va_end(args);
-	
+
 	Console::Color col = Console::GetFontColor();
 	Console::SetFontColor(Console::DARKGRAY);
-	n = Console::Write(BUFF);
+	n = Console::Writeln("[%s] %s:%d: %s",
+			(flag EQU 0) ? "INFO" : (flag EQU 1) ? "WARN" : (flag EQU 2) ? "ERROR" : "",
+			file,
+			line,
+			BUFF);
 	Console::SetFontColor(col);
-#endif
+
 	return n;
 }

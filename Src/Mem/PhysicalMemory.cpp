@@ -61,11 +61,6 @@ namespace Generix {
 
 	VOID GPhysicalMemory::Init() {
 
-		Console::Color col = Console::GetFontColor();
-		Console::SetFontColor(Console::DARKGRAY);
-		Console::Writeln("%-30s : Initializing Physical Memory","GPhysicalMemory::Init()");
-		Console::SetFontColor(col);
-
 		GKernel *kernel = GKernel::Instance();
 		PMULTIBOOTINFO mbi = kernel->GetMultiBootInfo();
 		m_TotalMemory = mbi->MemoryLow + mbi->MemoryHigh + 1024;

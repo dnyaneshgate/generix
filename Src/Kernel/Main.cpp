@@ -52,8 +52,17 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 	Console::Write("Version : ");
 	Console::Writeln(__GENERIX_VERSION__);
 
-	Console::Write("Processor : ");
-	Console::Writeln(CPU->GetVendorName());
+	CHAR vendor[13];
+	CPU->GetProcessorInfo("VendorName",vendor);
+	Console::Writeln("Processor : %s",vendor);
+
+	UINT cores;
+	CPU->GetProcessorInfo("Cores",&cores);
+	Console::Writeln("Cores : %d",cores);
+
+	CHAR brand[256];
+	CPU->GetProcessorInfo("Brand",brand);
+	Console::Writeln("Brand : %s",brand);
 
 	__dtors(); //invoke destructors of static/global objects
 	return EXIT_SUCCESS;

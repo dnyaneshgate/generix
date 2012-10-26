@@ -23,7 +23,7 @@ if [[ $EMU == "bochs" ]]; then
 	$EMU -q "ata0-master:type=cdrom,path=$BOOT/$ISO,status=inserted" \
 			'megs:512' \
 			'boot:cdrom' \
-			'cpu:count=1,ips=4000000' \
+			'cpu:model="core_duo_t2400_yonah" ,count=1,ips=4000000' \
 			'cpuid: mmx=1, sep=1, sse=sse4_2, apic=xapic, aes=1, movbe=1, xsave=1' \
 			'clock:sync=realtime,time0=local' \
 			'logprefix: %t-%e-@%i-%d' \
