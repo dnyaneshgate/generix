@@ -6,9 +6,11 @@
  */
 
 #include "Memory.hpp"
+#include "KHeap.hpp"
+#include "KMalloc.hpp"
 
 EXTERN ULONG __KERNEL_END;
-ULONG KEndAddress = (ULONG)&__KERNEL_END;
+ULONG KEndAddress = (ULONG) & __KERNEL_END;
 
 namespace Generix {
 
@@ -27,6 +29,8 @@ namespace Generix {
 	VOID GMemory::Init() {
 		m_PhyMem->Init();
 		m_VirtMem->Init();
+		GKMalloc * kMalloc = GKMalloc::Instance();
+		GAllocator::SetDefault(kMalloc);
 	}
 
 } /* namespace Generix */

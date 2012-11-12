@@ -13,6 +13,7 @@ namespace Generix {
 		friend class GVirtualMemory;
 		friend class GKMalloc;
 	public:
+
 		STATIC GPhysicalMemory *Instance() {
 			return &m_Instance;
 		}

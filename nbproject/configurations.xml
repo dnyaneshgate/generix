@@ -112,6 +112,7 @@
       </df>
       <df name="Klib">
         <df name="liballoc">
+          <in>Allocator.cpp</in>
         </df>
         <df name="libc">
           <df name="stdio">
@@ -157,6 +158,7 @@
       <df name="Linker">
       </df>
       <df name="Mem">
+        <in>KHeap.hpp</in>
         <in>KMalloc.cpp</in>
         <in>KMalloc.hpp</in>
         <in>Memory.cpp</in>
@@ -632,17 +634,6 @@
           </ccTool>
         </makeTool>
       </makefileType>
-      <item path="Src/Drivers/Video/Text/TextMode.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Drivers/Video/Video.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
       <item path="Src/Include/Assert.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Bitmap.hpp" ex="true" tool="3" flavor2="0">
@@ -735,28 +726,6 @@
             tool="4"
             flavor2="0">
       </item>
-      <item path="Src/Kernel/Processor/Arch/Gdt.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Kernel/Processor/Arch/IOPort.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Kernel/Processor/Arch/Idt.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Kernel/Processor/Arch/Timer.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
       <item path="Src/Kernel/Processor/Processor.cpp" ex="false" tool="1" flavor2="0">
         <ccTool>
           <preprocessorList>
@@ -779,25 +748,6 @@
             tool="0"
             flavor2="0">
       </item>
-      <item path="Src/Kernel/Processor/x86/Gdt.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Kernel/Processor/x86/IOPort.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Kernel/Processor/x86/Idt.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Kernel/Processor/x86/Timer.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
       <item path="Src/Kernel/ScreenIo.cpp" ex="false" tool="1" flavor2="0">
         <ccTool>
           <preprocessorList>
@@ -813,138 +763,62 @@
         </ccTool>
       </item>
       <item path="Src/Klib/libc/ctype.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/errno.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/stdio/printf.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/stdio/sprintf.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/stdio/vsprintf.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/stdlib/atoi.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/stdlib/itoa.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/bzero.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/memcpy.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/memmove.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/memset.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strcat.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strchr.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strcmp.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strcpy.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strcspn.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strlen.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strlwr.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strncat.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strncmp.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strncpy.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strpbrk.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strrchr.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strrev.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strspn.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strtok.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strupr.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
       </item>
       <item path="Src/Klib/libc/string/strxfrm.c" ex="true" tool="0" flavor2="0">
-        <cTool>
-        </cTool>
-      </item>
-      <item path="Src/Mem/KMalloc.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
       </item>
       <item path="Src/Mem/KMalloc.hpp" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Mem/Memory.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Mem/Paging.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Mem/PhysicalMemory.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Mem/VirtualMemory.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-        </ccTool>
       </item>
       <folder path="Src/Drivers">
         <ccTool>

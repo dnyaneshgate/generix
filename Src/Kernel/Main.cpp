@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ScreenIo.hpp>
+#include <Mem/KMalloc.hpp>
 
 using namespace Generix;
 
@@ -11,7 +12,9 @@ EXTERN MULTIBOOTHEADER _MBOOT_HEADER;
 ULONG __INIT_ESP;
 
 EXTERN "C" VOID __init(void) {
-	EXTERN VOID(*__INIT_START__)(), (*__INIT_END__)();
+	EXTERN VOID(*__INIT_START__)();
+	EXTERN VOID(*__INIT_END__)();
+
 	VOID(**init)();
 	for (init = &__INIT_START__; init < &__INIT_END__; init++) {
 		(*init)();
@@ -31,6 +34,8 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 
 	__INIT_ESP = esp; //save initial stack pointer
 
+	CLI();
+
 	GKernel *kernel = GKernel::Instance(); //get kernel instance
 	kernel->SetMultiBootHeader(&_MBOOT_HEADER); //save multibootheader
 	kernel->SetMultiBootInfo(mbi); //save multibootinfo
@@ -38,10 +43,11 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 	GProcessor *CPU = kernel->GetCpu(); //get processor instance
 	CPU->InstallGdt(); //setup gdt
 	CPU->InstallIdt(); //setup idt
-
 	CPU->InstallPit(); //setup timer
 
 	kernel->MemoryInit();
+
+	STI();
 
 	Console::Writeln(WELCOMELOGO);
 	Console::Write("\nWelcome to ");
@@ -53,16 +59,19 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 	Console::Writeln(__GENERIX_VERSION__);
 
 	CHAR vendor[13];
-	CPU->GetProcessorInfo("VendorName",vendor);
-	Console::Writeln("Processor : %s",vendor);
+	CPU->GetProcessorInfo("VendorName", vendor);
+	Console::Writeln("Processor : %s", vendor);
 
 	UINT cores;
-	CPU->GetProcessorInfo("Cores",&cores);
-	Console::Writeln("Cores : %d",cores);
+	CPU->GetProcessorInfo("Cores", &cores);
+	Console::Writeln("Cores : %d", cores);
 
-	CHAR brand[256];
-	CPU->GetProcessorInfo("Brand",brand);
-	Console::Writeln("Brand : %s",brand);
+	//CHAR brand[256];
+	//CPU->GetProcessorInfo("Brand",brand);
+	//Console::Writeln("Brand : %s",brand);
+
+	CHAR * addr1 = (CHAR*)kmalloc(10);
+	//printk("addr1: %x\n",(UINT)addr1);
 
 	__dtors(); //invoke destructors of static/global objects
 	return EXIT_SUCCESS;

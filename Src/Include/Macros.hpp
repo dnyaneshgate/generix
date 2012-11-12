@@ -1,6 +1,13 @@
 #ifndef __GENERIX_MACROS_HPP__
 #define __GENERIX_MACROS_HPP__
 
+#define SUCCESS                1
+#define FAILED                 0
+#define ERROR                  -1
+
+#define _MAX_SIZE              1024
+#define BUFFSIZE               _MAX_SIZE
+
 #define STATIC                 static
 #define EXTERN                 extern
 #define PRIVATE                STATIC
@@ -35,13 +42,6 @@
 
 #define ZERO                   0
 
-/*
-#define AND(x,y)               ( (x) & (y) )
-#define OR(x,y)                ( (x) | (y) )
-#define XOR(x,y)               ( (x) ^ (y) )
-#define NEG(x)                 ( ~(x) )
-*/
-
 #define SHL(x,i)               ((x) << (i))
 #define SHR(x,i)               ((x) >> (i))
 
@@ -52,7 +52,7 @@
 #define ROL(x,i)               (((x) << (i)) | ((x) >> (64-(i))))
 #define ROR(x,i)               (((x) >> (i)) | ((x) << (64-(i))))
 #else
-#error "Unsupported Architecture"
+#error Unsupported Architecture
 #endif
 
 #define __ASM__                asm

@@ -16,7 +16,7 @@ include Kernel/kernel.mk
 
 
 link:
-	$(LD) $(LDFLAGS) -o $(KERNEL) $(KERNELOBJ) $(MEMOBJ) $(DRIVEROBJ) $(LIBPATH)$(LIBS)
+	$(LD) $(LDFLAGS) -o $(KERNEL) $(KERNELOBJ) $(MEMOBJ) $(DRIVEROBJ) $(addprefix $(LIBPATH),$(LIBS))
 
 driverclean:
 	@rm -f $(DRIVEROBJ) && echo -e "\031[33m[RM]\033[36m       $(DRIVEROBJ)\033[0m";

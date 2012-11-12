@@ -29,30 +29,31 @@
 #define PAGES_PER_TABLE          1024
 
 #define PAGEBIT                  0x80000000
-
+namespace Generix {
 #ifdef __x86__
 
-namespace x86Paging {
-	typedef UINT PTE, *PPTE, **PPPTE;
-	typedef UINT PDE, *PPDE, **PPPDE;
+	namespace x86Paging {
+		typedef UINT PTE, *PPTE, **PPPTE;
+		typedef UINT PDE, *PPDE, **PPPDE;
 
-	typedef struct strucPAGETABLE {
-		PTE pages[1024];
-	} PAGETABLE, *PPAGETABLE;
+		typedef struct strucPAGETABLE {
+			PTE pages[1024];
+		} PAGETABLE, *PPAGETABLE;
 
-	typedef struct strucPAGEDIRECTORY {
-		PDE tables[1024];
-	} PAGEDIRECTORY, *PPAGEDIRECTORY;
+		typedef struct strucPAGEDIRECTORY {
+			PDE tables[1024];
+		} PAGEDIRECTORY, *PPAGEDIRECTORY;
 
-	EXTERN PPAGEDIRECTORY KernelDirectory;
-	EXTERN PPAGEDIRECTORY CurrentDirectory;
+		EXTERN PPAGEDIRECTORY KernelDirectory;
+		EXTERN PPAGEDIRECTORY CurrentDirectory;
 
-	INT MAPPAGE(PAddress pAddr, VAddress vAddr, UINT flag);
-	INT UNMAPPAGE(VAddress vAddr);
-	INT SWITCHPAGEDIR(PPAGEDIRECTORY dir);
-}
+		INT MAPPAGE(PAddress pAddr, VAddress vAddr, UINT flag);
+		INT UNMAPPAGE(VAddress vAddr);
+		INT SWITCHPAGEDIR(PPAGEDIRECTORY dir);
+	}
 
 #endif
+}
 
 #endif	//__GENERIX_MEM_PAGING_HPP__
 

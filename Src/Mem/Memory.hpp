@@ -22,13 +22,13 @@ namespace Generix {
 		GMemory();
 		~GMemory();
 		VOID Init();
-		STATIC GMemory *Instance()
-		{
+
+		STATIC GMemory *Instance() {
 			return &m_Instance;
 		}
 		STATIC GMemory m_Instance;
 		GPhysicalMemory *m_PhyMem;
-		GVirtualMemory  *m_VirtMem;
+		GVirtualMemory *m_VirtMem;
 	};
 
 } /* namespace Generix */

@@ -57,8 +57,6 @@
         <gdb_options>
           <DebugOptions>
             <option name="gdb_source_dirs" value="Src"/>
-            <option name="debug_command" value="./Debug.sh"/>
-            <option name="debug_dir" value="/media/SOFTWARE/Generix/"/>
           </DebugOptions>
         </gdb_options>
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>

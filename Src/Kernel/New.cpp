@@ -1,18 +1,24 @@
-#include <Types.hpp>
+#include <Allocator.hpp>
 
-void* operator new(UINT size) {
-	return (void*) 0;
+VOID * operator new(UINT size) {
+	GAllocator * allocator = GAllocator::GetDefault();
+	VOID * addr = allocator->Alloc(size);
+	return addr;
 }
 
-void* operator new[](UINT size) {
-	return (void*) 0;
+VOID * operator new[](UINT size) {
+	GAllocator * allocator = GAllocator::GetDefault();
+	VOID * addr = allocator->Alloc(size);
+	return addr;
 }
 
-void operator delete(void *P) {
-
+VOID operator delete(VOID *P) {
+	GAllocator * allocator = GAllocator::GetDefault();
+	allocator->Free(P);
 }
 
-void operator delete[](void *P) {
-
+VOID operator delete[](VOID *P) {
+	GAllocator * allocator = GAllocator::GetDefault();
+	allocator->Free(P);
 }
 

@@ -1,4 +1,4 @@
-LIBS     := libc.a
+LIBS     := libc.a liballoc.a
 LIBPATH  := Klib/
 LIBC     := $(patsubst %.c,%.o,$(shell find Klib/libc -name "*.c"))
 LIBCPP   := $(patsubst %.cpp,%.o,$(shell find Klib/libc++/ -name "*.cpp"))

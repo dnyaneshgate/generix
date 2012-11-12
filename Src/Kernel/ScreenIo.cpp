@@ -5,7 +5,6 @@
 
 EXTERN "C" INT vsprintf(char * buf, const char * fmt, va_list args);
 
-#define BUFFSIZE 512
 STATIC CHAR BUFF[BUFFSIZE];
 
 namespace Console {
