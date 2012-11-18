@@ -1,5 +1,5 @@
-#ifndef __GENERIX_IOPORT_HPP__
-#define __GENERIX_IOPORT_HPP__
+#ifndef __GENERIX_X86_IOPORT_HPP__
+#define __GENERIX_X86_IOPORT_HPP__
 
 #include <Types.hpp>
 #include <Macros.hpp>
@@ -40,4 +40,4 @@ private:
 #define STI()             __ASM__ __VOLATILE__("sti;")  //enable interrupt
 #define HLT()             __ASM__ __VOLATILE__("hlt;")  //halt system
 
-#endif //__GENERIX_IOPORT_HPP__
+#endif //__GENERIX_X86_IOPORT_HPP__
