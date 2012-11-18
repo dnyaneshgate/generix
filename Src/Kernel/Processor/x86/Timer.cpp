@@ -6,7 +6,6 @@
  */
 
 #include <Processor/Arch/Timer.hpp>
-#include <Processor/Arch/Idt.hpp>
 #include <Processor/Arch/IOPort.hpp>
 
 namespace Generix {
