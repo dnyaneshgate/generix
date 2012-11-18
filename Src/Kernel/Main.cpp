@@ -6,10 +6,15 @@
 #include <ScreenIo.hpp>
 #include <Mem/KMalloc.hpp>
 
+#include "Processor/x86/CPU.hpp"
+
 using namespace Generix;
 
-EXTERN MULTIBOOTHEADER _MBOOT_HEADER;
+EXTERN MULTIBOOTHEADER multiBootHeader;
+EXTERN MULTIBOOTINFO multiBootInfo;
 ULONG __INIT_ESP;
+
+EXTERN "C" INT _kMain(INT argc, CHAR ** argv);
 
 EXTERN "C" VOID __init(void) {
 	EXTERN VOID(*__INIT_START__)();
@@ -21,33 +26,30 @@ EXTERN "C" VOID __init(void) {
 	}
 }
 
-EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
-
+EXTERN "C" INT _kInit(UINT esp) {
 	Console::Clear();
-
-	if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
-		printk("Invalid magic no. : %X", (UINT) magic);
-		return EXIT_FAILURE;
-	}
 	__ctors(); //invoke constructors of static/global objects
 	__init(); //invoke functions resident in .initGenerix section
-
 	__INIT_ESP = esp; //save initial stack pointer
 
-	CLI();
-
 	GKernel *kernel = GKernel::Instance(); //get kernel instance
-	kernel->SetMultiBootHeader(&_MBOOT_HEADER); //save multibootheader
-	kernel->SetMultiBootInfo(mbi); //save multibootinfo
+	kernel->setMultiBootHeader(&multiBootHeader); //save multibootheader
+	kernel->setMultiBootInfo(&multiBootInfo); //save multibootinfo
 
-	GProcessor *CPU = kernel->GetCpu(); //get processor instance
-	CPU->InstallGdt(); //setup gdt
-	CPU->InstallIdt(); //setup idt
+	GProcessor *CPU = kernel->getCpu(); //get processor instance
 	CPU->InstallPit(); //setup timer
 
-	kernel->MemoryInit();
+	//kernel->MemoryInit();
 
-	STI();
+	_kMain(0, NULL);
+
+	__dtors(); //invoke destructors of static/global objects
+	return EXIT_SUCCESS;
+}
+
+EXTERN "C" INT _kMain(INT argc, CHAR ** argv) {
+
+	//Console::Clear();
 
 	Console::Writeln(WELCOMELOGO);
 	Console::Write("\nWelcome to ");
@@ -58,21 +60,23 @@ EXTERN "C" INT _kmain(PMULTIBOOTINFO mbi, ULONG magic, ULONG esp) {
 	Console::Write("Version : ");
 	Console::Writeln(__GENERIX_VERSION__);
 
-	CHAR vendor[13];
-	CPU->GetProcessorInfo("VendorName", vendor);
-	Console::Writeln("Processor : %s", vendor);
+	//GKernel *kernel = GKernel::Instance(); //get kernel instance
+	//GProcessor *CPU = kernel->GetCpu(); //get processor instance
 
-	UINT cores;
-	CPU->GetProcessorInfo("Cores", &cores);
-	Console::Writeln("Cores : %d", cores);
+	//CHAR vendor[13];
+	//CPU->GetProcessorInfo("VendorName", vendor);
+	//Console::Writeln("Processor : %s", vendor);
+
+	//UINT cores;
+	//CPU->GetProcessorInfo("Cores", &cores);
+	//Console::Writeln("Cores : %d", cores);
 
 	//CHAR brand[256];
 	//CPU->GetProcessorInfo("Brand",brand);
 	//Console::Writeln("Brand : %s",brand);
 
-	CHAR * addr1 = (CHAR*)kmalloc(10);
+	//CHAR * addr1 = (CHAR*)kmalloc(10);
 	//printk("addr1: %x\n",(UINT)addr1);
 
-	__dtors(); //invoke destructors of static/global objects
 	return EXIT_SUCCESS;
 }
