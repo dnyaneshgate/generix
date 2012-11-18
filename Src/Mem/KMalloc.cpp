@@ -1,20 +1,14 @@
 #include <Mem/KMalloc.hpp>
-#include <Mem/KHeap.hpp>
-#include <Mem/PhysicalMemory.hpp>
-#include <Mem/VirtualMemory.hpp>
+#include <Processor/Arch/Memory.hpp>
 #include <string.h>
 #include <stdlib.h>
 #include <Assert.hpp>
 
 namespace Generix {
-#ifdef __x86__
-	using namespace x86Paging;
-#endif
 
-	GKMalloc GKMalloc::m_p_Instance;
-	STATIC __USED__ HEAP kHeap;
+	STATIC HEAP kHeap;
 	STATIC BOOL isHeapInit = false;
-	STATIC __USED__ PCHUNK heapStart = 0;
+	STATIC PCHUNK heapStart = 0;
 
 	STATIC VOID HeapInit(PHEAP heap) {
 		heap->Start = (UINT*) KERNEL_HEAP_START;
@@ -27,8 +21,8 @@ namespace Generix {
 
 	STATIC INT ExpandHeap(PHEAP heap, UINT * start, Size size) {
 		while ((start + size) GT heap->Top) {
-			PAddress pAddr = PAddress(GPhysicalMemory::Instance()->Alloc());
-			MAPPAGE(pAddr, VAddress(heap->Top), PAGE_PRESENT);
+			PAddress pAddr = PAddress(Memory->allocPhysical());
+			Memory->mapVirtual(pAddr, VAddress(heap->Top), PAGE_PRESENT);
 			heap->Top += PAGESIZE;
 			ASSERT(UINT(heap->Top) < KERNEL_HEAP_END);
 		}
