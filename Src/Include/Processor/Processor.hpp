@@ -3,8 +3,7 @@
 
 #include "Arch/IOPort.hpp"
 #include "Arch/CPU.hpp"
-#include "Arch/Gdt.hpp"
-#include "Arch/Idt.hpp"
+#include "Arch/Interrupt.hpp"
 #include "Arch/Timer.hpp"
 
 namespace Generix {
@@ -20,8 +19,6 @@ namespace Generix {
 	class GProcessor {
 		friend class GKernel;
 	public:
-		BOOL InstallGdt();
-		BOOL InstallIdt();
 		BOOL InstallPit();
 		BOOL RegInterrupt(INT No, IsrHandler isr);
 		BOOL SetTimerFreq(UINT Frequency = 1000);
@@ -41,8 +38,6 @@ namespace Generix {
 
 		STATIC GProcessor m_Instance;
 		GProcessorInfo *m_p_ProcessorInfo;
-		GGdt m_gdt;
-		GIdt m_idt;
 		GTimer m_timer;
 	};
 
