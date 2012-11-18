@@ -1,43 +1,27 @@
 #ifndef __GENERIX_LIBCPP_SINGELTON_HPP__
 #define __GENERIX_LIBCPP_SINGELTON_HPP__
 
-#include <Types.hpp>
-#include <Macros.hpp>
+#ifndef __ASSEMBLER__
 
-template<class T>
+template <class T>
 class GSingleton {
 public:
-
-	STATIC T*
-	Instance() {
-		if (m_pObj == ZERO)
-			m_pObj = new T();
-		return m_pObj;
+	static T* Instance() {
+		return &Obj;
 	}
-
-	STATIC VOID
-	Release() {
-		if (m_pObj == ZERO)
-			return;
-		delete m_pObj;
-	}
-
 protected:
-
-	GSingleton<T>() {
-	};
-
-	virtual ~GSingleton<T>() {
-	};
+	GSingleton<T>(){}
+	~GSingleton<T>(){}
 private:
-	STATIC T *m_pObj;
-	STATIC UINT m_iCnt;
+
+public:
+protected:
+private:
+	static T Obj;
 };
 
-template <class T>
-T* GSingleton<T>::m_pObj = ZERO;
+template <class T> T GSingleton<T>::Obj;
 
-template <class T>
-UINT GSingleton<T>::m_iCnt = ZERO;
+#endif //__ASSEMBLER__
 
 #endif //__GENERIX_LIBCPP_SINGELTON_HPP__
