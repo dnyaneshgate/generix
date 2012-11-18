@@ -5,11 +5,9 @@
  *      Author: dnyanesh
  */
 
-#ifndef __GENERIX_x86_TIMER_HPP__
-#define __GENERIX_x86_TIMER_HPP__
+#ifndef __GENERIX_X86_TIMER_HPP__
+#define __GENERIX_X86_TIMER_HPP__
 
-#include <Types.hpp>
-#include <Macros.hpp>
 #include <Processor/Arch/CPU.hpp>
 
 namespace Generix {
@@ -31,4 +29,4 @@ namespace Generix {
 
 }
 
-#endif //__GENERIX_x86_TIMER_HPP__
+#endif //__GENERIX_X86_TIMER_HPP__
