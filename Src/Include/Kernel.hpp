@@ -4,26 +4,30 @@
 #include <Multiboot.hpp>
 #include <Processor/Processor.hpp>
 #include <MemoryManager.hpp>
+#include <Singleton.hpp>
 
 namespace Generix {
 
-	class GKernel {
-	public:
+	class GKernel : public GSingleton<GKernel> {
+	friend class GSingleton<GKernel>;
 
-		STATIC GKernel* Instance() {
-			return &m_Instance;
-		}
+	//member functions
+	public:
 		VOID MemoryInit();
-		VOID SetMultiBootHeader(PMULTIBOOTHEADER mbh);
-		VOID SetMultiBootInfo(PMULTIBOOTINFO mbi);
-		PMULTIBOOTHEADER GetMultiBootHeader();
-		PMULTIBOOTINFO GetMultiBootInfo();
-		GProcessor* GetCpu();
+		VOID setMultiBootHeader(PMULTIBOOTHEADER mbh);
+		VOID setMultiBootInfo(PMULTIBOOTINFO mbi);
+		PMULTIBOOTHEADER getMultiBootHeader();
+		PMULTIBOOTINFO getMultiBootInfo();
+		GProcessor* getCpu();
 	protected:
 	private:
 		GKernel();
 		~GKernel();
-		STATIC GKernel m_Instance;
+
+	//member variables
+	public:
+	protected:
+	private:
 		GProcessor *m_cpu;
 		GMemoryManager *m_MemMngr;
 		PMULTIBOOTHEADER m_MBH;
