@@ -18,8 +18,8 @@ SECTIONS
 	/* The executable is to be loaded by GrUB at 1 Mib */
 	. = 0x00100000;
 	/* Align every section on page boundaries. This'll be important later on */
-	.__mbHeader : {
-		*(.__mbHeader)
+	.msection : {
+		*(.msection)
 	}
 	.text ALIGN(0x1000) :
 	{
@@ -50,8 +50,9 @@ SECTIONS
 		KEEP(*(.ctor*))
 
 		__INIT_START__ = .;
-		KEEP(*(SORT(.init*)))
-		KEEP(*(.init*))
+		*(.initGenerix)
+		/*KEEP(*(SORT(.initGenerix)))*/
+		KEEP(*(.initGenerix))
 		__INIT_END__ = .;
 
 		*(.rodata*)
