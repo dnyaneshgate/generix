@@ -18,18 +18,21 @@ RM                  = @echo "Cleaning...  " && rm -f
 endif
 
 .cpp.o:
-	$(CXX) $(CXXFLAGS) -o $@ $<
+	$(CXX) -c $(CXXFLAGS) -o $@ $<
 
 .c.o:
-	$(CC) $(CFLAGS)    -o $@ $<
+	$(CC) -c $(CFLAGS)    -o $@ $<
 
-#%.s: %.asm
-#	$(CC) -E $(CFLAGS) -o $@ -x assembler-with-cpp $<
+#%.o: %.asm
+#	$(AS)  $(ASFLAGS)  -o $@ $<
 
-%.o: %.asm
-	$(AS)  $(ASFLAGS)  -o $@ $<
+#.s.o:
+#	$(AS)  $(ASFLAGS)  -o $@ $<
 
-.s.o:
-	$(AS)  $(ASFLAGS)  -o $@ $<
+%.o: %.s
+	@$(AS) $(ASFLAGS) $< -o $@
+
+%.s: %.asm
+	$(CPP) $(CPPFLAGS) -o $@ -x assembler-with-cpp $<
 
 ##export CC CXX AS LD AR RANLIB RM
