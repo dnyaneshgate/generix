@@ -13,14 +13,14 @@ namespace Generix {
 	GMemoryManager GMemoryManager::m_Instance;
 
 	GMemoryManager::GMemoryManager() {
-		m_Mem = GMemory::Instance();
+		//m_Mem = GMemory::Instance();
 	}
 
 	GMemoryManager::~GMemoryManager() {
 	}
 
 	VOID GMemoryManager::Init() {
-		m_Mem->Init();
+		//m_Mem->Init();
 	}
 
 }
