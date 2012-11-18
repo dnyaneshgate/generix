@@ -1,6 +1,8 @@
 #ifndef __GENERIX_TYPES_HPP__
 #define __GENERIX_TYPES_HPP__
 
+#ifndef __ASSEMBLER__
+
 #ifndef __cplusplus
 typedef enum {
 	false, true
@@ -67,5 +69,7 @@ typedef Address VAddress;
 typedef void VOID;
 typedef VOID* Type;
 typedef bool BOOL;
+
+#endif //__ASSEMBLER__
 
 #endif //__GENERIX_TYPES_HPP__
