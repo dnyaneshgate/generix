@@ -41,16 +41,15 @@
         <df name="Processor">
           <df name="Arch">
             <in>CPU.hpp</in>
-            <in>Gdt.hpp</in>
             <in>IOPort.hpp</in>
-            <in>Idt.hpp</in>
+            <in>Interrupt.hpp</in>
+            <in>Memory.hpp</in>
             <in>Timer.hpp</in>
           </df>
           <df name="x86">
             <in>CPU.hpp</in>
-            <in>Gdt.hpp</in>
             <in>IOPort.hpp</in>
-            <in>Idt.hpp</in>
+            <in>Interrupt.hpp</in>
             <in>Timer.hpp</in>
           </df>
           <df name="x86_64">
@@ -78,23 +77,18 @@
           <df name="Arch">
             <df name="Asm">
               <in>Boot.asm</in>
-              <in>DescriptorTableFlush.asm</in>
-              <in>Interrupt.asm</in>
             </df>
-            <in>Gdt.cpp</in>
             <in>IOPort.cpp</in>
-            <in>Idt.cpp</in>
+            <in>Interrupt.cpp</in>
+            <in>Memory.cpp</in>
             <in>Timer.cpp</in>
           </df>
           <df name="x86">
             <df name="Asm">
               <in>Boot.asm</in>
-              <in>DescriptorTableFlush.asm</in>
-              <in>Interrupt.asm</in>
             </df>
-            <in>Gdt.cpp</in>
             <in>IOPort.cpp</in>
-            <in>Idt.cpp</in>
+            <in>Interrupt.cpp</in>
             <in>Timer.cpp</in>
           </df>
           <df name="x86_64">
@@ -163,11 +157,8 @@
         <in>KMalloc.hpp</in>
         <in>Memory.cpp</in>
         <in>Memory.hpp</in>
-        <in>Paging.cpp</in>
         <in>Paging.hpp</in>
-        <in>PhysicalMemory.cpp</in>
         <in>PhysicalMemory.hpp</in>
-        <in>VirtualMemory.cpp</in>
         <in>VirtualMemory.hpp</in>
       </df>
     </df>
@@ -202,7 +193,6 @@
             <incDir>
               <pElem>Src/Include/Klib/libc++</pElem>
               <pElem>Src/Include/Klib/libc</pElem>
-              <pElem>Src/Mem</pElem>
               <pElem>Src</pElem>
               <pElem>Src/Include/Klib/libposix</pElem>
               <pElem>Src/Include/Klib/liballoc</pElem>
@@ -210,7 +200,6 @@
               <pElem>Src/Drivers</pElem>
             </incDir>
             <preprocessorList>
-              <Elem>__DEBUG__</Elem>
               <Elem>__GENERIX_VERSION__="0.0.1"</Elem>
               <Elem>__GENERIX__</Elem>
               <Elem>__x86__</Elem>
@@ -221,7 +210,6 @@
             <incDir>
               <pElem>Src/Include/Klib/libc++</pElem>
               <pElem>Src/Include/Klib/libc</pElem>
-              <pElem>Src/Mem</pElem>
               <pElem>Src</pElem>
               <pElem>Src/Include/Klib/libposix</pElem>
               <pElem>Src/Include/Klib/liballoc</pElem>
@@ -252,19 +240,9 @@
         <ccTool>
         </ccTool>
       </item>
-      <item path="Src/Include/Assert.hpp" ex="true" tool="3" flavor2="0">
-      </item>
       <item path="Src/Include/Bitmap.hpp" ex="true" tool="3" flavor2="0">
       </item>
-      <item path="Src/Include/Klib/liballoc/Allocator.hpp"
-            ex="true"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="Src/Include/Klib/libc++/Singleton.hpp"
-            ex="true"
-            tool="3"
-            flavor2="0">
+      <item path="Src/Include/Init.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Klib/libc/ctype.h" ex="true" tool="3" flavor2="0">
       </item>
@@ -273,17 +251,6 @@
       <item path="Src/Include/Klib/libc/limits.h" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Klib/libc/stdio.h" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Include/Processor/x86/CPU.hpp" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Include/Processor/x86/Gdt.hpp" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Include/Processor/x86/IOPort.hpp"
-            ex="true"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="Src/Include/Processor/x86/Idt.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Processor/x86/Timer.hpp" ex="true" tool="3" flavor2="0">
       </item>
@@ -334,29 +301,34 @@
             tool="4"
             flavor2="0">
       </item>
-      <item path="Src/Kernel/Processor/Arch/Asm/DescriptorTableFlush.asm"
-            ex="true"
-            tool="4"
-            flavor2="0">
-      </item>
-      <item path="Src/Kernel/Processor/Arch/Asm/Interrupt.asm"
-            ex="true"
-            tool="4"
-            flavor2="0">
-      </item>
-      <item path="Src/Kernel/Processor/Arch/Gdt.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
-      </item>
       <item path="Src/Kernel/Processor/Arch/IOPort.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>Src/Mem</pElem>
+          </incDir>
         </ccTool>
       </item>
-      <item path="Src/Kernel/Processor/Arch/Idt.cpp" ex="false" tool="1" flavor2="4">
+      <item path="Src/Kernel/Processor/Arch/Interrupt.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
         <ccTool>
+          <incDir>
+            <pElem>Src/Mem</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/Arch/Memory.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+          <preprocessorList>
+            <Elem>__DEBUG__</Elem>
+          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Kernel/Processor/Arch/Timer.cpp"
@@ -364,6 +336,9 @@
             tool="1"
             flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>Src/Mem</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="Src/Kernel/Processor/Processor.cpp" ex="false" tool="1" flavor2="8">
@@ -376,21 +351,7 @@
       <item path="Src/Kernel/Processor/x86/Asm/Boot.asm"
             ex="false"
             tool="0"
-            flavor2="8">
-      </item>
-      <item path="Src/Kernel/Processor/x86/Asm/DescriptorTableFlush.asm"
-            ex="false"
-            tool="0"
-            flavor2="8">
-      </item>
-      <item path="Src/Kernel/Processor/x86/Asm/Interrupt.asm"
-            ex="false"
-            tool="0"
-            flavor2="8">
-      </item>
-      <item path="Src/Kernel/Processor/x86/Gdt.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool>
-        </ccTool>
+            flavor2="0">
       </item>
       <item path="Src/Kernel/Processor/x86/IOPort.cpp"
             ex="false"
@@ -399,7 +360,10 @@
         <ccTool>
         </ccTool>
       </item>
-      <item path="Src/Kernel/Processor/x86/Idt.cpp" ex="false" tool="1" flavor2="8">
+      <item path="Src/Kernel/Processor/x86/Interrupt.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
         <ccTool>
         </ccTool>
       </item>
@@ -419,6 +383,10 @@
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="Src/Klib/liballoc/Allocator.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
         </ccTool>
       </item>
       <item path="Src/Klib/libc/ctype.c" ex="true" tool="0" flavor2="2">
@@ -537,21 +505,7 @@
         <ccTool>
         </ccTool>
       </item>
-      <item path="Src/Mem/KMalloc.hpp" ex="true" tool="3" flavor2="0">
-      </item>
       <item path="Src/Mem/Memory.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Mem/Paging.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Mem/PhysicalMemory.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="Src/Mem/VirtualMemory.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
         </ccTool>
       </item>
@@ -567,6 +521,13 @@
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
+        </ccTool>
+      </folder>
+      <folder path="Src/Klib">
+        <ccTool>
+          <incDir>
+            <pElem>Src/Mem</pElem>
+          </incDir>
         </ccTool>
       </folder>
       <folder path="Src/Mem">
@@ -656,16 +617,17 @@
       </item>
       <item path="Src/Include/Klib/libc/stdio.h" ex="true" tool="3" flavor2="0">
       </item>
-      <item path="Src/Include/Processor/x86/CPU.hpp" ex="true" tool="3" flavor2="0">
+      <item path="Src/Include/Processor/Arch/Memory.hpp"
+            ex="true"
+            tool="3"
+            flavor2="0">
       </item>
-      <item path="Src/Include/Processor/x86/Gdt.hpp" ex="true" tool="3" flavor2="0">
+      <item path="Src/Include/Processor/x86/CPU.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Processor/x86/IOPort.hpp"
             ex="true"
             tool="3"
             flavor2="0">
-      </item>
-      <item path="Src/Include/Processor/x86/Idt.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Processor/x86/Timer.hpp" ex="true" tool="3" flavor2="0">
       </item>
@@ -711,42 +673,12 @@
           </preprocessorList>
         </ccTool>
       </item>
-      <item path="Src/Kernel/Processor/Arch/Asm/Boot.asm"
-            ex="true"
-            tool="4"
-            flavor2="0">
-      </item>
-      <item path="Src/Kernel/Processor/Arch/Asm/DescriptorTableFlush.asm"
-            ex="true"
-            tool="4"
-            flavor2="0">
-      </item>
-      <item path="Src/Kernel/Processor/Arch/Asm/Interrupt.asm"
-            ex="true"
-            tool="4"
-            flavor2="0">
-      </item>
       <item path="Src/Kernel/Processor/Processor.cpp" ex="false" tool="1" flavor2="0">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
         </ccTool>
-      </item>
-      <item path="Src/Kernel/Processor/x86/Asm/Boot.asm"
-            ex="false"
-            tool="0"
-            flavor2="0">
-      </item>
-      <item path="Src/Kernel/Processor/x86/Asm/DescriptorTableFlush.asm"
-            ex="false"
-            tool="0"
-            flavor2="0">
-      </item>
-      <item path="Src/Kernel/Processor/x86/Asm/Interrupt.asm"
-            ex="false"
-            tool="0"
-            flavor2="0">
       </item>
       <item path="Src/Kernel/ScreenIo.cpp" ex="false" tool="1" flavor2="0">
         <ccTool>
@@ -818,7 +750,15 @@
       </item>
       <item path="Src/Klib/libc/string/strxfrm.c" ex="true" tool="0" flavor2="0">
       </item>
+      <item path="Src/Mem/KHeap.hpp" ex="true" tool="3" flavor2="0">
+      </item>
       <item path="Src/Mem/KMalloc.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Mem/Paging.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Mem/PhysicalMemory.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Mem/VirtualMemory.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <folder path="Src/Drivers">
         <ccTool>
