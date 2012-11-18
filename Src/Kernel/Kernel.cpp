@@ -2,8 +2,6 @@
 
 namespace Generix {
 
-	GKernel GKernel::m_Instance;
-
 	GKernel::GKernel() : m_MBH(ZERO), m_MBI(ZERO) {
 		m_cpu = GProcessor::Instance();
 		m_MemMngr = GMemoryManager::Instance();
@@ -16,23 +14,23 @@ namespace Generix {
 		m_MemMngr->Init();
 	}
 
-	VOID GKernel::SetMultiBootHeader(PMULTIBOOTHEADER mbh) {
+	VOID GKernel::setMultiBootHeader(PMULTIBOOTHEADER mbh) {
 		m_MBH = mbh;
 	}
 
-	VOID GKernel::SetMultiBootInfo(PMULTIBOOTINFO mbi) {
+	VOID GKernel::setMultiBootInfo(PMULTIBOOTINFO mbi) {
 		m_MBI = mbi;
 	}
 
-	PMULTIBOOTHEADER GKernel::GetMultiBootHeader() {
+	PMULTIBOOTHEADER GKernel::getMultiBootHeader() {
 		return m_MBH;
 	}
 
-	PMULTIBOOTINFO GKernel::GetMultiBootInfo() {
+	PMULTIBOOTINFO GKernel::getMultiBootInfo() {
 		return m_MBI;
 	}
 
-	GProcessor* GKernel::GetCpu() {
+	GProcessor* GKernel::getCpu() {
 		return m_cpu;
 	}
 
