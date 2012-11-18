@@ -20,25 +20,17 @@ namespace Generix {
 	GProcessor::~GProcessor() {
 	}
 
-	BOOL GProcessor::InstallGdt() {
-		m_gdt.Install();
-		return true;
-	}
-
-	BOOL GProcessor::InstallIdt() {
-		m_idt.Install();
-		return true;
-	}
-
 	BOOL GProcessor::InstallPit() {
-		m_idt.EnableIrq(0, GTimer::TimerHandler);
+		CLI();
+		EnableIrq(0, GTimer::TimerHandler);
 		m_timer.SetFrequency(1000);
 		m_timer.Initialise();
+		STI();
 		return true;
 	}
 
 	BOOL GProcessor::RegInterrupt(INT x, IsrHandler isr) {
-		m_idt.SetVector(x, isr);
+		//m_idt.SetVector(x, isr);
 		return true;
 	}
 
