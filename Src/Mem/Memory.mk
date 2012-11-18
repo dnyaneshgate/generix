@@ -1,1 +1,2 @@
-MEMOBJ := $(patsubst %.cpp,%.o,$(wildcard Mem/*.cpp))
+
+MEMOBJ := $(patsubst %.cpp, %.o, $(shell find Mem/ -name "*.cpp"))
