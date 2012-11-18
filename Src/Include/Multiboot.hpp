@@ -81,8 +81,14 @@
 
 #define MULTIBOOT_MEM_FLAG_FREE                 0x1
 
-#define MULTIBOOT_HEADER_FLAGS                  MULTIBOOT_PAGE_ALIGN | MULTIBOOT_MEMORY_INFO | MULTIBOOT_VIDEO_MODE
+#define MULTIBOOT_HEADER_FLAGS                  (MULTIBOOT_PAGE_ALIGN | MULTIBOOT_MEMORY_INFO | MULTIBOOT_VIDEO_MODE)
 #define MULTIBOOT_HEADER_CHECKSUM               -(MULTIBOOT_HEADER_MAGIC + MULTIBOOT_HEADER_FLAGS)
+
+/** Size of the multiboot header structure. */
+#define MULTIBOOT_HEADER_SIZE      52
+
+/** Size of the multibootinfo header structure. */
+#define MULTIBOOT_INFO_HEADER_SIZE      52
 
 #ifndef __ASSEMBLER__
 
@@ -225,7 +231,7 @@ typedef struct strucVBEMODEINFO {
 	unsigned int FrameBuffer;
 } __attribute__((packed)) VBEMODEINFO, *PVBEMODEINFO;
 
-typedef struct strucMULTIBOOTIFO {
+typedef struct strucMULTIBOOTINFO {
 	unsigned int Flags;
 	unsigned int MemoryLow;
 	unsigned int MemoryHigh;
