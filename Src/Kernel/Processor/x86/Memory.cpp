@@ -13,16 +13,19 @@ namespace Generix {
 	UINT * pageTable     = (UINT*)VMM_PAGE_TABLES;
 
 	x86GMemory::x86GMemory() {
-		GKernel * kernel = GKernel::Instance();
-		GProcessor * CPU = kernel->getCpu();
-		CPU->RegInterrupt(14, pageFaultHandler);
 	}
 
 	x86GMemory::~x86GMemory() {
 	}
 
+	VOID x86GMemory::Init() {
+		GProcessor * CPU = GKernel::Instance()->GetCpu();
+		CPU->RegInterrupt(14, pageFaultHandler);
+	}
+
 	Address x86GMemory::mapVirtual(PAddress pAddr, VAddress vAddr, UINT flags) {
-		UINT page = pAddr AND PAGE_MASK;
+		//printk("mapVirtual(pAddr=%x, vAddr=%x, flags=%d)\n", pAddr, vAddr, flags);
+		UINT page = vAddr AND PAGE_MASK;
 		flags &= PAGE_FLAG_MASK;
 
 		if( NOT (pageDirectory[PAGE_DIR_INDEX(page)] AND PAGE_PRESENT) ) {
@@ -35,10 +38,10 @@ namespace Generix {
 		return vAddr;
 	}
 
-	VOID x86GMemory::umapVirtual(VAddress vAddr) {
+	VOID x86GMemory::umapVirtual(VAddress vAddr, UINT flags) {
 		if( pageDirectory[PAGE_DIR_INDEX(vAddr)] AND PAGE_PRESENT ) {
 			if( pageTable[PAGE_TABLE_INDEX(vAddr)] AND PAGE_PRESENT ) {
-				pageTable[PAGE_TABLE_INDEX(vAddr)] = 2;
+				pageTable[PAGE_TABLE_INDEX(vAddr)] = flags;
 			}
 
 			INT i;
@@ -48,9 +51,18 @@ namespace Generix {
 
 			if (i EQU 1024) {
 				freePhysical(pageDirectory[PAGE_DIR_INDEX(vAddr)] AND PAGE_MASK);
-				pageDirectory[PAGE_DIR_INDEX(vAddr)] = 2;
+				pageDirectory[PAGE_DIR_INDEX(vAddr)] = PAGE_WRITE;
 			}
 		}
+	}
+
+	PAddress x86GMemory::getPhyPage(VAddress vAddr) {
+		PAddress pAddr = ZERO;
+		UINT page = vAddr AND PAGE_MASK;
+		if(pageDirectory[PAGE_DIR_INDEX(page)] AND PAGE_PRESENT)
+			if(pageTable[PAGE_TABLE_INDEX(page)] AND PAGE_PRESENT)
+				pAddr = pageTable[PAGE_TABLE_INDEX(page)];
+		return pAddr;
 	}
 
 	VOID pageFaultHandler(REG reg) {
@@ -69,10 +81,9 @@ namespace Generix {
 		printk(") at 0x%x\n", UINT(faultAddress));
 		printk("eip: 0x%x\n", UINT(reg.eip));
 
-		CLI();
-		HLT();
+		//CLI();
+		//HLT();
 	}
 
 	x86GMemory * Memory = x86GMemory::Instance();
-
 }
