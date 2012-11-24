@@ -8,11 +8,12 @@
 #ifndef __GENERIX_MEMORYMANAGER_HPP__
 #define __GENERIX_MEMORYMANAGER_HPP__
 
-#include <Mem/Memory.hpp>
+#include <Processor/Arch/Memory.hpp>
 
 namespace Generix {
 
-	class GMemoryManager {
+	class GMemoryManager : public GSingleton<GMemoryManager> {
+		friend class GSingleton<GMemoryManager>;
 		friend class GKernel;
 	public:
 	protected:
@@ -20,12 +21,7 @@ namespace Generix {
 		GMemoryManager();
 		~GMemoryManager();
 		VOID Init();
-		STATIC GMemoryManager *Instance()
-		{
-			return &m_Instance;
-		}
 
-		STATIC GMemoryManager m_Instance;
 		GMemory *m_Mem;
 	};
 
