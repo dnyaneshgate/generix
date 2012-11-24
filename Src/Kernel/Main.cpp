@@ -33,13 +33,13 @@ EXTERN "C" INT _kInit(UINT esp) {
 	__INIT_ESP = esp; //save initial stack pointer
 
 	GKernel *kernel = GKernel::Instance(); //get kernel instance
-	kernel->setMultiBootHeader(&multiBootHeader); //save multibootheader
-	kernel->setMultiBootInfo(&multiBootInfo); //save multibootinfo
+	kernel->SetMultiBootHeader(&multiBootHeader); //save multibootheader
+	kernel->SetMultiBootInfo(&multiBootInfo); //save multibootinfo
 
-	GProcessor *CPU = kernel->getCpu(); //get processor instance
+	GProcessor *CPU = kernel->GetCpu(); //get processor instance
 	CPU->InstallPit(); //setup timer
 
-	//kernel->MemoryInit();
+	kernel->MemoryInit();
 
 	_kMain(0, NULL);
 
@@ -60,12 +60,12 @@ EXTERN "C" INT _kMain(INT argc, CHAR ** argv) {
 	Console::Write("Version : ");
 	Console::Writeln(__GENERIX_VERSION__);
 
-	//GKernel *kernel = GKernel::Instance(); //get kernel instance
-	//GProcessor *CPU = kernel->GetCpu(); //get processor instance
+	GKernel *kernel = GKernel::Instance(); //get kernel instance
+	GProcessor *CPU = kernel->GetCpu(); //get processor instance
 
-	//CHAR vendor[13];
-	//CPU->GetProcessorInfo("VendorName", vendor);
-	//Console::Writeln("Processor : %s", vendor);
+	CHAR vendor[13];
+	CPU->GetProcessorInfo("VendorName", vendor);
+	Console::Writeln("Processor : %s", vendor);
 
 	//UINT cores;
 	//CPU->GetProcessorInfo("Cores", &cores);
@@ -75,8 +75,10 @@ EXTERN "C" INT _kMain(INT argc, CHAR ** argv) {
 	//CPU->GetProcessorInfo("Brand",brand);
 	//Console::Writeln("Brand : %s",brand);
 
-	//CHAR * addr1 = (CHAR*)kmalloc(10);
-	//printk("addr1: %x\n",(UINT)addr1);
+	CHAR * addr1 = (CHAR*)kmalloc(10);
+	printk("addr1: %x\n",(UINT)addr1);
+	strcpy(addr1, "AB");
+	printk("%s\n",addr1);
 
 	return EXIT_SUCCESS;
 }
