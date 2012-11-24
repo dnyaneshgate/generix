@@ -75,7 +75,6 @@ multiBootHeader:
 	dd _Start                               ;entry point of kernel
 
 section .text
-
 _Start:
 	jmp _Entry
 
@@ -203,10 +202,10 @@ pic:
 	mov ss, eax
 
 	;Kernel Directory
-	mov eax, kernelDirectory
-	mov ebx, kernelTable
-	or  ebx, (PAGE_PRESENT | PAGE_WRITE)
-	mov [eax], ebx
+	;mov eax, kernelDirectory
+	;mov ebx, kernelTable
+	;or  ebx, (PAGE_PRESENT | PAGE_WRITE)
+	;mov [eax], ebx
 
 	;identity page mapping first 4MB
 ;	mov eax, kernelTable
@@ -316,6 +315,7 @@ kernelDirectory:
 	times(1022 - (PAGE_DIR_INDEX(KERNEL_OFFSET))) dd 0x0
 	dd kernelDirectory + (PAGE_PRESENT | PAGE_WRITE)
 
+align PAGESIZE
 kernelTable:
 	%assign i 0
 	%rep 1024
@@ -324,11 +324,10 @@ kernelTable:
 	%endrep
 
 section .bss
-
 multiBootInfo:
-	;times (MULTIBOOT_INFO_HEADER_SIZE) db 0x0
 	resb (MULTIBOOT_INFO_HEADER_SIZE)
 
+align 4
 StackBegin:
 	resb STACKSIZE
 StackEnd:
