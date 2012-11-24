@@ -13,14 +13,20 @@ namespace Console {
 
 	const PRIVATE UINT WIDTH = 80, HEIGHT = 25;
 	const PRIVATE UINT BUFFERSIZE = WIDTH * HEIGHT;
-	PRIVATE USHORT DBUFFER[ BUFFERSIZE ] = {ZERO};
+	//PRIVATE USHORT DBUFFER[ BUFFERSIZE ] = {ZERO};
 	PRIVATE UINT Xpos = 0, Ypos = 0;
 	PRIVATE USHORT *TEXTBUFFER = (USHORT*) 0xB8000;
 	PRIVATE Color FontColor = LIGHTGRAY;
 	PRIVATE Color BackColor = BLUE;
 
 	PRIVATE VOID ScrollUp() {
-		memmove(TEXTBUFFER, DBUFFER + WIDTH, sizeof (USHORT) * WIDTH * (HEIGHT - 1));
+		//memmove(TEXTBUFFER, DBUFFER + WIDTH, sizeof (USHORT) * WIDTH * (HEIGHT - 1));
+		for (UINT i = 0; i LT (HEIGHT - 1); i++) {
+			for (UINT j = 0; j LT WIDTH; j++)
+				TEXTBUFFER[ j + i * WIDTH ] = TEXTBUFFER[ j + (i + 1) * WIDTH ];
+		}
+		for (UINT i = 0; i LT WIDTH; i++)
+			TEXTBUFFER[ (HEIGHT - 1) * WIDTH + i ] = (USHORT) (' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8));
 	}
 
 	PRIVATE VOID UpdateCursor() {
@@ -33,17 +39,21 @@ namespace Console {
 	}
 
 	PRIVATE VOID PartialRefresh() {
-		TEXTBUFFER[ Xpos + Ypos * WIDTH ] = DBUFFER[ Xpos + Ypos * WIDTH ];
+		//TEXTBUFFER[ Xpos + Ypos * WIDTH ] = DBUFFER[ Xpos + Ypos * WIDTH ];
 	}
 
 	VOID Refresh() {
-		memmove(TEXTBUFFER, DBUFFER, sizeof (USHORT) * BUFFERSIZE);
+		//memmove(TEXTBUFFER, DBUFFER, sizeof (USHORT) * BUFFERSIZE);
 	}
 
 	VOID Clear() {
-		for (UINT i = 0; i < BUFFERSIZE; i++)
-			DBUFFER[i] = (USHORT) (' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8));
-		Refresh();
+		//for (UINT i = 0; i < BUFFERSIZE; i++)
+		//	DBUFFER[i] = (USHORT) (' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8));
+		//Refresh();
+
+		for (UINT i = 0; i LT BUFFERSIZE; i++) {
+			TEXTBUFFER[ i ] = (USHORT) (' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8));
+		}
 	}
 
 	VOID SetColor(Color fgColor, Color bgColor) {
@@ -91,19 +101,6 @@ namespace Console {
 		return HEIGHT;
 	}
 
-	/*INT Write(const CHAR *S) {
-		const CHAR* str = S;
-		while (*str)
-			Putch(*str++);
-		return S - str;
-	}
-
-	INT Writeln(const CHAR *S) {
-		INT n = Write(S);
-		Putch('\n');
-		return ++n;
-	}*/
-
 	INT Write(const CHAR *format, ...) {
 		va_list args;
 		va_start(args, format);
@@ -146,8 +143,8 @@ namespace Console {
 				break;
 			case '\b':
 				--Xpos;
-				DBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (' ' OR SHL(ATTRIBUTE(FontColor, BackColor), 8));
-				PartialRefresh();
+				//DBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (' ' OR SHL(ATTRIBUTE(FontColor, BackColor), 8));
+				//PartialRefresh();
 				break;
 			default:
 				if (Xpos >= WIDTH) {
@@ -158,9 +155,10 @@ namespace Console {
 				if (Ypos >= HEIGHT)
 					ScrollUp();
 
-				DBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (ch
-						| SHL(ATTRIBUTE(FontColor, BackColor), 8));
-				PartialRefresh();
+				//DBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (ch
+				//		| SHL(ATTRIBUTE(FontColor, BackColor), 8));
+				//PartialRefresh();
+				TEXTBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (ch | SHL(ATTRIBUTE(FontColor, BackColor), 8));
 				++Xpos;
 				break;
 		}
