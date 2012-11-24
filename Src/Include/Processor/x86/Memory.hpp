@@ -58,14 +58,17 @@ namespace Generix {
 class x86GMemory : public GMemory, public GSingleton<x86GMemory> {
 
 friend class GSingleton<x86GMemory>;
-
+friend class GKernel;
 /*member functions*/
 public:
 	Address mapVirtual(PAddress pAddr, VAddress vAddr, UINT flag);
-	VOID umapVirtual(VAddress vAddr);
+	VOID umapVirtual(VAddress vAddr, UINT flags=PAGE_WRITE);
+	PAddress getPhyPage(VAddress vAddr);
+	VOID Init();
 protected:
 	x86GMemory();
 	~x86GMemory();
+	VAddress findFree();
 private:
 
 /*member variables*/
