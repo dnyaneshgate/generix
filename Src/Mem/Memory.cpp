@@ -6,7 +6,7 @@
 
 EXTERN MULTIBOOTINFO multiBootInfo;
 EXTERN UINT __KERNEL_END;
-UINT KEndAddress = (UINT)&__KERNEL_END;
+UINT KEndAddress = (UINT) & __KERNEL_END;
 
 namespace Generix {
 
@@ -50,15 +50,15 @@ namespace Generix {
 	}
 
 	VOID GMemory::Init() {
-		PMULTIBOOTINFO mbi = (PMULTIBOOTINFO)&multiBootInfo;
-		m_ui_memTotal = mbi->MemoryLow + mbi->MemoryHigh + 1024;
-		m_ui_memUsedBlks = m_ui_memMaxBlks = (m_ui_memTotal * 1024) / PAGESIZE;
+		PMULTIBOOTINFO mbi = (PMULTIBOOTINFO) & multiBootInfo;
+		m_ui_memTotal = (mbi->MemoryLow + mbi->MemoryHigh + 1024) *1024;
+		m_ui_memUsedBlks = m_ui_memMaxBlks = (m_ui_memTotal) / PAGESIZE;
 		m_ui_memFreeBlks = 0;
-		m_pu_memMapStart = (UINT*)PAGE_ROUND_UP(KEndAddress);
+		m_pu_memMapStart = (UINT*) PAGE_ROUND_UP(KEndAddress);
 		m_ui_memMapLen = m_ui_memMaxBlks / BLOCKS_PER_BYTE;
-		m_pu_memMapEnd = (UINT*)(m_pu_memMapStart + m_ui_memMapLen);
-		memset(m_pu_memMapStart, 0xff, m_ui_memMapLen);
+		m_pu_memMapEnd = (UINT*) (m_pu_memMapStart + m_ui_memMapLen);
 
+		/*memset(m_pu_memMapStart, 0xff, m_ui_memMapLen);
 		PMEMORYMAP mapAddr = (PMEMORYMAP)mbi->MemoryMapAddress;
 		UINT mapLen        = mbi->MemoryMapLength;
 		UINT Limit         = (UINT) mapAddr + mapLen;
@@ -82,6 +82,14 @@ namespace Generix {
 			i += me->Size + sizeof(UINT);
 		}
 
+		i = 0;
+		while(i LT 1024) {
+			MapMark(i);
+			m_ui_memUsedBlks++;
+			m_ui_memFreeBlks--;
+			i++;
+		}
+
 		i = 0x100000;
 		KEndAddress += m_ui_memMapLen;
 		Limit = PAGE_ROUND_UP(KEndAddress) / PAGESIZE;
@@ -90,11 +98,25 @@ namespace Generix {
 			m_ui_memUsedBlks++;
 			m_ui_memFreeBlks--;
 			i++;
+		}*/
+
+		m_ui_memFreeBlks = m_ui_memMaxBlks;
+		m_ui_memUsedBlks = ZERO;
+		memset(m_pu_memMapStart, 0, m_ui_memMapLen);
+		UINT i = 0;
+		UINT Limit = 0x3FF000;//PAGE_ROUND_UP(KEndAddress);
+		while (i LT Limit) {
+			MapMark(i);
+			if (m_ui_memUsedBlks LT m_ui_memMaxBlks)
+				m_ui_memUsedBlks++;
+			if (m_ui_memFreeBlks GT ZERO)
+				m_ui_memFreeBlks--;
+			i += PAGESIZE;
 		}
 	}
 
 	PAddress GMemory::allocPhysical() {
-		if ((INT) getFreeBlocks() < 0)
+		if ((INT) GetFreeBlocks() < 0)
 			return 0;
 
 		INT frame = MapFirstFree();
@@ -103,7 +125,7 @@ namespace Generix {
 			return 0;
 
 		MapMark(frame);
-		PAddress addr = PAddress( frame * PAGESIZE );
+		PAddress addr = PAddress(frame * PAGESIZE);
 		m_ui_memUsedBlks++;
 		m_ui_memFreeBlks--;
 
@@ -111,21 +133,21 @@ namespace Generix {
 	}
 
 	VOID GMemory::freePhysical(PAddress pAddr) {
-		INT frame = INT( pAddr / PAGESIZE );
+		INT frame = INT(pAddr / PAGESIZE);
 		MapUnmark(frame);
 		m_ui_memUsedBlks--;
 		m_ui_memFreeBlks++;
 	}
 
-	INT GMemory::getMaxBlocks() const {
+	INT GMemory::gGetMaxBlocks() const {
 		return m_ui_memMaxBlks;
 	}
 
-	INT GMemory::getUsedBlocks() const {
+	INT GMemory::GetUsedBlocks() const {
 		return m_ui_memUsedBlks;
 	}
 
-	INT GMemory::getFreeBlocks() const {
+	INT GMemory::GetFreeBlocks() const {
 		return m_ui_memFreeBlks;
 	}
 
