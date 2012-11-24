@@ -139,7 +139,7 @@ namespace Generix {
 		m_ui_memFreeBlks++;
 	}
 
-	INT GMemory::gGetMaxBlocks() const {
+	INT GMemory::GetMaxBlocks() const {
 		return m_ui_memMaxBlks;
 	}
 
