@@ -22,7 +22,7 @@ namespace Generix {
 	STATIC INT ExpandHeap(PHEAP heap, UINT * start, Size size) {
 		while ((start + size) GT heap->Top) {
 			PAddress pAddr = PAddress(Memory->allocPhysical());
-			Memory->mapVirtual(pAddr, VAddress(heap->Top), PAGE_PRESENT);
+			Memory->mapVirtual(pAddr, VAddress(heap->Top), PAGE_PRESENT OR PAGE_WRITE);
 			heap->Top += PAGESIZE;
 			ASSERT(UINT(heap->Top) < KERNEL_HEAP_END);
 		}
@@ -30,6 +30,19 @@ namespace Generix {
 	}
 
 	STATIC INT ContractHeap(PHEAP heap, PCHUNK chunk) {
+		ASSERT(NOT chunk->Next);
+
+		if (chunk EQU heapStart)
+			heapStart = ZERO;
+		else
+			chunk->Prev->Next = ZERO;
+
+		while ((UINT(heap->Top) - PAGESIZE) GTE UINT(chunk)) {
+			Memory->freePhysical(Memory->getPhyPage(VAddress(heap->Top)) AND PAGE_MASK);
+			Memory->umapVirtual(VAddress(heap->Top));
+			heap->Top -= PAGESIZE;
+		}
+
 		return SUCCESS;
 	}
 
@@ -50,8 +63,8 @@ namespace Generix {
 				nxtChunk->Next->Prev = chunk;
 		}
 
-		//if(NOT chunk->Next)
-		//	ContractHeap(heap,chunk);
+		if (NOT chunk->Next)
+			ContractHeap(heap, chunk);
 
 		return SUCCESS;
 	}
@@ -109,17 +122,17 @@ namespace Generix {
 		curChunk->Used = TRUE;
 		if (preChunk)
 			preChunk->Next = curChunk;
-		return (VOID*) (curChunk + CHUNKSIZE);
+		return (VOID*) (UINT(curChunk) + CHUNKSIZE);
 	}
 
 	VOID GKMalloc::Free(VOID* address) {
-		ASSERT( ((UINT)address >= KERNEL_HEAP_START) && \
-				((UINT)address < KERNEL_HEAP_END) );
-		PCHUNK chunk = (PCHUNK)((UINT)address - CHUNKSIZE);
+		ASSERT(((UINT) address >= KERNEL_HEAP_START) && \
+				((UINT) address < KERNEL_HEAP_END));
+		PCHUNK chunk = (PCHUNK) ((UINT) address - CHUNKSIZE);
 
 		//if(chunk->Magic == (UINT)CHUNK_MAGIC)
 		chunk->Used = FALSE;
-		MergeChunk(&kHeap,chunk);
+		MergeChunk(&kHeap, chunk);
 	}
 
 	VOID * kmalloc(Size size) {
