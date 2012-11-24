@@ -40,11 +40,11 @@ SECTIONS
 	{
 		_DATA_START = .;
 
-		/*__CTOR_LIST__ = .; LONG((__CTOR_END__ - __CTOR_LIST__) / 4 - 2) *(.init_array*) LONG(0) __CTOR_END__ = .;
-		__DTOR_LIST__ = .; LONG((__DTOR_END__ - __DTOR_LIST__) / 4 - 2) *(.fini_array*) LONG(0) __DTOR_END__ = .;*/
+		__CTOR_LIST__ = .; LONG((__CTOR_END__ - __CTOR_LIST__) / 4 - 2) *(.init_array*) LONG(0) __CTOR_END__ = .;
+		__DTOR_LIST__ = .; LONG((__DTOR_END__ - __DTOR_LIST__) / 4 - 2) *(.fini_array*) LONG(0) __DTOR_END__ = .;
 
-		__CTOR_LIST__ = .; LONG((__CTOR_END__ - __CTOR_LIST__) / 4 - 2) *(.ctor*) LONG(0) __CTOR_END__ = .;
-		__DTOR_LIST__ = .; LONG((__DTOR_END__ - __DTOR_LIST__) / 4 - 2) *(.dtor*) LONG(0) __DTOR_END__ = .;
+		/*__CTOR_LIST__ = .; LONG((__CTOR_END__ - __CTOR_LIST__) / 4 - 2) *(.ctor*) LONG(0) __CTOR_END__ = .;
+		__DTOR_LIST__ = .; LONG((__DTOR_END__ - __DTOR_LIST__) / 4 - 2) *(.dtor*) LONG(0) __DTOR_END__ = .;*/
 
 		KEEP(*(.ctor*))
 		KEEP(*(.ctor*))
