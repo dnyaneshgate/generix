@@ -6,7 +6,6 @@
 namespace Generix {
 
 	PRIVATE IsrHandler VectorList[256] = {ZERO};
-	PRIVATE BOOL m_b_isInit = false;
 	PRIVATE LONG CurrentMask = 0xffff;
 
 	const char *interrupt_messages[] = {
@@ -29,7 +28,6 @@ namespace Generix {
 
 	PRIVATE VOID Init() {
 		memset(VectorList, 0, sizeof (IsrHandler) * 256);
-		m_b_isInit = true;
 	}
 
 	VOID EnableIrq(INT x, IsrHandler irq) {
@@ -74,12 +72,12 @@ namespace Generix {
 	}
 
 	EXTERN "C" VOID InterruptServiceRoutine(REG reg) {
-		if (NOT m_b_isInit)
-			Init();
 		IsrHandler handler = VectorList[reg.vector];
 		if (handler)
 			handler(reg);
 		if (reg.vector <= 31)
 			faultHandler(&reg);
 	}
+
+	STATIC UINT __interruptinit __INIT__ __USED__ = (UINT) Init;
 }
