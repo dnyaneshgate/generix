@@ -4,15 +4,13 @@
 #include <Driver.hpp>
 #include <Macros.hpp>
 #include "Text/TextMode.hpp"
+#include <Singleton.hpp>
 
 namespace Generix {
 
-	class GVideo : public GDriver {
+	class GVideo : public GDriver, public GSingleton<GVideo> {
+		friend class GSingleton<GVideo>;
 	public:
-
-		STATIC GVideo* Instance() {
-			return &m_GVideo;
-		}
 		INT Write(const CHAR *buffer);
 		VOID Put(const CHAR ch);
 		VOID ClrScr();
@@ -29,14 +27,13 @@ namespace Generix {
 		VOID Refresh();
 		INT Write(CHAR *buffer, UINT size, ULLONG offset);
 		INT Read(CHAR *buffer, UINT size, ULLONG offset);
-		GVideo();
-		virtual ~GVideo();
+		//GVideo();
+		//~GVideo();
 	protected:
 
 	private:
-		//	GVideo();
-		//	virtual ~GVideo();
-		STATIC GVideo m_GVideo;
+		GVideo();
+		~GVideo();
 		GTextMode m_textMode;
 	};
 }

@@ -5,6 +5,7 @@
 #include "Arch/CPU.hpp"
 #include "Arch/Interrupt.hpp"
 #include "Arch/Timer.hpp"
+#include <Singleton.hpp>
 
 namespace Generix {
 
@@ -16,7 +17,8 @@ namespace Generix {
 
 	class GProcessorInfo;
 
-	class GProcessor {
+	class GProcessor : public GSingleton<GProcessor> {
+		friend class GSingleton<GProcessor>;
 		friend class GKernel;
 	public:
 		BOOL InstallPit();
@@ -30,18 +32,14 @@ namespace Generix {
 		GProcessor();
 		~GProcessor();
 
-		STATIC GProcessor* Instance() {
-			return &m_Instance;
-		}
-
 		VOID ProcessorInfoInit();
 
-		STATIC GProcessor m_Instance;
 		GProcessorInfo *m_p_ProcessorInfo;
 		GTimer m_timer;
 	};
 
-	class GProcessorInfo {
+	class GProcessorInfo : public GSingleton<GProcessorInfo> {
+		friend class GSingleton<GProcessorInfo>;
 		friend class GProcessor;
 	private:
 		Processor m_i_Processor;
@@ -62,13 +60,8 @@ namespace Generix {
 		UINT m_u_Chunks;
 		UINT m_u_Features;
 
-
 		GProcessorInfo();
 		~GProcessorInfo();
-
-		STATIC GProcessorInfo* Instance() {
-			return &m_Instance;
-		}
 
 		VOID DO_INTEL();
 		VOID DO_AMD();
@@ -89,10 +82,7 @@ namespace Generix {
 		UINT  GetProcessorApicId() const;
 		UINT  GetProcessorBrandId() const;
 		CHAR* GetProcessorBrand() const;
-
-		STATIC GProcessorInfo m_Instance;
 	};
-
 };
 
 #endif //__GENERIX_PROCESSOR_HPP__

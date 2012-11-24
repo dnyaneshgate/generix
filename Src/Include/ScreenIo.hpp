@@ -7,8 +7,6 @@
 
 namespace Console {
 
-	/*EXTERN "C" INT Write(const CHAR *str);
-	EXTERN "C" INT Writeln(const CHAR *str);*/
 	EXTERN "C" INT Write(const CHAR *str, ...) __attribute__((format(printf, 1, 2)));
 	EXTERN "C" INT Writeln(const CHAR *str, ...) __attribute__((format(printf, 1, 2)));
 	EXTERN "C" VOID Putch(const CHAR ch);

@@ -15,7 +15,7 @@
 
 namespace Generix {
 
-	#define CHUNK_MAGIC  0x123456ABCD
+#define CHUNK_MAGIC  0x123456ABCD
 
 	typedef struct strucHEAP {
 		UINT * Start;
@@ -24,7 +24,7 @@ namespace Generix {
 		UINT * Top;
 	} __PACKED__ HEAP, *PHEAP;
 
-	typedef struct strucCHUNK{
+	typedef struct strucCHUNK {
 		UINT Magic;
 		UINT Used : 1;
 		UINT Size;
@@ -32,10 +32,10 @@ namespace Generix {
 		strucCHUNK * Prev;
 	} __PACKED__ CHUNK, *PCHUNK;
 
-	#define CHUNKSIZE sizeof(CHUNK)
+#define CHUNKSIZE sizeof(CHUNK)
 
 	class GKMalloc : public GAllocator, public GSingleton<GKMalloc> {
-	friend class GSingleton<GKMalloc>;
+		friend class GSingleton<GKMalloc>;
 	public:
 		VOID * Alloc(Size sz);
 		VOID Free(VOID * address);
