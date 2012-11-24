@@ -152,14 +152,10 @@
       <df name="Linker">
       </df>
       <df name="Mem">
-        <in>KHeap.hpp</in>
         <in>KMalloc.cpp</in>
         <in>KMalloc.hpp</in>
         <in>Memory.cpp</in>
         <in>Memory.hpp</in>
-        <in>Paging.hpp</in>
-        <in>PhysicalMemory.hpp</in>
-        <in>VirtualMemory.hpp</in>
       </df>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -750,15 +746,7 @@
       </item>
       <item path="Src/Klib/libc/string/strxfrm.c" ex="true" tool="0" flavor2="0">
       </item>
-      <item path="Src/Mem/KHeap.hpp" ex="true" tool="3" flavor2="0">
-      </item>
       <item path="Src/Mem/KMalloc.hpp" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Mem/Paging.hpp" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Mem/PhysicalMemory.hpp" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Mem/VirtualMemory.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <folder path="Src/Drivers">
         <ccTool>

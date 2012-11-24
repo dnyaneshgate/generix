@@ -23,8 +23,20 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=0
-FILE_NAME_0=338;C++;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FGenerix%2FSrc%2FKernel%2FMain.cpp;0;4
+current_page=12
+FILE_NAME_0=2438;C++;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2FBrokenthorn%2FDemo12%2FSysCore%2FKernel%2Fmain.cpp;0;4
+FILE_NAME_1=5116;C++;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2FBrokenthorn%2FDemo12%2FSysCore%2FKernel%2Fmmngr_phys.cpp;0;4
+FILE_NAME_2=0;C;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2FBrokenthorn%2FDemo12%2FSysCore%2FKernel%2Fmmngr_phys.h;0;4
+FILE_NAME_3=0;C++;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2FBrokenthorn%2FDemo12%2FSysCore%2FKernel%2Fmmngr_virtual.cpp;0;4
+FILE_NAME_4=0;C;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2FBrokenthorn%2FDemo12%2FSysCore%2FKernel%2Fmmngr_virtual.h;0;4
+FILE_NAME_5=0;C++;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2FBrokenthorn%2FDemo12%2FSysCore%2FKernel%2Fvmmngr_pde.cpp;0;4
+FILE_NAME_6=0;C;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2FBrokenthorn%2FDemo12%2FSysCore%2FKernel%2Fvmmngr_pde.h;0;4
+FILE_NAME_7=0;C++;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2FBrokenthorn%2FDemo12%2FSysCore%2FKernel%2Fvmmngr_pte.cpp;0;4
+FILE_NAME_8=0;C;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2FBrokenthorn%2FDemo12%2FSysCore%2FKernel%2Fvmmngr_pte.h;0;4
+FILE_NAME_9=0;C;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2Fsample%20os%2Fjames%20molloy%20sample%2Fthe_heap%2Fsrc%2Fkheap.h;0;4
+FILE_NAME_10=0;C;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2FKernelDev%2Fsample%20os%2Fjames%20molloy%20sample%2Fthe_heap%2Fsrc%2Fpaging.h;0;4
+FILE_NAME_11=0;C++;0;16;1;1;0;%2Fmedia%2FSOFTWARE%2Fosx-kernel%2FINCLUDE%2FLIBC%2B%2B%2FSingleton.hh;0;4
+FILE_NAME_12=0;C++;0;16;1;1;0;%2Fhome%2Fdnyanesh%2Fgenerix%2FSrc%2FInclude%2FKlib%2Flibc%2B%2B%2FSingleton.hpp;0;4
 
 [VTE]
 last_dir=/home/dnyanesh
