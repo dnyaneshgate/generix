@@ -1,15 +1,11 @@
 #include "Video.hpp"
 
 namespace Generix {
-	GVideo GVideo::m_GVideo;
 
 	GVideo::GVideo() : GDriver(1, "Video") {
-		USHORT *vidm = (USHORT*) 0xb8000;
-		vidm[3] = (USHORT) ('A' | (4 << 8));
 	}
 
 	GVideo::~GVideo() {
-
 	}
 
 	INT
