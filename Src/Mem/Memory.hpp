@@ -16,10 +16,10 @@ public:
 	VAddress allocVirtual(Size sz);
 	VOID freeVirtual(VAddress vAddr);
 	virtual Address mapVirtual(PAddress pAddr, VAddress vAddr, UINT flag) = 0;
-	virtual VOID umapVirtual(VAddress vAddr) = 0;
-	INT getMaxBlocks() const;
-	INT getUsedBlocks() const;
-	INT getFreeBlocks() const;
+	virtual VOID umapVirtual(VAddress vAddr, UINT flags=2) = 0;
+	INT GetMaxBlocks() const;
+	INT GetUsedBlocks() const;
+	INT GetFreeBlocks() const;
 protected:
 	GMemory();
 	virtual ~GMemory();
