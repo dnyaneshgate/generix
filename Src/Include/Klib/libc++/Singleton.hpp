@@ -7,20 +7,21 @@ template <class T>
 class GSingleton {
 public:
 	static T* Instance() {
-		return &Obj;
+		return &m_Obj;
 	}
 protected:
 	GSingleton<T>(){}
-	~GSingleton<T>(){}
+	virtual ~GSingleton<T>(){}
 private:
 
 public:
 protected:
 private:
-	static T Obj;
+	static T m_Obj;
 };
 
-template <class T> T GSingleton<T>::Obj;
+template <class T>
+T GSingleton<T>::m_Obj;
 
 #endif //__ASSEMBLER__
 
