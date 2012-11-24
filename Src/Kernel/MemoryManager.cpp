@@ -10,8 +10,6 @@
 
 namespace Generix {
 
-	GMemoryManager GMemoryManager::m_Instance;
-
 	GMemoryManager::GMemoryManager() {
 		//m_Mem = GMemory::Instance();
 	}
@@ -21,6 +19,7 @@ namespace Generix {
 
 	VOID GMemoryManager::Init() {
 		//m_Mem->Init();
+		Memory->Init();
 	}
 
 }
