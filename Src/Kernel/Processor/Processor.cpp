@@ -10,9 +10,6 @@ PRIVATE ULONG _EAX, _EBX, _ECX, _EDX;
 
 namespace Generix {
 
-	GProcessor GProcessor::m_Instance;
-	GProcessorInfo GProcessorInfo::m_Instance;
-
 	GProcessor::GProcessor() {
 		m_p_ProcessorInfo = GProcessorInfo::Instance();
 	}
@@ -30,7 +27,7 @@ namespace Generix {
 	}
 
 	BOOL GProcessor::RegInterrupt(INT x, IsrHandler isr) {
-		//m_idt.SetVector(x, isr);
+		SetVector(x, isr);
 		return true;
 	}
 
