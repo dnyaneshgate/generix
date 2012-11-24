@@ -14,23 +14,23 @@ namespace Generix {
 		m_MemMngr->Init();
 	}
 
-	VOID GKernel::setMultiBootHeader(PMULTIBOOTHEADER mbh) {
+	VOID GKernel::SetMultiBootHeader(PMULTIBOOTHEADER mbh) {
 		m_MBH = mbh;
 	}
 
-	VOID GKernel::setMultiBootInfo(PMULTIBOOTINFO mbi) {
+	VOID GKernel::SetMultiBootInfo(PMULTIBOOTINFO mbi) {
 		m_MBI = mbi;
 	}
 
-	PMULTIBOOTHEADER GKernel::getMultiBootHeader() {
+	PMULTIBOOTHEADER GKernel::GetMultiBootHeader() {
 		return m_MBH;
 	}
 
-	PMULTIBOOTINFO GKernel::getMultiBootInfo() {
+	PMULTIBOOTINFO GKernel::GetMultiBootInfo() {
 		return m_MBI;
 	}
 
-	GProcessor* GKernel::getCpu() {
+	GProcessor* GKernel::GetCpu() {
 		return m_cpu;
 	}
 
