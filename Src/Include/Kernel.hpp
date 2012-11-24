@@ -9,22 +9,22 @@
 namespace Generix {
 
 	class GKernel : public GSingleton<GKernel> {
-	friend class GSingleton<GKernel>;
+		friend class GSingleton<GKernel>;
 
-	//member functions
+		//member functions
 	public:
 		VOID MemoryInit();
-		VOID setMultiBootHeader(PMULTIBOOTHEADER mbh);
-		VOID setMultiBootInfo(PMULTIBOOTINFO mbi);
-		PMULTIBOOTHEADER getMultiBootHeader();
-		PMULTIBOOTINFO getMultiBootInfo();
-		GProcessor* getCpu();
+		VOID SetMultiBootHeader(PMULTIBOOTHEADER mbh);
+		VOID SetMultiBootInfo(PMULTIBOOTINFO mbi);
+		PMULTIBOOTHEADER GetMultiBootHeader();
+		PMULTIBOOTINFO GetMultiBootInfo();
+		GProcessor* GetCpu();
 	protected:
 	private:
 		GKernel();
 		~GKernel();
 
-	//member variables
+		//member variables
 	public:
 	protected:
 	private:
