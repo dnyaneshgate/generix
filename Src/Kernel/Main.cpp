@@ -77,7 +77,7 @@ EXTERN "C" INT _kMain(INT argc, CHAR ** argv) {
 
 	CHAR * addr1 = (CHAR*)kmalloc(10);
 	printk("addr1: %x\n",(UINT)addr1);
-	strcpy(addr1, "AB");
+	strcpy(addr1, "A");
 	printk("%s\n",addr1);
 
 	return EXIT_SUCCESS;

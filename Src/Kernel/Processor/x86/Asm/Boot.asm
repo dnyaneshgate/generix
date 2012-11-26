@@ -223,7 +223,7 @@ pic:
 	mov ecx, kernelDirectory
 	mov cr3, ecx
 	mov ecx, cr0
-	or  ecx, PAGEBIT
+	or  ecx, CR0_PAGEBIT
 	mov cr0, ecx
 
 	sti

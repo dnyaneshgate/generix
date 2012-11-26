@@ -17,8 +17,6 @@
 #define VMM_PAGE_TABLES    0xFFC00000
 #define VMM_PAGE_DIR       0xFFFFF000
 
-#define VMM_PAGES_PER_TABLE 1024
-
 #define PAGESIZE       4096
 #define PAGE_MASK      0xfffff000
 #define PAGE_FLAG_MASK 0xfff
@@ -39,7 +37,7 @@
 #define TABLES_PER_DIRECTORY     1024
 #define PAGES_PER_TABLE          1024
 
-#define PAGEBIT                  0x80000000
+#define CR0_PAGEBIT                  0x80000000
 
 #ifdef __ASSEMBLER__
 #	define FLUSHTLB(page) invlpg[page]

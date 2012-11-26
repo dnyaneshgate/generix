@@ -8,8 +8,17 @@ extern "C" {
 #endif
 
 	extern void* memcpy(void* dest, const void* src, size_t n);
+	extern void* memcpy_b(void* dest, const void* src, size_t n);
+	extern void* memcpy_w(void* dest, const void* src, size_t n);
+	extern void* memcpy_l(void* dest, const void* src, size_t n);
 	extern void* memmove(void* dest, const void* src, size_t n);
+	extern void* memmove_b(void* dest, const void* src, size_t n);
+	extern void* memmove_w(void* dest, const void* src, size_t n);
+	extern void* memmove_l(void* dest, const void* src, size_t n);
 	extern void* memset(void* dest, int val, size_t n);
+	extern void* memset_b(void* dest, int val, size_t n);
+	extern void* memset_w(void* dest, int val, size_t n);
+	extern void* memset_l(void* dest, int val, size_t n);
 	extern void* memchr(const void* dest, int c, size_t n);
 	extern int strlen(const char* src);
 	extern char* strcpy(char* dest, const char* src);

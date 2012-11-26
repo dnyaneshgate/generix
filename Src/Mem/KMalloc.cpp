@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <Assert.hpp>
+#include <ScreenIo.hpp>
 
 namespace Generix {
 
@@ -20,10 +21,14 @@ namespace Generix {
 	}
 
 	STATIC INT ExpandHeap(PHEAP heap, UINT * start, Size size) {
+		//printk("ExpandHeap(heap=%x, start=%x, size=%d)\n", UINT(heap), UINT(start), size);
 		while ((start + size) GT heap->Top) {
+			//printk("iteration: ");
 			PAddress pAddr = PAddress(Memory->allocPhysical());
+			//printk("pAddr=%x ", UINT(pAddr));
 			Memory->mapVirtual(pAddr, VAddress(heap->Top), PAGE_PRESENT OR PAGE_WRITE);
 			heap->Top += PAGESIZE;
+			//printk("heap-Top=%x\n", UINT(heap->Top));
 			ASSERT(UINT(heap->Top) < KERNEL_HEAP_END);
 		}
 		return SUCCESS;
