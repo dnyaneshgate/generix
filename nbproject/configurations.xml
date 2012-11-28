@@ -8,8 +8,6 @@
             <in>TextMode.cpp</in>
             <in>TextMode.hpp</in>
           </df>
-          <df name="Vesa">
-          </df>
           <in>Video.cpp</in>
           <in>Video.hpp</in>
         </df>
@@ -41,18 +39,20 @@
         <df name="Processor">
           <df name="Arch">
             <in>CPU.hpp</in>
+            <in>Gdt.hpp</in>
             <in>IOPort.hpp</in>
+            <in>Idt.hpp</in>
             <in>Interrupt.hpp</in>
             <in>Memory.hpp</in>
             <in>Timer.hpp</in>
           </df>
           <df name="x86">
             <in>CPU.hpp</in>
+            <in>Gdt.hpp</in>
             <in>IOPort.hpp</in>
+            <in>Idt.hpp</in>
             <in>Interrupt.hpp</in>
             <in>Timer.hpp</in>
-          </df>
-          <df name="x86_64">
           </df>
           <in>Processor.hpp</in>
           <in>ProcessorInfo.hpp</in>
@@ -90,8 +90,6 @@
             <in>IOPort.cpp</in>
             <in>Interrupt.cpp</in>
             <in>Timer.cpp</in>
-          </df>
-          <df name="x86_64">
           </df>
           <in>Processor.cpp</in>
         </df>
@@ -144,10 +142,6 @@
           <in>ctype.c</in>
           <in>errno.c</in>
         </df>
-        <df name="libc++">
-        </df>
-        <df name="libposix">
-        </df>
       </df>
       <df name="Linker">
       </df>
@@ -156,6 +150,8 @@
         <in>KMalloc.hpp</in>
         <in>Memory.cpp</in>
         <in>Memory.hpp</in>
+        <in>PhysicalMemory.hpp</in>
+        <in>VirtualMemory.hpp</in>
       </df>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -613,6 +609,10 @@
       </item>
       <item path="Src/Include/Klib/libc/stdio.h" ex="true" tool="3" flavor2="0">
       </item>
+      <item path="Src/Include/Processor/Arch/Gdt.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Include/Processor/Arch/Idt.hpp" ex="true" tool="3" flavor2="0">
+      </item>
       <item path="Src/Include/Processor/Arch/Memory.hpp"
             ex="true"
             tool="3"
@@ -620,10 +620,14 @@
       </item>
       <item path="Src/Include/Processor/x86/CPU.hpp" ex="true" tool="3" flavor2="0">
       </item>
+      <item path="Src/Include/Processor/x86/Gdt.hpp" ex="true" tool="3" flavor2="0">
+      </item>
       <item path="Src/Include/Processor/x86/IOPort.hpp"
             ex="true"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="Src/Include/Processor/x86/Idt.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Processor/x86/Timer.hpp" ex="true" tool="3" flavor2="0">
       </item>
@@ -747,6 +751,10 @@
       <item path="Src/Klib/libc/string/strxfrm.c" ex="true" tool="0" flavor2="0">
       </item>
       <item path="Src/Mem/KMalloc.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Mem/PhysicalMemory.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Mem/VirtualMemory.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <folder path="Src/Drivers">
         <ccTool>

@@ -34,7 +34,7 @@
           <runcommandpicklistitem>./Run.sh</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>./Run.sh</runcommand>
-        <rundir>/media/SOFTWARE/Generix/.</rundir>
+        <rundir>.</rundir>
         <buildfirst>true</buildfirst>
         <console-type>1</console-type>
         <terminal-type>1</terminal-type>
