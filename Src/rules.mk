@@ -5,6 +5,7 @@ DRIVERPATH          := Drivers
 BOOTPATH            := Boot
 LINKERPATH          := Linker
 BASH                := /bin/bash
+DEBUG               := 0
 
 ## Kernel Version
 VERSION             := "\"0.0.1\""
@@ -50,7 +51,11 @@ LDFLAGS             := -T$(LINKERPATH)/Linker64.ld -melf_x86_64
 
 endif
 
-CFLAGS              += $(DFLAGS) $(CPPFLAGS) ## C Compiler Flags
+ifeq ($(DEBUG),1)
+CFLAGS              += $(DFLAGS)
+endif
+
+CFLAGS              += $(CPPFLAGS) ## C Compiler Flags
 CXXFLAGS            := $(CFLAGS) -DCPP -fno-stack-protector -fno-exceptions -fno-rtti -std=c++11 ## C++ Compiler Flags
 ARFLAGS             := rcs
 

@@ -12,8 +12,8 @@ CND_DISTDIR=dist
 CND_BUILDDIR=build
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=MissingOutputInProject
-OUTPUT_BASENAME=MissingOutputInProject
+OUTPUT_PATH=Src/Kernel32.elf
+OUTPUT_BASENAME=Kernel32.elf
 PACKAGE_TOP_DIR=generix/
 
 # Functions
@@ -59,7 +59,7 @@ mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory "${NBTMPDIR}/generix"
+makeDirectory "${NBTMPDIR}/generix/bin"
 copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 

@@ -15,6 +15,7 @@
         </gdb_interceptlist>
         <gdb_options>
           <DebugOptions>
+            <option name="gdb_init_file" value="Src/.gdbinit"/>
           </DebugOptions>
         </gdb_options>
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
@@ -36,7 +37,6 @@
         <runcommand>./Run.sh</runcommand>
         <rundir>.</rundir>
         <buildfirst>true</buildfirst>
-        <console-type>1</console-type>
         <terminal-type>1</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>
         <environment>
@@ -56,7 +56,10 @@
         </gdb_interceptlist>
         <gdb_options>
           <DebugOptions>
+            <option name="gdb_init_file" value="Src/.gdbinit"/>
             <option name="gdb_source_dirs" value="Src"/>
+            <option name="debug_command" value="Src/Kernel32.elf"/>
+            <option name="debug_dir" value="."/>
           </DebugOptions>
         </gdb_options>
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
@@ -74,11 +77,11 @@
           <runcommandpicklistitem>Run.sh</runcommandpicklistitem>
           <runcommandpicklistitem>/Run.sh</runcommandpicklistitem>
           <runcommandpicklistitem>./Run.sh</runcommandpicklistitem>
+          <runcommandpicklistitem>./Run.sh debug</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>./Run.sh</runcommand>
-        <rundir>/media/SOFTWARE/Generix/.</rundir>
+        <runcommand>./Run.sh debug</runcommand>
+        <rundir>.</rundir>
         <buildfirst>true</buildfirst>
-        <console-type>1</console-type>
         <terminal-type>1</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>
         <environment>

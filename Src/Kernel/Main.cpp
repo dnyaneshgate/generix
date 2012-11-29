@@ -16,7 +16,9 @@ ULONG __INIT_ESP;
 
 EXTERN "C" INT _kMain(INT argc, CHAR ** argv);
 
-EXTERN "C" VOID __init(void) {
+EXTERN "C" VOID
+__init(void)
+{
 	EXTERN VOID(*__INIT_START__)();
 	EXTERN VOID(*__INIT_END__)();
 
@@ -26,7 +28,9 @@ EXTERN "C" VOID __init(void) {
 	}
 }
 
-EXTERN "C" INT _kInit(UINT esp) {
+EXTERN "C" INT
+_kInit(UINT esp)
+{
 	Console::Clear();
 	__ctors(); //invoke constructors of static/global objects
 	__init(); //invoke functions resident in .initGenerix section
@@ -47,8 +51,9 @@ EXTERN "C" INT _kInit(UINT esp) {
 	return EXIT_SUCCESS;
 }
 
-EXTERN "C" INT _kMain(INT argc, CHAR ** argv) {
-
+EXTERN "C" INT
+_kMain(INT argc, CHAR ** argv)
+{
 	//Console::Clear();
 
 	Console::Writeln(WELCOMELOGO);
@@ -67,18 +72,18 @@ EXTERN "C" INT _kMain(INT argc, CHAR ** argv) {
 	CPU->GetProcessorInfo("VendorName", vendor);
 	Console::Writeln("Processor : %s", vendor);
 
-	//UINT cores;
-	//CPU->GetProcessorInfo("Cores", &cores);
-	//Console::Writeln("Cores : %d", cores);
+	UINT cores;
+	CPU->GetProcessorInfo("Cores", &cores);
+	Console::Writeln("Cores : %d", cores);
 
-	//CHAR brand[256];
-	//CPU->GetProcessorInfo("Brand",brand);
-	//Console::Writeln("Brand : %s",brand);
+	CHAR brand[256];
+	CPU->GetProcessorInfo("Brand", brand);
+	Console::Writeln("Brand : %s", brand);
 
-	CHAR * addr1 = (CHAR*)kmalloc(10);
-	printk("addr1: %x\n",(UINT)addr1);
-	strcpy(addr1, "A");
-	printk("%s\n",addr1);
+	//CHAR * addr1 = (CHAR*)kmalloc(10);
+	//printk("addr1: %x\n",(UINT)addr1);
+	//strcpy(addr1, "A");
+	//printk("%s\n",addr1);
 
 	return EXIT_SUCCESS;
 }

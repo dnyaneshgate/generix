@@ -2,6 +2,12 @@
 <configurationDescriptor version="84">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df name="Src" root="Src">
+      <df name="adg">
+        <df name="lib">
+        </df>
+        <df name="lib64">
+        </df>
+      </df>
       <df name="Drivers">
         <df name="Video">
           <df name="Text">
@@ -179,7 +185,7 @@
           <buildCommandWorkingDir>Src</buildCommandWorkingDir>
           <buildCommand>${MAKE} -f Makefile all</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
-          <executablePath></executablePath>
+          <executablePath>Src/Kernel32.elf</executablePath>
           <cTool>
             <standard>3</standard>
             <incDir>
@@ -248,44 +254,26 @@
       </item>
       <item path="Src/Kernel/Device.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Kernel/Driver.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Kernel/Kernel.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Kernel/Main.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Kernel/MemoryManager.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Kernel/New.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Kernel/Processor/Arch/Asm/Boot.asm"
@@ -318,9 +306,6 @@
             tool="1"
             flavor2="8">
         <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Kernel/Processor/Arch/Timer.cpp"
@@ -335,9 +320,6 @@
       </item>
       <item path="Src/Kernel/Processor/Processor.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Kernel/Processor/x86/Asm/Boot.asm"
@@ -365,16 +347,10 @@
       </item>
       <item path="Src/Kernel/ScreenIo.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Kernel/Support.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </item>
       <item path="Src/Klib/liballoc/Allocator.cpp" ex="false" tool="1" flavor2="8">
@@ -501,32 +477,11 @@
         <ccTool>
         </ccTool>
       </item>
-      <folder path="Src/Drivers">
-        <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
-        </ccTool>
-      </folder>
-      <folder path="Src/Kernel/Processor/x86">
-        <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
-        </ccTool>
-      </folder>
       <folder path="Src/Klib">
         <ccTool>
           <incDir>
             <pElem>Src/Mem</pElem>
           </incDir>
-        </ccTool>
-      </folder>
-      <folder path="Src/Mem">
-        <ccTool>
-          <preprocessorList>
-            <Elem>__DEBUG__</Elem>
-          </preprocessorList>
         </ccTool>
       </folder>
     </conf>
@@ -540,15 +495,14 @@
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>Src</buildCommandWorkingDir>
-          <buildCommand>${MAKE} -f Makefile all</buildCommand>
+          <buildCommand>${MAKE} -f Makefile all DEBUG=1</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
-          <executablePath></executablePath>
+          <executablePath>Src/Kernel32.elf</executablePath>
           <cTool>
             <standard>3</standard>
             <incDir>
               <pElem>Src/Include/Klib/libc++</pElem>
               <pElem>Src/Include/Klib/libc</pElem>
-              <pElem>Src/Mem</pElem>
               <pElem>Src</pElem>
               <pElem>Src/Include/Klib/libposix</pElem>
               <pElem>Src/Include/Klib/liballoc</pElem>
@@ -556,7 +510,6 @@
               <pElem>Src/Drivers</pElem>
             </incDir>
             <preprocessorList>
-              <Elem>__DEBUG__</Elem>
               <Elem>__GENERIX_VERSION__="0.0.1"</Elem>
               <Elem>__GENERIX__</Elem>
               <Elem>__x86__</Elem>
@@ -567,7 +520,6 @@
             <incDir>
               <pElem>Src/Include/Klib/libc++</pElem>
               <pElem>Src/Include/Klib/libc</pElem>
-              <pElem>Src/Mem</pElem>
               <pElem>Src</pElem>
               <pElem>Src/Include/Klib/libposix</pElem>
               <pElem>Src/Include/Klib/liballoc</pElem>
@@ -587,19 +539,20 @@
           </ccTool>
         </makeTool>
       </makefileType>
-      <item path="Src/Include/Assert.hpp" ex="true" tool="3" flavor2="0">
+      <item path="Src/Drivers/Video/Text/TextMode.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Drivers/Video/Video.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
       </item>
       <item path="Src/Include/Bitmap.hpp" ex="true" tool="3" flavor2="0">
       </item>
-      <item path="Src/Include/Klib/liballoc/Allocator.hpp"
-            ex="true"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="Src/Include/Klib/libc++/Singleton.hpp"
-            ex="true"
-            tool="3"
-            flavor2="0">
+      <item path="Src/Include/Init.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Klib/libc/ctype.h" ex="true" tool="3" flavor2="0">
       </item>
@@ -609,89 +562,155 @@
       </item>
       <item path="Src/Include/Klib/libc/stdio.h" ex="true" tool="3" flavor2="0">
       </item>
-      <item path="Src/Include/Processor/Arch/Gdt.hpp" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Include/Processor/Arch/Idt.hpp" ex="true" tool="3" flavor2="0">
-      </item>
       <item path="Src/Include/Processor/Arch/Memory.hpp"
             ex="true"
             tool="3"
             flavor2="0">
       </item>
-      <item path="Src/Include/Processor/x86/CPU.hpp" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Include/Processor/x86/Gdt.hpp" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Include/Processor/x86/IOPort.hpp"
-            ex="true"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="Src/Include/Processor/x86/Idt.hpp" ex="true" tool="3" flavor2="0">
-      </item>
       <item path="Src/Include/Processor/x86/Timer.hpp" ex="true" tool="3" flavor2="0">
       </item>
-      <item path="Src/Kernel/Device.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Src/Kernel/Device.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
         </ccTool>
       </item>
-      <item path="Src/Kernel/Driver.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Src/Kernel/Driver.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
         </ccTool>
       </item>
-      <item path="Src/Kernel/Kernel.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Src/Kernel/Kernel.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
         </ccTool>
       </item>
-      <item path="Src/Kernel/Main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Src/Kernel/Main.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
         </ccTool>
       </item>
-      <item path="Src/Kernel/MemoryManager.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Src/Kernel/MemoryManager.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
         </ccTool>
       </item>
-      <item path="Src/Kernel/New.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Src/Kernel/New.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
         </ccTool>
       </item>
-      <item path="Src/Kernel/Processor/Processor.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Src/Kernel/Processor/Arch/Asm/Boot.asm"
+            ex="true"
+            tool="4"
+            flavor2="0">
+      </item>
+      <item path="Src/Kernel/Processor/Arch/IOPort.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+          <incDir>
+            <pElem>Src/Mem</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>__DEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/Arch/Interrupt.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+          <incDir>
+            <pElem>Src/Mem</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>__DEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/Arch/Memory.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
         </ccTool>
       </item>
-      <item path="Src/Kernel/ScreenIo.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Src/Kernel/Processor/Arch/Timer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+          <incDir>
+            <pElem>Src/Mem</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>__DEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/Processor.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
         </ccTool>
       </item>
-      <item path="Src/Kernel/Support.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Src/Kernel/Processor/x86/Asm/Boot.asm"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="Src/Kernel/Processor/x86/IOPort.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/x86/Interrupt.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Processor/x86/Timer.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/ScreenIo.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
           </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/Support.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+          <preprocessorList>
+            <Elem>__DEBUG__</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="Src/Klib/liballoc/Allocator.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
         </ccTool>
       </item>
       <item path="Src/Klib/libc/ctype.c" ex="true" tool="0" flavor2="0">
@@ -750,11 +769,13 @@
       </item>
       <item path="Src/Klib/libc/string/strxfrm.c" ex="true" tool="0" flavor2="0">
       </item>
-      <item path="Src/Mem/KMalloc.hpp" ex="true" tool="3" flavor2="0">
+      <item path="Src/Mem/KMalloc.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
       </item>
-      <item path="Src/Mem/PhysicalMemory.hpp" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Src/Mem/VirtualMemory.hpp" ex="true" tool="3" flavor2="0">
+      <item path="Src/Mem/Memory.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
       </item>
       <folder path="Src/Drivers">
         <ccTool>
@@ -767,6 +788,16 @@
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
+          </preprocessorList>
+        </ccTool>
+      </folder>
+      <folder path="Src/Klib">
+        <ccTool>
+          <incDir>
+            <pElem>Src/Mem</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>__DEBUG</Elem>
           </preprocessorList>
         </ccTool>
       </folder>
