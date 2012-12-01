@@ -80,10 +80,5 @@ _kMain(INT argc, CHAR ** argv)
 	CPU->GetProcessorInfo("Brand", brand);
 	Console::Writeln("Brand : %s", brand);
 
-	//CHAR * addr1 = (CHAR*)kmalloc(10);
-	//printk("addr1: %x\n",(UINT)addr1);
-	//strcpy(addr1, "A");
-	//printk("%s\n",addr1);
-
 	return EXIT_SUCCESS;
 }

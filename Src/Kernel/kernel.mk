@@ -4,4 +4,4 @@ KERNELOBJ := $(sort $(patsubst %.asm,%.o,$(wildcard Kernel/Processor/$(ARCH)/Asm
 			 $(patsubst %.cpp,%.o,$(wildcard Kernel/Processor/*.cpp)) \
 			 $(patsubst %.cpp,%.o,$(wildcard Kernel/*.cpp))
 
-kernel: $(KERNELOBJ) $(MEMOBJ)
+kernel: $(KERNELOBJ) $(MEMOBJ) $(FILESYSTEM)

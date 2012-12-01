@@ -7,19 +7,20 @@
 
 
 #include <MemoryManager.hpp>
+#include <Mem/KMalloc.hpp>
 
 namespace Generix {
 
 	GMemoryManager::GMemoryManager() {
-		//m_Mem = GMemory::Instance();
 	}
 
 	GMemoryManager::~GMemoryManager() {
 	}
 
 	VOID GMemoryManager::Init() {
-		//m_Mem->Init();
 		Memory->Init();
+		GKMalloc * kMalloc = GKMalloc::Instance();
+		GAllocator::SetDefault(kMalloc);
 	}
 
 }

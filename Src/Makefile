@@ -11,6 +11,7 @@ world: kernel drivers
 
 include Klib/libraries.mk
 include Mem/Memory.mk
+include FileSystem/FileSystem.mk
 include Drivers/drivers.mk
 include Kernel/kernel.mk
 
@@ -30,7 +31,7 @@ libclean:
 	done
 
 clean:
-	@for i in $(LIBC) $(LIBCPP) $(LIBPOSIX) $(LIBALLOC) $(KERNELOBJ) $(MEMOBJ) $(DRIVEROBJ); do \
+	@for i in $(LIBC) $(LIBCPP) $(LIBPOSIX) $(LIBALLOC) $(KERNELOBJ) $(MEMOBJ) $(FILESYSTEM) $(DRIVEROBJ); do \
 		rm -f $$i && echo -e "\033[31m[RM]\033[36m       $$i\033[0m"; \
 	done
 

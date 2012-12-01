@@ -104,9 +104,9 @@ namespace Generix {
 		m_ui_memUsedBlks = ZERO;
 		memset(m_pu_memMapStart, 0, m_ui_memMapLen);
 		UINT i = 0;
-		UINT Limit = 0x3FF000;//PAGE_ROUND_UP(KEndAddress);
+		UINT Limit = 0x400000;//PAGE_ROUND_UP(KEndAddress);
 		while (i LT Limit) {
-			MapMark(i);
+			MapMark(i / PAGESIZE);
 			if (m_ui_memUsedBlks LT m_ui_memMaxBlks)
 				m_ui_memUsedBlks++;
 			if (m_ui_memFreeBlks GT ZERO)

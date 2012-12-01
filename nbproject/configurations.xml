@@ -18,6 +18,23 @@
           <in>Video.hpp</in>
         </df>
       </df>
+      <df name="FileSystem">
+        <df name="Ext2">
+          <in>Ext2FileSystem.cpp</in>
+        </df>
+        <df name="FAT">
+          <in>FatFileSystem.cpp</in>
+        </df>
+        <df name="Tar">
+          <in>TarFileSystem.cpp</in>
+        </df>
+        <in>File.cpp</in>
+        <in>File.hpp</in>
+        <in>FileSystem.cpp</in>
+        <in>FileSystem.hpp</in>
+        <in>VirtualFileSystem.cpp</in>
+        <in>VirtualFileSystem.hpp</in>
+      </df>
       <df name="Include">
         <df name="Klib">
           <df name="liballoc">
@@ -45,18 +62,14 @@
         <df name="Processor">
           <df name="Arch">
             <in>CPU.hpp</in>
-            <in>Gdt.hpp</in>
             <in>IOPort.hpp</in>
-            <in>Idt.hpp</in>
             <in>Interrupt.hpp</in>
             <in>Memory.hpp</in>
             <in>Timer.hpp</in>
           </df>
           <df name="x86">
             <in>CPU.hpp</in>
-            <in>Gdt.hpp</in>
             <in>IOPort.hpp</in>
-            <in>Idt.hpp</in>
             <in>Interrupt.hpp</in>
             <in>Timer.hpp</in>
           </df>
@@ -156,8 +169,6 @@
         <in>KMalloc.hpp</in>
         <in>Memory.cpp</in>
         <in>Memory.hpp</in>
-        <in>PhysicalMemory.hpp</in>
-        <in>VirtualMemory.hpp</in>
       </df>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -235,6 +246,42 @@
         </ccTool>
       </item>
       <item path="Src/Drivers/Video/Video.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/Ext2/Ext2FileSystem.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/FAT/FatFileSystem.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/File.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/FileSystem.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/Tar/TarFileSystem.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/VirtualFileSystem.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
         <ccTool>
         </ccTool>
       </item>
@@ -325,7 +372,9 @@
       <item path="Src/Kernel/Processor/x86/Asm/Boot.asm"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="3">
+        <cTool>
+        </cTool>
       </item>
       <item path="Src/Kernel/Processor/x86/IOPort.cpp"
             ex="false"

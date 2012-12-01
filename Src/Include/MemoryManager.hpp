@@ -21,8 +21,6 @@ namespace Generix {
 		GMemoryManager();
 		~GMemoryManager();
 		VOID Init();
-
-		GMemory *m_Mem;
 	};
 
 }
