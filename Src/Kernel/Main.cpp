@@ -52,6 +52,7 @@ EXTERN "C" INT _kInit(UINT esp)
 	CPU->InstallPit(); //setup timer
 
 	kernel->MemoryInit();
+	kernel->FileSystemInit();
 
 	_kMain(0, NULL);
 
@@ -87,9 +88,8 @@ EXTERN "C" INT _kMain(INT argc, CHAR ** argv)
 	CPU->GetProcessorInfo("Brand", brand);
 	Console::Writeln("Brand : %s", brand);
 	
-	printk("initrd size = %d\n", (multiBootInfo.Modules[0].ModuleEnd - multiBootInfo.Modules[0].ModuleStart));
-	//GFileSystem *tarFS = new GTarFileSystem(multiBootInfo.Modules[0].ModuleStart, multiBootInfo.Modules[0].ModuleEnd);
-	GTarFileSystem tarFS(multiBootInfo.Modules[0].ModuleStart, multiBootInfo.Modules[0].ModuleEnd);
+	//GTarFileSystem tarFS(multiBootInfo.Modules[0].ModuleStart, multiBootInfo.Modules[0].ModuleEnd);
+	//tarFS.Read(0,0,0,0);
 
 	return EXIT_SUCCESS;
 }

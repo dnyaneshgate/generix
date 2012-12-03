@@ -34,14 +34,14 @@ struct TarHeader
 	CHAR ModifyTime[12];
 	CHAR CheckSum[8];
 	CHAR TypeFlag;
-	//CHAR LinkName[TARLINKNAMESIZE];
-	//CHAR Magic[6];
-	//CHAR Version[2];
-	//CHAR Uname[32];
-	//CHAR Gname[32];
-	//CHAR DevMajor[8];
-	//CHAR DevMinor[8];
-	//CHAR Prefix[TARPREFIXSIZE];
+	CHAR LinkName[TARLINKNAMESIZE];
+	CHAR Magic[6];
+	CHAR Version[2];
+	CHAR Uname[32];
+	CHAR Gname[32];
+	CHAR DevMajor[8];
+	CHAR DevMinor[8];
+	CHAR Prefix[TARPREFIXSIZE];
 };
 
 union TarRecord

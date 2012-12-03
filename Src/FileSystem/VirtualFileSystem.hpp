@@ -21,18 +21,19 @@ class GVirtualFileSystem : public GSingleton<GVirtualFileSystem> {
 	friend class GFileSystemManager;
 	//member functions
 public:
-	INT Mount();
-	INT Umount();
 protected:
 private:
 	GVirtualFileSystem();
 	~GVirtualFileSystem();
+	
+	INT Mount(const CHAR * dest, const CHAR * src, const CHAR * fsType);
+	INT Umount(const CHAR * src);
 
 	//member variables
 public:
 protected:
 private:
-	List<GFileSystem *> m_p_FileSystems;
+	List<GFileSystem*> m_p_ListOfFileSystems;
 };
 
 }

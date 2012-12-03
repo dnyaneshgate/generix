@@ -34,10 +34,11 @@ private:
 	// member variables
 public:
 protected:
+	UINT m_ui_FileCount;
+	List<GFile*> m_p_ListOfFiles;
+	STATIC UINT Id;
 private:
 	BOOL m_b_Mounted;
-	UINT m_ui_FileCount;
-	List<GFile*> m_p_Files;
 };
 
 }

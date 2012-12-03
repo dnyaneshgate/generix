@@ -18,10 +18,10 @@ namespace Generix {
 #define CHUNK_MAGIC  0x123456ABCD
 
 	typedef struct strucHEAP {
-		UINT * Start;
-		UINT * End;
+		UINT Start;
+		UINT End;
 		UINT Size;
-		UINT * Top;
+		UINT Top;
 	} __PACKED__ HEAP, *PHEAP;
 
 	typedef struct strucCHUNK {

@@ -622,6 +622,49 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="Src/FileSystem/CPIO/CpioFileSystem.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/Ext2/Ext2FileSystem.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/FAT/FatFileSystem.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/File.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/FileSystem.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/Tar/TarFileSystem.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/FileSystem/VirtualFileSystem.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
       <item path="Src/Include/Bitmap.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Init.hpp" ex="true" tool="3" flavor2="0">
@@ -649,6 +692,13 @@
         </ccTool>
       </item>
       <item path="Src/Kernel/Driver.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+          <preprocessorList>
+            <Elem>__DEBUG__</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/FileSystemManager.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>
@@ -850,6 +900,13 @@
         </ccTool>
       </item>
       <folder path="Src/Drivers">
+        <ccTool>
+          <preprocessorList>
+            <Elem>__DEBUG__</Elem>
+          </preprocessorList>
+        </ccTool>
+      </folder>
+      <folder path="Src/FileSystem">
         <ccTool>
           <preprocessorList>
             <Elem>__DEBUG__</Elem>

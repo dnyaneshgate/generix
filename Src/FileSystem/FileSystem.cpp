@@ -3,7 +3,9 @@
 
 namespace Generix {
 
-GFileSystem::GFileSystem() : m_b_Mounted(false), m_ui_FileCount(ZERO)
+UINT GFileSystem::Id = 0;
+
+GFileSystem::GFileSystem() : m_ui_FileCount(ZERO), m_b_Mounted(false)
 {
 	
 }

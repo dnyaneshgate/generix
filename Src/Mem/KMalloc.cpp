@@ -13,22 +13,22 @@ STATIC PCHUNK heapStart = 0;
 
 STATIC VOID HeapInit(PHEAP heap)
 {
-	heap->Start = (UINT*) KERNEL_HEAP_START;
-	heap->End = (UINT*) KERNEL_HEAP_END;
+	heap->Start = (UINT) KERNEL_HEAP_START;
+	heap->End = (UINT) KERNEL_HEAP_END;
 	heap->Size = KERNEL_HEAP_END - KERNEL_HEAP_START;
-	heap->Top = (UINT*) KERNEL_HEAP_START;
+	heap->Top = (UINT) KERNEL_HEAP_START;
 	//memset(heap->Start, 0, heap->Size);
 	isHeapInit = true;
 }
 
-STATIC INT ExpandHeap(PHEAP heap, UINT * start, Size size)
+STATIC INT ExpandHeap(PHEAP heap, UINT start, Size size)
 {
 	//printk("ExpandHeap()\n");
 	while ((start + size) GT heap->Top) {
 		PAddress pAddr = PAddress(Memory->allocPhysical());
 		Memory->mapVirtual(pAddr, VAddress(heap->Top), PAGE_PRESENT OR PAGE_WRITE);
 		heap->Top += PAGESIZE;
-		ASSERT(UINT(heap->Top) < KERNEL_HEAP_END);
+		ASSERT(heap->Top < KERNEL_HEAP_END);
 	}
 	return SUCCESS;
 }
@@ -124,9 +124,10 @@ VOID * GKMalloc::Alloc(Size sz)
 	} else {
 		curChunk = heapStart = (PCHUNK) kHeap.Start;
 	}
-
-	ExpandHeap(&kHeap, (UINT*) curChunk, sz);
-	memset(curChunk, 0, CHUNKSIZE);
+	
+	ExpandHeap(&kHeap, (UINT) curChunk, sz);
+	
+	memset(curChunk, 0, sz);
 	curChunk->Prev = preChunk;
 	curChunk->Next = 0;
 	curChunk->Size = sz;
