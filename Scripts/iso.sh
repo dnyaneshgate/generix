@@ -7,17 +7,19 @@ RM="rm"
 MKDIR="mkdir"
 MKISO="mkisofs"
 
-if [[ $# != 1 ]]; then
-	$ECHO "Usage $0 <kernel-path>";
+if [[ $# != 2 ]]; then
+	$ECHO "Usage $0 <path-to-kernel> <path-to-initrd>";
 	exit;
 fi
 
-GENERIX="GeneriXOS-0.0.1"
+GENERIX="GeneriXOS"
 PROJECTDIR=$PWD
 BOOT=$PROJECTDIR/Boot
 ISOPATH=$BOOT/Iso
 ISO=$BOOT/$GENERIX.iso
 KERNEL=$1
+INITRD='Initrd.img'
+INITRD_PATH=$2
 GRUB=$BOOT/Grub
 
 if [ ! -d $ISOPATH ]; then
@@ -26,10 +28,12 @@ fi
 
 ret=`$CP $GRUB/* $ISOPATH/boot/grub/ && \
 	 $CP $KERNEL $ISOPATH/boot/$GENERIX && \
+	 $CP $INITRD_PATH $ISOPATH/boot/$INITRD && \
 	 $ECHO "default 0"                   > $ISOPATH/boot/grub/menu.lst && \
 	 $ECHO "timeout 5\n\n"              >> $ISOPATH/boot/grub/menu.lst && \
 	 $ECHO "title $GENERIX"             >> $ISOPATH/boot/grub/menu.lst && \
-	 $ECHO "\tkernel /boot/$GENERIX"    >> $ISOPATH/boot/grub/menu.lst`
+	 $ECHO "\tkernel /boot/$GENERIX"    >> $ISOPATH/boot/grub/menu.lst && \
+	 $ECHO "\tmodule /boot/$INITRD"     >> $ISOPATH/boot/grub/menu.lst`
 
 if [[ $ret ]]; then
 	$ECHO "Error: $ret"

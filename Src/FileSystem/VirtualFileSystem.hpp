@@ -11,21 +11,28 @@
 #include <Types.hpp>
 #include <Macros.hpp>
 #include <FileSystem/FileSystem.hpp>
+#include <List.hpp>
+#include <Singleton.hpp>
 
 namespace Generix {
 
-class GVirtualFileSystem : public GFileSystem {
+class GVirtualFileSystem : public GSingleton<GVirtualFileSystem> {
+	friend class GSingleton<GVirtualFileSystem>;
+	friend class GFileSystemManager;
 	//member functions
 public:
-	GVirtualFileSystem();
-	~GVirtualFileSystem();
+	INT Mount();
+	INT Umount();
 protected:
 private:
+	GVirtualFileSystem();
+	~GVirtualFileSystem();
 
 	//member variables
 public:
 protected:
 private:
+	List<GFileSystem *> m_p_FileSystems;
 };
 
 }

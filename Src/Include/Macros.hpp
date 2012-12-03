@@ -20,7 +20,8 @@
 #define __UNUSED__             __attribute__((unused))
 #define __ALIGN__(x)           __attribute__((align((x))))
 
-#define __INIT__               __SECTION__((".initGenerix"))
+#define __INITFUNC__(x)        __SECTION__(x)
+#define __INIT__(level)        __INITFUNC__(".init" level)
 
 #define MAX(x,y)               (((x) > (y)) ? (x) : (y))
 #define MIN(x,y)               (((x) < (y)) ? (x) : (y))

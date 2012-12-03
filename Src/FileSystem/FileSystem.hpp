@@ -9,17 +9,25 @@
 #define	__GENERIX_FILESYSTEM_HPP__
 
 #define MAX_PATH 256
+#define FILE_SEPERATOR '/'
+#define ROOT_DIR '/'
 
 #include <Types.hpp>
 #include <Macros.hpp>
+#include <List.hpp>
+#include <FileSystem/File.hpp>
 
 namespace Generix {
 
-class GFileSystem {
+class GFileSystem
+{
 	// member functions
 public:
 	GFileSystem();
 	virtual ~GFileSystem();
+	BOOL IsMounted() const;
+	virtual INT Read(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE) = 0;
+	virtual INT Write(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE) = 0;
 protected:
 private:
 
@@ -27,6 +35,9 @@ private:
 public:
 protected:
 private:
+	BOOL m_b_Mounted;
+	UINT m_ui_FileCount;
+	List<GFile*> m_p_Files;
 };
 
 }

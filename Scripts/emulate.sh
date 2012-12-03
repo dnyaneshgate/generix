@@ -9,7 +9,7 @@ if [[ $# -lt 1 ]]; then
 fi
 
 EMU=$1
-GENERIX="GeneriXOS-0.0.1"
+GENERIX="GeneriXOS"
 ISO=$GENERIX.iso
 PROJECTPATH=$PWD
 BOOT=$PROJECTPATH/Boot

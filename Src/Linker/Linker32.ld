@@ -50,9 +50,9 @@ SECTIONS
 		KEEP(*(.ctor*))
 
 		__INIT_START__ = .;
-		*(.initGenerix)
-		/*KEEP(*(SORT(.initGenerix)))*/
-		KEEP(*(.initGenerix))
+		*(.init*)
+		KEEP(*(SORT(.init*)))
+		/*KEEP(*(.init*))*/
 		__INIT_END__ = .;
 
 		*(.rodata*)

@@ -12,6 +12,7 @@
 #include <Macros.hpp>
 
 #define MAX_FILE_NAME 128
+#define MAX_DATETIME_SIZE 15
 
 typedef enum {
 	eDirectory = 0, eRegular
@@ -38,6 +39,11 @@ private:
 	CHAR m_c_FileName[MAX_FILE_NAME];
 	eFileType m_e_Type;
 	UCHAR m_uc_Attributes;
+	UCHAR m_uc_TimeCreated[MAX_DATETIME_SIZE];
+	UCHAR m_uc_LastModified[MAX_DATETIME_SIZE];
+	UINT Size;
+	CHAR * Data;
+	GFile *Next, *Prev;
 };
 
 }

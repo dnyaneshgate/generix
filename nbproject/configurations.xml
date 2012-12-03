@@ -19,14 +19,21 @@
         </df>
       </df>
       <df name="FileSystem">
+        <df name="CPIO">
+          <in>CpioFileSystem.cpp</in>
+          <in>CpioFileSystem.hpp</in>
+        </df>
         <df name="Ext2">
           <in>Ext2FileSystem.cpp</in>
         </df>
         <df name="FAT">
           <in>FatFileSystem.cpp</in>
         </df>
+        <df name="SFS">
+        </df>
         <df name="Tar">
           <in>TarFileSystem.cpp</in>
+          <in>TarFileSystem.hpp</in>
         </df>
         <in>File.cpp</in>
         <in>File.hpp</in>
@@ -51,6 +58,7 @@
             <in>va_list.h</in>
           </df>
           <df name="libc++">
+            <in>List.hpp</in>
             <in>Singleton.hpp</in>
           </df>
           <df name="libposix">
@@ -81,6 +89,7 @@
         <in>ColorCode.hpp</in>
         <in>Device.hpp</in>
         <in>Driver.hpp</in>
+        <in>FileSystemManager.hpp</in>
         <in>Init.hpp</in>
         <in>Kernel.hpp</in>
         <in>Macros.hpp</in>
@@ -114,6 +123,7 @@
         </df>
         <in>Device.cpp</in>
         <in>Driver.cpp</in>
+        <in>FileSystemManager.cpp</in>
         <in>Kernel.cpp</in>
         <in>Main.cpp</in>
         <in>MemoryManager.cpp</in>
@@ -160,6 +170,8 @@
           </df>
           <in>ctype.c</in>
           <in>errno.c</in>
+        </df>
+        <df name="libc++">
         </df>
       </df>
       <df name="Linker">
@@ -249,6 +261,13 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="Src/FileSystem/CPIO/CpioFileSystem.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
       <item path="Src/FileSystem/Ext2/Ext2FileSystem.cpp"
             ex="false"
             tool="1"
@@ -304,6 +323,10 @@
         </ccTool>
       </item>
       <item path="Src/Kernel/Driver.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="Src/Kernel/FileSystemManager.cpp" ex="false" tool="1" flavor2="8">
         <ccTool>
         </ccTool>
       </item>

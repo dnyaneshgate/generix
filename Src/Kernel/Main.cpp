@@ -2,36 +2,44 @@
 #include <Support.hpp>
 #include <Kernel.hpp>
 #include <stdlib.h>
-#include <string.h>
 #include <ScreenIo.hpp>
-#include <Mem/KMalloc.hpp>
-
-#include "Processor/x86/CPU.hpp"
+#include <FileSystem/Tar/TarFileSystem.hpp>
 
 using namespace Generix;
 
 EXTERN MULTIBOOTHEADER multiBootHeader;
 EXTERN MULTIBOOTINFO multiBootInfo;
+EXTERN UINT KEndAddress;
 ULONG __INIT_ESP;
 
 EXTERN "C" INT _kMain(INT argc, CHAR ** argv);
 
-EXTERN "C" VOID
-__init(void)
+EXTERN "C" VOID __init(void)
 {
 	EXTERN VOID(*__INIT_START__)();
 	EXTERN VOID(*__INIT_END__)();
 
 	VOID(**init)();
-	for (init = &__INIT_START__; init < &__INIT_END__; init++) {
+	for (init = &__INIT_START__; init < &__INIT_END__; init++)
+	{
 		(*init)();
 	}
 }
 
-EXTERN "C" INT
-_kInit(UINT esp)
+INT ModuleInit()
+{
+	UINT i = 0;
+	for (i = 0; i < multiBootInfo.ModuleCount; i++)
+	{
+		KEndAddress += (multiBootInfo.Modules[i].ModuleEnd - multiBootInfo.Modules[i].ModuleStart);
+	}
+	return 0;
+}
+
+EXTERN "C" INT _kInit(UINT esp)
 {
 	Console::Clear();
+	ModuleInit();
 	__ctors(); //invoke constructors of static/global objects
 	__init(); //invoke functions resident in .initGenerix section
 	__INIT_ESP = esp; //save initial stack pointer
@@ -51,8 +59,7 @@ _kInit(UINT esp)
 	return EXIT_SUCCESS;
 }
 
-EXTERN "C" INT
-_kMain(INT argc, CHAR ** argv)
+EXTERN "C" INT _kMain(INT argc, CHAR ** argv)
 {
 	//Console::Clear();
 
@@ -79,6 +86,10 @@ _kMain(INT argc, CHAR ** argv)
 	CHAR brand[256];
 	CPU->GetProcessorInfo("Brand", brand);
 	Console::Writeln("Brand : %s", brand);
+	
+	printk("initrd size = %d\n", (multiBootInfo.Modules[0].ModuleEnd - multiBootInfo.Modules[0].ModuleStart));
+	//GFileSystem *tarFS = new GTarFileSystem(multiBootInfo.Modules[0].ModuleStart, multiBootInfo.Modules[0].ModuleEnd);
+	GTarFileSystem tarFS(multiBootInfo.Modules[0].ModuleStart, multiBootInfo.Modules[0].ModuleEnd);
 
 	return EXIT_SUCCESS;
 }

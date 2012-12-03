@@ -1,9 +1,10 @@
 #include <FileSystem/File.hpp>
 #include <string.h>
 
-namespace Generix {
+namespace Generix
+{
 
-GFile::GFile() : m_uc_Attributes(ZERO)
+GFile::GFile() : m_uc_Attributes(ZERO), Size(ZERO), Data(ZERO)
 {
 	m_e_Type = eRegular;
 	memset(m_c_FileName, ZERO, MAX_FILE_NAME);

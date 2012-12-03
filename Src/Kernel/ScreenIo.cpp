@@ -21,12 +21,13 @@ namespace Console {
 
 	PRIVATE VOID ScrollUp() {
 		//memmove(TEXTBUFFER, DBUFFER + WIDTH, sizeof (USHORT) * WIDTH * (HEIGHT - 1));
-		for (UINT i = 0; i LT (HEIGHT - 1); i++) {
+		for (UINT i = 0; i LT (HEIGHT); i++) {
 			for (UINT j = 0; j LT WIDTH; j++)
 				TEXTBUFFER[ j + i * WIDTH ] = TEXTBUFFER[ j + (i + 1) * WIDTH ];
 		}
 		for (UINT i = 0; i LT WIDTH; i++)
 			TEXTBUFFER[ (HEIGHT - 1) * WIDTH + i ] = (USHORT) (' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8));
+		--Ypos;
 	}
 
 	PRIVATE VOID UpdateCursor() {
@@ -137,6 +138,8 @@ namespace Console {
 					Xpos = 0;
 					++Ypos;
 				}
+				if (Ypos >= HEIGHT)
+					ScrollUp();
 				break;
 			case '\r':
 				Xpos = 0;

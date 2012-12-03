@@ -153,4 +153,4 @@ namespace Generix {
 
 }
 
-STATIC UINT __meminit __INIT__ __USED__ = (UINT) Generix::GMemory::Init;
+STATIC UINT __meminit __INIT__("Memory") __USED__ = (UINT) Generix::GMemory::Init;

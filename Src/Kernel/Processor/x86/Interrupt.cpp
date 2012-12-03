@@ -86,5 +86,5 @@ EXTERN "C" VOID InterruptServiceRoutine(REG reg)
 		faultHandler(&reg);
 }
 
-STATIC UINT __interruptinit __INIT__ __USED__ = (UINT) Init;
+STATIC UINT __interruptinit __INIT__("Interrupt") __USED__ = (UINT) Init;
 }

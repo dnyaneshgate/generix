@@ -6,4 +6,4 @@ else
 	debug=' ';
 fi
 
-Scripts/iso.sh Src/Kernel32.elf && Scripts/emulate.sh bochs $debug
+Scripts/iso.sh Src/Kernel32.elf Initrd.img && Scripts/emulate.sh bochs $debug
