@@ -10,7 +10,7 @@
 
 #define MAX_PATH 256
 #define FILE_SEPERATOR '/'
-#define ROOT_DIR '/'
+#define ROOT_DIR "/"
 
 #include <Types.hpp>
 #include <Macros.hpp>
@@ -24,6 +24,7 @@ class GFileSystem
 	// member functions
 public:
 	GFileSystem();
+	GFileSystem(const CHAR * fsPath);
 	virtual ~GFileSystem();
 	BOOL IsMounted() const;
 	virtual INT Read(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE) = 0;
@@ -38,7 +39,8 @@ protected:
 	List<GFile*> m_p_ListOfFiles;
 	STATIC UINT Id;
 private:
-	BOOL m_b_Mounted;
+	CHAR m_c_Path[MAX_PATH];
+	BOOL m_b_isMounted;
 };
 
 }

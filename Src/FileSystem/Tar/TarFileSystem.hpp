@@ -54,7 +54,7 @@ class GTarFileSystem : public GFileSystem
 {
 	//member functions
 public:
-	GTarFileSystem();
+	GTarFileSystem(const CHAR * fsPath);
 	GTarFileSystem(UINT Start, UINT End);
 	~GTarFileSystem();
 	INT Read(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE);

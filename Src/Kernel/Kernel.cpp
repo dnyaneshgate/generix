@@ -21,7 +21,7 @@ VOID GKernel::MemoryInit()
 
 VOID GKernel::FileSystemInit()
 {
-
+	m_FSMngr->Init();
 }
 
 INT GKernel::FSMount(const CHAR * dest, const CHAR * src, const CHAR * fsType)

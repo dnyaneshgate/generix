@@ -4,13 +4,21 @@
 #include <Types.hpp>
 #include <Macros.hpp>
 
-namespace Generix {
+namespace Generix
+{
 
-	class GDevice {
-	public:
-	protected:
-	private:
-	};
+class GDevice
+{
+	//member functions
+public:
+protected:
+private:
+	
+	//member variables
+public:
+protected:
+private:
+};
 
 }
 

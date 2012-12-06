@@ -6,7 +6,15 @@ namespace Generix
 
 PRIVATE INT ParseFilePath(const CHAR * pPath)
 {
-	return 0;
+	if (pPath == ZERO)
+		return 0;
+
+	CHAR * str = (CHAR*) pPath;
+
+	while (*str != '/' && *str != '\n' && *str != 0)
+		str++;
+
+	return (str - pPath);
 }
 
 PRIVATE INT GetSize(const CHAR * in)
@@ -21,7 +29,7 @@ PRIVATE INT GetSize(const CHAR * in)
 	return size;
 }
 
-GTarFileSystem::GTarFileSystem()
+GTarFileSystem::GTarFileSystem(const CHAR * fsPath) : GFileSystem(fsPath)
 {
 
 }
@@ -34,25 +42,39 @@ GTarFileSystem::GTarFileSystem(UINT Start, UINT End)
 	UINT fsEnd = End;
 	UINT fsPtr = fsStart;
 	INT i = 0;
-	while (fsPtr <= fsEnd and i < 180)
+	while (fsPtr <= fsEnd and i < 4)
 	{
 		fileRecord = (TarRecord*) fsPtr;
 		fileHeader = (TarHeader*) & fileRecord->Header;
-		
-		if(fileHeader->Name[0] == '\0')
+
+		if (fileHeader->Name[0] == '\0')
 			break;
-		
-		//printk("%s ", fileHeader->Name);
+
 		INT sz = GetSize(fileHeader->Size);
-		//printk("size = %d\n", sz);
 		
 		Id++;
-		printk("Id= %d   Name = %s ", i, fileHeader->Name);
+		
+		/*CHAR * token = (CHAR*)fileHeader->Name;
+		CHAR s[TARNAMESIZE];
+		INT ret = 0;
+		printk("%s: ", token);
+		while((ret = ParseFilePath(token)) != 0)
+		{
+			memcpy(s, token, ret);
+			
+			//if(token[ret] != 0)
+			token += ret + 1;
+			
+			s[ret] = 0;
+			
+			printk("%s ", s);
+		}
+		printk("\n");*/
+		
 		GFile * file = new GFile(Id, fileHeader->Name, eRegular, 0);
 		m_p_ListOfFiles.push_back(file);
-		printk("..\n");
 		fsPtr += ((sz / 512) + 1) * 512;
-		
+
 		if ((sz % 512) and (sz))
 			fsPtr += 512;
 		i++;
@@ -69,14 +91,14 @@ INT GTarFileSystem::Read(GFile * file, CHAR * buffer, UINT offset, UINT size)
 {
 	List<GFile*>::iterator begin = m_p_ListOfFiles.begin();
 	List<GFile*>::iterator end = m_p_ListOfFiles.end();
-	
-	while(begin != end)
+
+	while (begin != end)
 	{
 		GFile * file = *begin;
 		printk("Id = %02d    Name = %s\n", file->GetFileId(), file->GetFileName());
 		++begin;
 	}
-	
+
 	return ZERO;
 }
 

@@ -16,6 +16,7 @@ GFileSystemManager::~GFileSystemManager()
 VOID GFileSystemManager::Init()
 {
 	m_p_VFS = GVirtualFileSystem::Instance();
+	m_p_VFS->Init();
 }
 
 INT GFileSystemManager::Mount(const CHAR* dest, const CHAR* src, const CHAR* fsType)
