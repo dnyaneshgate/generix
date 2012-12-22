@@ -29,4 +29,19 @@ INT GFileSystemManager::Umount(const CHAR* src)
 	return m_p_VFS->Umount(src);
 }
 
+INT GFileSystemManager::Create(const CHAR * file)
+{
+	return m_p_VFS->Create(file);
+}
+
+INT GFileSystemManager::ChangeDir(const CHAR * path)
+{
+	return m_p_VFS->ChangeDir(path);
+}
+
+INT GFileSystemManager::ListDir(const CHAR * path)
+{
+	return m_p_VFS->ListDir(path);
+}
+
 }

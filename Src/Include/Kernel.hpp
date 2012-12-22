@@ -18,13 +18,14 @@ class GKernel : public GSingleton<GKernel>
 public:
 	VOID MemoryInit();
 	VOID FileSystemInit();
-	INT FSMount(const CHAR * dest, const CHAR * src, const CHAR * fsType);
-	INT FSUmount(const CHAR * src);
+	//INT FSMount(const CHAR * dest, const CHAR * src, const CHAR * fsType);
+	//INT FSUmount(const CHAR * src);
 	VOID SetMultiBootHeader(PMULTIBOOTHEADER mbh);
 	VOID SetMultiBootInfo(PMULTIBOOTINFO mbi);
 	PMULTIBOOTHEADER GetMultiBootHeader();
 	PMULTIBOOTINFO GetMultiBootInfo();
 	GProcessor* GetCpu();
+	GFileSystemManager * GetFSManager();
 protected:
 private:
 	GKernel();

@@ -58,6 +58,7 @@
             <in>va_list.h</in>
           </df>
           <df name="libc++">
+            <in>HashTable.hpp</in>
             <in>List.hpp</in>
             <in>Singleton.hpp</in>
           </df>
@@ -249,6 +250,18 @@
             </undefinedList>
           </ccTool>
         </makeTool>
+        <requiredProjects>
+          <makeArtifact PL="gboot"
+                        CT="0"
+                        CN="Default"
+                        AC="true"
+                        BL="false"
+                        WD="gboot/src"
+                        BC="${MAKE} -f Makefile"
+                        CC="${MAKE} -f Makefile clean"
+                        OP="">
+          </makeArtifact>
+        </requiredProjects>
       </makefileType>
       <item path="Src/Drivers/Video/Text/TextMode.cpp"
             ex="false"
@@ -610,6 +623,18 @@
             </undefinedList>
           </ccTool>
         </makeTool>
+        <requiredProjects>
+          <makeArtifact PL="gboot"
+                        CT="0"
+                        CN="Default"
+                        AC="true"
+                        BL="false"
+                        WD="gboot/src"
+                        BC="${MAKE} -f Makefile"
+                        CC="${MAKE} -f Makefile clean"
+                        OP="">
+          </makeArtifact>
+        </requiredProjects>
       </makefileType>
       <item path="Src/Drivers/Video/Text/TextMode.cpp"
             ex="false"

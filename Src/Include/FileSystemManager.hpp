@@ -16,7 +16,7 @@ namespace Generix
 class GFileSystemManager : public GSingleton<GFileSystemManager>
 {
 	friend class GSingleton<GFileSystemManager>;
-	friend class GKernel;
+	//friend class GKernel;
 	// member functions
 public:
 protected:
@@ -27,6 +27,9 @@ private:
 	VOID Init();
 	INT Mount(const CHAR * dest, const CHAR * src, const CHAR * fsType);
 	INT Umount(const CHAR * src);
+	INT Create(const CHAR * file);
+	INT ChangeDir(const CHAR * path);
+	INT ListDir(const CHAR * path);
 
 	// member variables
 public:

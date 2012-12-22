@@ -24,14 +24,14 @@ VOID GKernel::FileSystemInit()
 	m_FSMngr->Init();
 }
 
-INT GKernel::FSMount(const CHAR * dest, const CHAR * src, const CHAR * fsType)
-{
-	return m_FSMngr->Mount(dest, src, fsType);
-}
-INT GKernel::FSUmount(const CHAR * src)
-{
-	return m_FSMngr->Umount(src);
-}
+//INT GKernel::FSMount(const CHAR * dest, const CHAR * src, const CHAR * fsType)
+//{
+//	return m_FSMngr->Mount(dest, src, fsType);
+//}
+//INT GKernel::FSUmount(const CHAR * src)
+//{
+//	return m_FSMngr->Umount(src);
+//}
 
 VOID GKernel::SetMultiBootHeader(PMULTIBOOTHEADER mbh)
 {
@@ -56,6 +56,11 @@ PMULTIBOOTINFO GKernel::GetMultiBootInfo()
 GProcessor* GKernel::GetCpu()
 {
 	return m_cpu;
+}
+
+GFileSystemManager * GKernel::GetFSManager()
+{
+	return m_FSMngr;
 }
 
 }

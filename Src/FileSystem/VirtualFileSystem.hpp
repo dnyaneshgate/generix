@@ -26,17 +26,45 @@ struct fsNode
 {
 	CHAR Name[MAX_NAME_SIZE];
 	UINT Type;
+	USHORT Permissions;
 	UINT NoOfChilds;
 	fsNode * Parent;
 	fsNode ** Childs;
-	
-	fsNode(const CHAR * fName, UINT fType, fsNode * fParent) : Type(fType), NoOfChilds(ZERO), Parent(fParent), Childs(ZERO) 
+
+	fsNode(const CHAR * fName, UINT fType, fsNode * fParent) : Type(fType), NoOfChilds(ZERO), Parent(fParent), Childs(ZERO)
 	{
 		strcpy(Name, fName);
 	}
+
+	fsNode * CreateNewChildNode(const CHAR * fName, UINT fType)
+	{
+		fsNode * newNode = new fsNode(fName, fType, this);
+		Childs[NoOfChilds++] = newNode;
+		return fsNode;
+	}
+
+	fsNode * FindNode(const CHAR * fName, UINT fType)
+	{
+		fsNode * temp = ZERO;
+		for (INT i = 0; i LT NoOfChilds; i++)
+		{
+			if (strequ(fName, Childs[i]->Name))
+			{
+				temp = Childs[i];
+				break;
+			}
+		}
+		return temp;
+	}
 };
 
-EXTERN fsNode * Root;
+struct MountPoint
+{
+	fsNode * src;
+	fsNode * dest;
+	USHORT flags;
+	MountPoint * Next;
+};
 
 class GVirtualFileSystem : public GSingleton<GVirtualFileSystem>
 {
@@ -51,23 +79,38 @@ private:
 	VOID Init();
 	INT Mount(const CHAR * dest, const CHAR * src, const CHAR * fsType);
 	INT Umount(const CHAR * src);
+	INT Create(const CHAR * file);
+	INT ChangeDir(const CHAR * path);
+	INT ListDir(const CHAR * path);
+	INT SetCWD(const CHAR * path);
 
 	//member variables
 public:
 protected:
 private:
+	CHAR m_c_CurrentWorkingDirectory[MAX_PATH];
+	fsNode * Root;
+	MountPoint * mountPoints;
 	List<GFileSystem*> m_p_ListOfFileSystems;
 };
 
-EXTERN CHAR CWD[];
-
-EXTERN INT PWD();
-EXTERN INT Create(const CHAR * name);
-EXTERN INT ChangeDir(const CHAR * path);
-EXTERN INT MakeDir(const CHAR * path);
-EXTERN INT ListDir(const CHAR * path);
-
 }
+
+#ifdef CPP
+EXTERN "C"
+{
+#endif
+
+	INT Open();
+	INT Create(const char * file);
+	INT ChangeDir(const CHAR * path);
+	INT ListDir(const CHAR * path);
+	INT Read();
+	INT Write();
+
+#ifdef CPP
+}
+#endif
 
 #endif	/* __GENERIX_FILESYSTEM_VIRTUALFILESYSTEM_HPP__ */
 
