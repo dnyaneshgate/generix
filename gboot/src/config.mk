@@ -10,9 +10,6 @@ CXXFLAGS :=
 CPPFLAGS :=
 LDFLAGS :=
 
-%.img : %.s
-	$(AS) $(ASFLAGS) -o $@ $<
-
 %.o : %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 

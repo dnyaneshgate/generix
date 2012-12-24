@@ -9,7 +9,8 @@
 
 include ../config.mk
 
-all: stage0.img
+all: stage0.o
+	mv stage0.o ../../build/stage0.img
 
 #stage0.img: stage0.asm ../include/stage0.h
 	
