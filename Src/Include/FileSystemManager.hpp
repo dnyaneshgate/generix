@@ -16,7 +16,7 @@ namespace Generix
 class GFileSystemManager : public GSingleton<GFileSystemManager>
 {
 	friend class GSingleton<GFileSystemManager>;
-	//friend class GKernel;
+	friend class GKernel;
 	// member functions
 public:
 protected:

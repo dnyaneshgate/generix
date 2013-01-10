@@ -40,13 +40,13 @@ struct fsNode
 	{
 		fsNode * newNode = new fsNode(fName, fType, this);
 		Childs[NoOfChilds++] = newNode;
-		return fsNode;
+		return newNode;
 	}
 
 	fsNode * FindNode(const CHAR * fName, UINT fType)
 	{
 		fsNode * temp = ZERO;
-		for (INT i = 0; i LT NoOfChilds; i++)
+		for (UINT i = 0; i LT NoOfChilds; i++)
 		{
 			if (strequ(fName, Childs[i]->Name))
 			{
@@ -101,12 +101,12 @@ EXTERN "C"
 {
 #endif
 
-	INT Open();
+	/*INT Open();
 	INT Create(const char * file);
 	INT ChangeDir(const CHAR * path);
 	INT ListDir(const CHAR * path);
 	INT Read();
-	INT Write();
+	INT Write();*/
 
 #ifdef CPP
 }

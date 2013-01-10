@@ -29,8 +29,6 @@
         <df name="FAT">
           <in>FatFileSystem.cpp</in>
         </df>
-        <df name="SFS">
-        </df>
         <df name="Tar">
           <in>TarFileSystem.cpp</in>
           <in>TarFileSystem.hpp</in>
@@ -171,8 +169,6 @@
           </df>
           <in>ctype.c</in>
           <in>errno.c</in>
-        </df>
-        <df name="libc++">
         </df>
       </df>
       <df name="Linker">
@@ -320,6 +316,11 @@
       <item path="Src/Include/Bitmap.hpp" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Src/Include/Init.hpp" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Src/Include/Klib/libc++/HashTable.hpp"
+            ex="true"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="Src/Include/Klib/libc/ctype.h" ex="true" tool="3" flavor2="0">
       </item>
