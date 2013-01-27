@@ -24,49 +24,46 @@
 
 namespace Generix {
 
-struct TarHeader
-{
-	CHAR Name[TARNAMESIZE];
-	CHAR Mode[8];
-	CHAR UID[8];
-	CHAR GID[8];
-	CHAR Size[12];
-	CHAR ModifyTime[12];
-	CHAR CheckSum[8];
-	CHAR TypeFlag;
-	CHAR LinkName[TARLINKNAMESIZE];
-	CHAR Magic[6];
-	CHAR Version[2];
-	CHAR Uname[32];
-	CHAR Gname[32];
-	CHAR DevMajor[8];
-	CHAR DevMinor[8];
-	CHAR Prefix[TARPREFIXSIZE];
-};
+	struct TarHeader {
+		CHAR Name[TARNAMESIZE];
+		CHAR Mode[8];
+		CHAR UID[8];
+		CHAR GID[8];
+		CHAR Size[12];
+		CHAR ModifyTime[12];
+		CHAR CheckSum[8];
+		CHAR TypeFlag;
+		CHAR LinkName[TARLINKNAMESIZE];
+		CHAR Magic[6];
+		CHAR Version[2];
+		CHAR Uname[32];
+		CHAR Gname[32];
+		CHAR DevMajor[8];
+		CHAR DevMinor[8];
+		CHAR Prefix[TARPREFIXSIZE];
+	};
 
-union TarRecord
-{
-	TarHeader Header;
-	CHAR Buffer[TARRECORDSIZE];
-};
+	union TarRecord {
+		TarHeader Header;
+		CHAR Buffer[TARRECORDSIZE];
+	};
 
-class GTarFileSystem : public GFileSystem
-{
-	//member functions
-public:
-	GTarFileSystem(const CHAR * fsPath);
-	GTarFileSystem(UINT Start, UINT End);
-	~GTarFileSystem();
-	INT Read(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE);
-	INT Write(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE);
-protected:
-private:
+	class GTarFileSystem : public GFileSystem {
+		//member functions
+	public:
+		GTarFileSystem(const CHAR * fsPath);
+		GTarFileSystem(UINT Start, UINT End);
+		~GTarFileSystem();
+		INT Read(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE);
+		INT Write(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE);
+	protected:
+	private:
 
-	//member variables
-public:
-protected:
-private:
-};
+		//member variables
+	public:
+	protected:
+	private:
+	};
 
 }
 

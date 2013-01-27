@@ -20,34 +20,34 @@ typedef enum {
 
 namespace Generix {
 
-class GFile {
-	// member functions
-public:
-	GFile();
-	GFile(UINT ID, CHAR * name, eFileType type = eRegular, UCHAR attributes = 0);
-	~GFile();
-	UINT GetFileId() const;
-	CHAR * GetFileName() const;
-	eFileType GetFileType() const;
-	UCHAR GetFileAttributes() const;
-protected:
-private:
+	class GFile {
+		// member functions
+	public:
+		GFile();
+		GFile(UINT ID, CHAR * name, eFileType type = eRegular, UCHAR attributes = 0);
+		~GFile();
+		UINT GetFileId() const;
+		CHAR * GetFileName() const;
+		eFileType GetFileType() const;
+		UCHAR GetFileAttributes() const;
+	protected:
+	private:
 
-	// member variables
-public:
-protected:
-private:
-	UINT m_ui_Id;
-	CHAR m_c_FileName[MAX_FILE_NAME];
-	eFileType m_e_Type;
-	USHORT m_uc_Attributes;
-	UCHAR m_uc_TimeCreated[MAX_DATETIME_SIZE];
-	UCHAR m_uc_LastModified[MAX_DATETIME_SIZE];
-	
-	UINT Size;
-	CHAR * Data;
-	GFile *Next, *Prev;
-};
+		// member variables
+	public:
+	protected:
+	private:
+		UINT m_ui_Id;
+		CHAR m_c_FileName[MAX_FILE_NAME];
+		eFileType m_e_Type;
+		USHORT m_uc_Attributes;
+		UCHAR m_uc_TimeCreated[MAX_DATETIME_SIZE];
+		UCHAR m_uc_LastModified[MAX_DATETIME_SIZE];
+
+		UINT Size;
+		CHAR * Data;
+		GFile *Next, *Prev;
+	};
 
 }
 

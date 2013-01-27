@@ -4,6 +4,7 @@
 #ifndef __ASSEMBLER__
 
 #ifndef __cplusplus
+
 typedef enum {
 	false, true
 } bool;
@@ -70,15 +71,15 @@ typedef void VOID;
 typedef VOID* Type;
 typedef bool BOOL;
 
-typedef VOID                     *PVOID;
-typedef CHAR                     *PCHAR;
-typedef INT                      *PINT;
-typedef LONG                     *PLONG;
-typedef SHORT                    *PSHORT;
-typedef UCHAR                    *PUCHAR;
-typedef USHORT                   *PUSHORT;
-typedef UINT                     *PUINT;
-typedef ULONG                    *PULONG;
+typedef VOID *PVOID;
+typedef CHAR *PCHAR;
+typedef INT *PINT;
+typedef LONG *PLONG;
+typedef SHORT *PSHORT;
+typedef UCHAR *PUCHAR;
+typedef USHORT *PUSHORT;
+typedef UINT *PUINT;
+typedef ULONG *PULONG;
 
 #endif //__ASSEMBLER__
 

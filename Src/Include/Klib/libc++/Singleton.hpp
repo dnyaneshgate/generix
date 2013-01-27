@@ -6,12 +6,17 @@
 template <class T>
 class GSingleton {
 public:
+
 	static T* Instance() {
 		return &m_Obj;
 	}
 protected:
-	GSingleton<T>(){}
-	virtual ~GSingleton<T>(){}
+
+	GSingleton<T>() {
+	}
+
+	virtual ~GSingleton<T>() {
+	}
 private:
 
 public:

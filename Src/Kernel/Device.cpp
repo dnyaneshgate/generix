@@ -1,6 +1,5 @@
 #include <Device.hpp>
 
-namespace Generix
-{
+namespace Generix {
 
 }

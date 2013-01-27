@@ -40,9 +40,9 @@
 #define CR0_PAGEBIT                  0x80000000
 
 #ifdef __ASSEMBLER__
-#	define FLUSHTLB(page) invlpg[page]
+#define FLUSHTLB(page) invlpg[page]
 #else
-#	define FLUSHTLB(page) \
+#define FLUSHTLB(page) \
 				__ASM__ __VOLATILE__ ("invlpg (%0)" : : "a" (page & PAGE_MASK))
 #endif //__ASSEMBLER__
 
@@ -53,29 +53,28 @@
 
 namespace Generix {
 
-class x86GMemory : public GMemory, public GSingleton<x86GMemory> {
+	class x86GMemory : public GMemory, public GSingleton<x86GMemory> {
+		friend class GSingleton<x86GMemory>;
+		friend class GKernel;
+		/*member functions*/
+	public:
+		Address mapVirtual(PAddress pAddr, VAddress vAddr, UINT flag);
+		VOID umapVirtual(VAddress vAddr, UINT flags = PAGE_WRITE);
+		PAddress getPhyPage(VAddress vAddr);
+		VOID Init();
+	protected:
+		x86GMemory();
+		~x86GMemory();
+		VAddress findFree();
+	private:
 
-friend class GSingleton<x86GMemory>;
-friend class GKernel;
-/*member functions*/
-public:
-	Address mapVirtual(PAddress pAddr, VAddress vAddr, UINT flag);
-	VOID umapVirtual(VAddress vAddr, UINT flags=PAGE_WRITE);
-	PAddress getPhyPage(VAddress vAddr);
-	VOID Init();
-protected:
-	x86GMemory();
-	~x86GMemory();
-	VAddress findFree();
-private:
+		/*member variables*/
+	public:
+	protected:
+	private:
+	};
 
-/*member variables*/
-public:
-protected:
-private:
-};
-
-EXTERN x86GMemory * Memory;
+	EXTERN x86GMemory * Memory;
 
 }
 #endif //__ASSEMBLER__

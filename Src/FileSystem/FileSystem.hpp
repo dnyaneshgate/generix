@@ -19,29 +19,28 @@
 
 namespace Generix {
 
-class GFileSystem
-{
-	// member functions
-public:
-	GFileSystem();
-	GFileSystem(const CHAR * fsPath);
-	virtual ~GFileSystem();
-	BOOL IsMounted() const;
-	virtual INT Read(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE) = 0;
-	virtual INT Write(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE) = 0;
-protected:
-private:
+	class GFileSystem {
+		// member functions
+	public:
+		GFileSystem();
+		GFileSystem(const CHAR * fsPath);
+		virtual ~GFileSystem();
+		BOOL IsMounted() const;
+		virtual INT Read(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE) = 0;
+		virtual INT Write(GFile * file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE) = 0;
+	protected:
+	private:
 
-	// member variables
-public:
-protected:
-	UINT m_ui_FileCount;
-	List<GFile*> m_p_ListOfFiles;
-	STATIC UINT Id;
-private:
-	CHAR m_c_Path[MAX_PATH];
-	BOOL m_b_isMounted;
-};
+		// member variables
+	public:
+	protected:
+		UINT m_ui_FileCount;
+		List<GFile*> m_p_ListOfFiles;
+		STATIC UINT Id;
+	private:
+		CHAR m_c_Path[MAX_PATH];
+		BOOL m_b_isMounted;
+	};
 
 }
 

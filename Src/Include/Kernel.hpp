@@ -7,40 +7,38 @@
 #include <FileSystemManager.hpp>
 #include <Singleton.hpp>
 
-namespace Generix
-{
+namespace Generix {
 
-class GKernel : public GSingleton<GKernel>
-{
-	friend class GSingleton<GKernel>;
+	class GKernel : public GSingleton<GKernel> {
+		friend class GSingleton<GKernel>;
 
-	//member functions
-public:
-	VOID MemoryInit();
-	VOID FileSystemInit();
-	//INT FSMount(const CHAR * dest, const CHAR * src, const CHAR * fsType);
-	//INT FSUmount(const CHAR * src);
-	VOID SetMultiBootHeader(PMULTIBOOTHEADER mbh);
-	VOID SetMultiBootInfo(PMULTIBOOTINFO mbi);
-	PMULTIBOOTHEADER GetMultiBootHeader();
-	PMULTIBOOTINFO GetMultiBootInfo();
-	GProcessor* GetCpu();
-	GFileSystemManager * GetFSManager();
-protected:
-private:
-	GKernel();
-	~GKernel();
+		//member functions
+	public:
+		VOID MemoryInit();
+		VOID FileSystemInit();
+		//INT FSMount(const CHAR * dest, const CHAR * src, const CHAR * fsType);
+		//INT FSUmount(const CHAR * src);
+		VOID SetMultiBootHeader(PMULTIBOOTHEADER mbh);
+		VOID SetMultiBootInfo(PMULTIBOOTINFO mbi);
+		PMULTIBOOTHEADER GetMultiBootHeader();
+		PMULTIBOOTINFO GetMultiBootInfo();
+		GProcessor* GetCpu();
+		GFileSystemManager * GetFSManager();
+	protected:
+	private:
+		GKernel();
+		~GKernel();
 
-	//member variables
-public:
-protected:
-private:
-	GProcessor *m_cpu;
-	GMemoryManager *m_MemMngr;
-	GFileSystemManager * m_FSMngr;
-	PMULTIBOOTHEADER m_MBH;
-	PMULTIBOOTINFO m_MBI;
-};
+		//member variables
+	public:
+	protected:
+	private:
+		GProcessor *m_cpu;
+		GMemoryManager *m_MemMngr;
+		GFileSystemManager * m_FSMngr;
+		PMULTIBOOTHEADER m_MBH;
+		PMULTIBOOTINFO m_MBI;
+	};
 
 }
 

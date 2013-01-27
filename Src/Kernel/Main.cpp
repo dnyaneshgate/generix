@@ -22,7 +22,7 @@ EXTERN "C" VOID __init(void) {
 	EXTERN VOID(*__INIT_END__)();
 
 	VOID(**init)();
-	for (init = &__INIT_START__; init < &__INIT_END__; init++) {
+	for (init = &__INIT_START__; init < &__INIT_END__; ++init) {
 		(*init)();
 	}
 }
