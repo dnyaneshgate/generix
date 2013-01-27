@@ -17,30 +17,25 @@ ULONG __INIT_ESP;
 
 EXTERN "C" INT _kMain(INT argc, CHAR ** argv);
 
-EXTERN "C" VOID __init(void)
-{
+EXTERN "C" VOID __init(void) {
 	EXTERN VOID(*__INIT_START__)();
 	EXTERN VOID(*__INIT_END__)();
 
 	VOID(**init)();
-	for (init = &__INIT_START__; init < &__INIT_END__; init++)
-	{
+	for (init = &__INIT_START__; init < &__INIT_END__; init++) {
 		(*init)();
 	}
 }
 
-INT ModuleInit()
-{
+INT ModuleInit() {
 	UINT i = 0;
-	for (i = 0; i < multiBootInfo.ModuleCount; i++)
-	{
+	for (i = 0; i < multiBootInfo.ModuleCount; i++) {
 		KEndAddress += (multiBootInfo.Modules[i].ModuleEnd - multiBootInfo.Modules[i].ModuleStart);
 	}
 	return 0;
 }
 
-EXTERN "C" INT _kInit(UINT esp)
-{
+EXTERN "C" INT _kInit(UINT esp) {
 	Console::Clear();
 	ModuleInit();
 	__ctors(); //invoke constructors of static/global objects
@@ -63,8 +58,7 @@ EXTERN "C" INT _kInit(UINT esp)
 	return EXIT_SUCCESS;
 }
 
-EXTERN "C" INT _kMain(INT argc, CHAR ** argv)
-{
+EXTERN "C" INT _kMain(INT argc, CHAR ** argv) {
 	//Console::Clear();
 
 	Console::Writeln(WELCOMELOGO);
@@ -87,13 +81,13 @@ EXTERN "C" INT _kMain(INT argc, CHAR ** argv)
 	CPU->GetProcessorInfo("Cores", &cores);
 	Console::Writeln("Cores : %d", cores);
 
-	CHAR brand[256];
-	CPU->GetProcessorInfo("Brand", brand);
-	Console::Writeln("Brand : %s", brand);
-	
+	//CHAR brand[256];
+	//CPU->GetProcessorInfo("Brand", brand);
+	//Console::Writeln("Brand : %s", brand);
+
 	//GTarFileSystem tarFS(multiBootInfo.Modules[0].ModuleStart, multiBootInfo.Modules[0].ModuleEnd);
 	//tarFS.Read(0,0,0,0);
-	
+
 	//ListDir("/");
 
 	return EXIT_SUCCESS;

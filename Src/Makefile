@@ -15,7 +15,6 @@ include FileSystem/FileSystem.mk
 include Drivers/drivers.mk
 include Kernel/kernel.mk
 
-
 link:
 	$(LD) $(LDFLAGS) -o $(KERNEL) $(KERNELOBJ) $(MEMOBJ) $(FILESYSTEM) $(DRIVEROBJ) $(addprefix $(LIBPATH),$(LIBS))
 

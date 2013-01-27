@@ -1,4 +1,6 @@
 
+.PHONY: world lib kernel drivers distclean libclean iso bochs qemu usage
+
 all:
 	$(MAKE) -C Src $@
 
@@ -28,6 +30,15 @@ libclean:
 
 driverclean:
 	$(MAKE) -C Src $@
+
+iso: Src/Kernel32.elf Initrd.img
+	Scripts/iso.sh $^
+
+bochs:
+	Scripts/emulate.sh bochs
+
+qemu:
+	Scripts/emulate.sh qemu
 
 usage:
 	@echo "make clean lib driver kernel"

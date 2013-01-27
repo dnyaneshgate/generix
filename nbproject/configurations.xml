@@ -98,6 +98,7 @@
         <in>ScreenIo.hpp</in>
         <in>Support.hpp</in>
         <in>Types.hpp</in>
+        <in>Vga.hpp</in>
       </df>
       <df name="Kernel">
         <df name="Processor">
@@ -123,12 +124,14 @@
         <in>Device.cpp</in>
         <in>Driver.cpp</in>
         <in>FileSystemManager.cpp</in>
+        <in>Fonts.cpp</in>
         <in>Kernel.cpp</in>
         <in>Main.cpp</in>
         <in>MemoryManager.cpp</in>
         <in>New.cpp</in>
         <in>ScreenIo.cpp</in>
         <in>Support.cpp</in>
+        <in>Vga.cpp</in>
       </df>
       <df name="Klib">
         <df name="liballoc">
@@ -246,18 +249,6 @@
             </undefinedList>
           </ccTool>
         </makeTool>
-        <requiredProjects>
-          <makeArtifact PL="gboot"
-                        CT="0"
-                        CN="Default"
-                        AC="true"
-                        BL="false"
-                        WD="gboot/src"
-                        BC="${MAKE} -f Makefile"
-                        CC="${MAKE} -f Makefile clean"
-                        OP="">
-          </makeArtifact>
-        </requiredProjects>
       </makefileType>
       <item path="Src/Drivers/Video/Text/TextMode.cpp"
             ex="false"
@@ -624,18 +615,6 @@
             </undefinedList>
           </ccTool>
         </makeTool>
-        <requiredProjects>
-          <makeArtifact PL="gboot"
-                        CT="0"
-                        CN="Default"
-                        AC="true"
-                        BL="false"
-                        WD="gboot/src"
-                        BC="${MAKE} -f Makefile"
-                        CC="${MAKE} -f Makefile clean"
-                        OP="">
-          </makeArtifact>
-        </requiredProjects>
       </makefileType>
       <item path="Src/Drivers/Video/Text/TextMode.cpp"
             ex="false"

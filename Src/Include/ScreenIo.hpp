@@ -30,5 +30,6 @@ namespace Console {
 
 EXTERN "C" INT printk(const CHAR* format, ...) __attribute__((format(printf, 1, 2)));
 EXTERN "C" INT dprintk(INT flag, const CHAR* file, const INT line, const CHAR* format, ...) __attribute__((format(printf, 4, 5)));
+#define DEBUG_PRINT(flag, ...)  dprintk(flag, __FILE__, __LINE__, __VA_ARGS__)
 
 #endif //__GENERIX_SCREENIO_HPP__

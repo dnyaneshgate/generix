@@ -10,25 +10,16 @@ STATIC CHAR BUFF[BUFFSIZE];
 namespace Console {
 
 #define ATTRIBUTE(F,B) ( SHL(B,4) OR (F AND 0xF) )
-
-	const PRIVATE UINT WIDTH = 80, HEIGHT = 25;
-	const PRIVATE UINT BUFFERSIZE = WIDTH * HEIGHT;
-	//PRIVATE USHORT DBUFFER[ BUFFERSIZE ] = {ZERO};
+#define TEXT_MODE 0
+	PRIVATE UINT WIDTH = 80, HEIGHT = 25;
+#define BUFFERSIZE WIDTH * HEIGHT
 	PRIVATE UINT Xpos = 0, Ypos = 0;
 	PRIVATE USHORT *TEXTBUFFER = (USHORT*) 0xB8000;
 	PRIVATE Color FontColor = LIGHTGRAY;
 	PRIVATE Color BackColor = BLUE;
+	PRIVATE INT GraphicsMode = 0;
 
-	PRIVATE VOID ScrollUp() {
-		//memmove(TEXTBUFFER, DBUFFER + WIDTH, sizeof (USHORT) * WIDTH * (HEIGHT - 1));
-		for (UINT i = 0; i LT (HEIGHT); i++) {
-			for (UINT j = 0; j LT WIDTH; j++)
-				TEXTBUFFER[ j + i * WIDTH ] = TEXTBUFFER[ j + (i + 1) * WIDTH ];
-		}
-		for (UINT i = 0; i LT WIDTH; i++)
-			TEXTBUFFER[ (HEIGHT - 1) * WIDTH + i ] = (USHORT) (' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8));
-		--Ypos;
-	}
+	PRIVATE VOID __PUTCHAR(INT X, INT Y, CONST CHAR C);
 
 	PRIVATE VOID UpdateCursor() {
 		unsigned temp;
@@ -39,21 +30,23 @@ namespace Console {
 		OUTB(0x3D4 + 1, temp);
 	}
 
-	PRIVATE VOID PartialRefresh() {
-		//TEXTBUFFER[ Xpos + Ypos * WIDTH ] = DBUFFER[ Xpos + Ypos * WIDTH ];
-	}
-
-	VOID Refresh() {
-		//memmove(TEXTBUFFER, DBUFFER, sizeof (USHORT) * BUFFERSIZE);
+	PRIVATE VOID ScrollUp() {
+		if (GraphicsMode == TEXT_MODE) {
+			USHORT *buffer = (USHORT*) TEXTBUFFER;
+			for (UINT i = 0; i LT HEIGHT; ++i) {
+				memmove_w(buffer, buffer + WIDTH, WIDTH);
+				buffer += WIDTH;
+			}
+			--Ypos;
+			UpdateCursor();
+		}
 	}
 
 	VOID Clear() {
-		//for (UINT i = 0; i < BUFFERSIZE; i++)
-		//	DBUFFER[i] = (USHORT) (' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8));
-		//Refresh();
-
-		for (UINT i = 0; i LT BUFFERSIZE; i++) {
-			TEXTBUFFER[ i ] = (USHORT) (' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8));
+		if (GraphicsMode == TEXT_MODE) {
+			memset_w(TEXTBUFFER, (' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8)), BUFFERSIZE);
+			Xpos = Ypos = ZERO;
+			UpdateCursor();
 		}
 	}
 
@@ -145,9 +138,10 @@ namespace Console {
 				Xpos = 0;
 				break;
 			case '\b':
-				--Xpos;
-				//DBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (' ' OR SHL(ATTRIBUTE(FontColor, BackColor), 8));
-				//PartialRefresh();
+				if (Xpos > 0) {
+					--Xpos;
+					__PUTCHAR(Xpos, Ypos, ' ');
+				}
 				break;
 			default:
 				if (Xpos >= WIDTH) {
@@ -158,16 +152,19 @@ namespace Console {
 				if (Ypos >= HEIGHT)
 					ScrollUp();
 
-				//DBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (ch
-				//		| SHL(ATTRIBUTE(FontColor, BackColor), 8));
-				//PartialRefresh();
-				TEXTBUFFER[Xpos + WIDTH * Ypos] = (USHORT) (ch | SHL(ATTRIBUTE(FontColor, BackColor), 8));
+				__PUTCHAR(Xpos, Ypos, ch);
+
 				++Xpos;
 				break;
 		}
 		UpdateCursor();
 	}
 
+	PRIVATE VOID __PUTCHAR(INT X, INT Y, CONST CHAR C) {
+		if (GraphicsMode == TEXT_MODE) {
+			TEXTBUFFER[X + WIDTH * Y] = (USHORT) (C | SHL(ATTRIBUTE(FontColor, BackColor), 8));
+		}
+	}
 }
 
 INT printk(const CHAR* format, ...) {
