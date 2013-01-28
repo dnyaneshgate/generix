@@ -63,6 +63,13 @@
 
 #define BREAK                  break
 #define CONST                  const
+#define SIZEOF					sizeof
+
+#define XSTR(x)					STR(x)
+#define STR(x)					#x
+
+#define _PASTE(x,y)				x##y
+#define PASTE(x,y)				_PASTE(x,y)
 
 #define SWAP(x,y) \
 		{ \
