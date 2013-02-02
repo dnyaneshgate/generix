@@ -6,10 +6,7 @@
 #include <FileSystem/Tar/TarFileSystem.hpp>
 #include <FileSystem/CPIO/CpioFileSystem.hpp>
 
-#include "FileSystem/CPIO/CpioFileSystem.hpp"
-
 using namespace Generix;
-
 EXTERN MULTIBOOTHEADER multiBootHeader;
 EXTERN MULTIBOOTINFO multiBootInfo;
 EXTERN UINT KEndAddress;
@@ -18,10 +15,10 @@ ULONG __INIT_ESP;
 EXTERN "C" INT _kMain(INT argc, CHAR ** argv);
 
 EXTERN "C" VOID __init(void) {
-	EXTERN VOID(*__INIT_START__)();
-	EXTERN VOID(*__INIT_END__)();
+	EXTERN VOID (*__INIT_START__)();
+	EXTERN VOID (*__INIT_END__)();
 
-	VOID(**init)();
+	VOID (**init)();
 	for (init = &__INIT_START__; init < &__INIT_END__; ++init) {
 		(*init)();
 	}
@@ -30,12 +27,13 @@ EXTERN "C" VOID __init(void) {
 INT ModuleInit() {
 	UINT i = 0;
 	for (i = 0; i < multiBootInfo.ModuleCount; i++) {
-		KEndAddress += (multiBootInfo.Modules[i].ModuleEnd - multiBootInfo.Modules[i].ModuleStart);
+		KEndAddress += (multiBootInfo.Modules[i].ModuleEnd
+				- multiBootInfo.Modules[i].ModuleStart);
 	}
 	return 0;
 }
 
-EXTERN "C" INT _kInit(UINT esp) {
+EXTERN C INT _kInit(UINT esp) {
 	Console::Clear();
 	ModuleInit();
 	__ctors(); //invoke constructors of static/global objects
@@ -58,7 +56,7 @@ EXTERN "C" INT _kInit(UINT esp) {
 	return EXIT_SUCCESS;
 }
 
-EXTERN "C" INT _kMain(INT argc, CHAR ** argv) {
+EXTERN C INT _kMain(INT argc, CHAR ** argv) {
 	//Console::Clear();
 
 	Console::Writeln(WELCOMELOGO);
@@ -68,7 +66,7 @@ EXTERN "C" INT _kMain(INT argc, CHAR ** argv) {
 	Console::Writeln("Generix");
 	Console::SetFontColor(fgCol);
 	Console::Write("Version : ");
-	Console::Writeln(__GENERIX_VERSION__);
+	Console::Writeln (__GENERIX_VERSION__);
 
 	GKernel *kernel = GKernel::Instance(); //get kernel instance
 	GProcessor *CPU = kernel->GetCpu(); //get processor instance

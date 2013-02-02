@@ -1,6 +1,12 @@
 #ifndef __GENERIX_MACROS_HPP__
 #define __GENERIX_MACROS_HPP__
 
+#ifdef __cplusplus
+#define C "C"
+#else
+#define C
+#endif
+
 #define SUCCESS                1
 #define FAILED                 0
 #define ERROR                  -1

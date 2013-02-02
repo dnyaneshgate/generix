@@ -8,13 +8,21 @@ AR                  = gcc-ar
 RANLIB              = gcc-ranlib
 RM                  = rm -f
 else
-CC                  = @echo -e "\033[33m[CC]\033[32m       $<\033[0m" && gcc
-CXX                 = @echo -e "\033[33m[CXX]\033[32m      $<\033[0m" && g++
-AS                  = @echo -e "\033[33m[NASM]\033[32m     $<\033[0m" && nasm
-LD                  = @echo -e "\033[33m[LD]\033[32m       $(KERNEL)\033[0m" && ld
-AR                  = @echo -e "\033[33m[AR]\033[32m       $@\033[0m" && gcc-ar
-RANLIB              = @echo -e "\033[33m[RANLIB]\033[32m   $@\033[0m" && gcc-ranlib
+CC                  = @echo "[CC]       $<" && gcc
+CXX                 = @echo "[CXX]      $<" && g++
+AS                  = @echo "[NASM]     $<" && nasm
+LD                  = @echo "[LD]       $(KERNEL)" && ld
+AR                  = @echo "[AR]       $@" && gcc -ar
+RANLIB              = @echo "[RANLIB]   $@" && gcc -ranlib
 RM                  = @echo "Cleaning...  " && rm -f
+
+#CC                  = @echo -e "\033[33m[CC]\033[32m       $<\033[0m" && gcc
+#CXX                 = @echo -e "\033[33m[CXX]\033[32m      $<\033[0m" && g++
+#AS                  = @echo -e "\033[33m[NASM]\033[32m     $<\033[0m" && nasm
+#LD                  = @echo -e "\033[33m[LD]\033[32m       $(KERNEL)\033[0m" && ld
+#AR                  = @echo -e "\033[33m[AR]\033[32m       $@\033[0m" && gcc-ar
+#RANLIB              = @echo -e "\033[33m[RANLIB]\033[32m   $@\033[0m" && gcc-ranlib
+#RM                  = @echo "Cleaning...  " && rm -f
 endif
 
 .cpp.o:

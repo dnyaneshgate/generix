@@ -20,6 +20,8 @@ typedef int INT;
 typedef long LONG;
 typedef long long LLONG;
 
+typedef char *string;
+
 typedef CHAR s8;
 typedef SHORT s16;
 typedef INT s32;
@@ -51,12 +53,6 @@ typedef uint16_t WORD;
 typedef uint32_t DWORD;
 typedef uint64_t QWORD;
 
-//typedef char                       *string;
-//typedef string                     STRING;
-
-//typedef unsigned char             *ustring;
-//typedef ustring                    USTRING;
-
 typedef UINT Size;
 typedef ULONG Address;
 typedef USHORT UserId;
@@ -80,6 +76,11 @@ typedef UCHAR *PUCHAR;
 typedef USHORT *PUSHORT;
 typedef UINT *PUINT;
 typedef ULONG *PULONG;
+typedef PCHAR STRING;
+
+typedef const char CCHAR;
+typedef const char *PCCHAR;
+typedef const char *CSTRING;
 
 #endif //__ASSEMBLER__
 

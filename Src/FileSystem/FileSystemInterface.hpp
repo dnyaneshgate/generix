@@ -22,6 +22,7 @@ namespace Generix {
 	public:
 		fs_node(CONST CHAR *Name);
 		fs_node(CONST CHAR *Name, UCHAR Type, USHORT Permissions);
+		fs_node(CONST CHAR *Name, UCHAR Type, USHORT Permissions, fs_node *Parent);
 		~fs_node();
 		BOOL AddChild(fs_node *child);
 		BOOL DelChild(fs_node *child);

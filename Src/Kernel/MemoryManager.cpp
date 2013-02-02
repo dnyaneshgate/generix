@@ -5,22 +5,21 @@
  *      Author: dnyanesh
  */
 
-
 #include <MemoryManager.hpp>
 #include <Mem/KMalloc.hpp>
 
 namespace Generix {
 
-	GMemoryManager::GMemoryManager() {
-	}
+GMemoryManager::GMemoryManager() {
+}
 
-	GMemoryManager::~GMemoryManager() {
-	}
+GMemoryManager::~GMemoryManager() {
+}
 
-	VOID GMemoryManager::Init() {
-		Memory->Init();
-		GKMalloc * kMalloc = GKMalloc::Instance();
-		GAllocator::SetDefault(kMalloc);
-	}
+VOID GMemoryManager::Init() {
+	Memory->Init();
+	GKMalloc * kMalloc = GKMalloc::Instance();
+	GAllocator::SetDefault(kMalloc);
+}
 
 }

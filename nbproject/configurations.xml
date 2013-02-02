@@ -29,8 +29,6 @@
         <df name="FAT">
           <in>FatFileSystem.cpp</in>
         </df>
-        <df name="SFS">
-        </df>
         <df name="Tar">
           <in>TarFileSystem.cpp</in>
           <in>TarFileSystem.hpp</in>
@@ -176,8 +174,6 @@
           </df>
           <in>ctype.c</in>
           <in>errno.c</in>
-        </df>
-        <df name="libc++">
         </df>
       </df>
       <df name="Linker">
