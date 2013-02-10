@@ -11,20 +11,19 @@
 #include <Types.hpp>
 #include <Macros.hpp>
 
+#define __FILE_MAGIC__ 0xaabbccdd
 #define MAX_FILE_NAME 128
 #define MAX_DATETIME_SIZE 15
 
-typedef enum {
-	eRegularFile = 0,
-	eHardLink,
-	eSymbolicLink,
-	eCharacterSpecial,
-	eBlockSpecial,
-	eDirectoryFile,
-	eFIFO,
-	eContiguousFile,
-	eUnknownFile
-} eFileType;
+#define FS_UNKNOWN     -1
+#define FS_FILE        0x01
+#define FS_DIRECTORY   0x02
+#define FS_CHARDEVICE  0x03
+#define FS_BLOCKDEVICE 0x04
+#define FS_PIPE        0x05
+#define FS_SYMLINK     0x06
+#define FS_HARDLINK    0x07
+#define FS_MOUNTPOINT  0x08 // Is the file an active mountpoint?
 
 namespace Generix {
 
@@ -32,15 +31,16 @@ class GFile {
 	// member functions
 public:
 	GFile();
-	GFile(UINT ID, CHAR * name, eFileType type, UCHAR attributes, UINT fileSize,
+	GFile(UINT ID, CONST CHAR * name, INT type, UCHAR attributes, UINT fileSize,
 			CHAR *data);
 	~GFile();
 	UINT GetFileId() const;
 	CHAR * GetFileName() const;
-	eFileType GetFileType() const;
+	INT GetFileType() const;
 	UCHAR GetFileAttributes() const;
 	CHAR* GetData();
 	UINT GetSize() const;
+	BOOL isValid();
 protected:
 private:
 
@@ -48,14 +48,16 @@ private:
 public:
 protected:
 private:
+	UINT m_ui_magic;
 	UINT m_ui_id;
 	CHAR m_c_fileName[MAX_FILE_NAME];
-	eFileType m_e_type;
+	INT m_i_type;
 	USHORT m_us_attributes;
 	ULONG m_uc_timeCreated;
 	ULONG m_uc_lastModified;
 	UINT m_ui_size;
 	CHAR * m_pc_data;
+	ULONG64 m_ull_offset;
 };
 
 typedef VOID *GFILE;

@@ -25,8 +25,8 @@ public:
 	UINT GetWidth();
 	UINT GetHeight();
 	VOID Refresh();
-	INT Write(CHAR *buffer, UINT size, ULLONG offset);
-	INT Read(CHAR *buffer, UINT size, ULLONG offset);
+	INT Write(CHAR *buffer, UINT size, ULONG64 offset);
+	INT Read(CHAR *buffer, UINT size, ULONG64 offset);
 	//GVideo();
 	//~GVideo();
 protected:

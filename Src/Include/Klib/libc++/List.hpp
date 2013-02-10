@@ -130,7 +130,7 @@ void List<T>::clear() {
 
 template<class T>
 void List<T>::push_front(const T& elem) {
-	ListNode<T> *newnode = new ListNode<T>(ZERO, &elem, ZERO);
+	ListNode<T> *newnode = new ListNode<T>(ZERO, elem, ZERO);
 	ASSERT(newnode != ZERO);
 	if (head == ZERO)
 		head = newnode;

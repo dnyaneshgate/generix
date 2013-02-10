@@ -18,14 +18,14 @@ typedef char CHAR;
 typedef short int SHORT;
 typedef int INT;
 typedef long LONG;
-typedef long long LLONG;
+typedef long long LONG64;
 
 typedef char *string;
 
 typedef CHAR s8;
 typedef SHORT s16;
 typedef INT s32;
-typedef LLONG s64;
+typedef LONG64 s64;
 
 typedef s8 int8_t;
 typedef s16 int16_t;
@@ -36,12 +36,12 @@ typedef unsigned char UCHAR;
 typedef unsigned short USHORT;
 typedef unsigned int UINT;
 typedef unsigned long ULONG;
-typedef unsigned long long ULLONG;
+typedef unsigned long long ULONG64;
 
 typedef UCHAR u8;
 typedef USHORT u16;
 typedef UINT u32;
-typedef ULLONG u64;
+typedef ULONG64 u64;
 
 typedef u8 uint8_t;
 typedef u16 uint16_t;

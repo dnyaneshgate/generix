@@ -10,8 +10,8 @@ public:
 	CHAR *getName();
 	UINT getId();
 
-	virtual INT Write(CHAR *buffer, UINT size, ULLONG offset) = 0;
-	virtual INT Read(CHAR *buffer, UINT size, ULLONG offset) = 0;
+	virtual INT Write(CHAR *buffer, UINT size, ULONG64 offset) = 0;
+	virtual INT Read(CHAR *buffer, UINT size, ULONG64 offset) = 0;
 protected:
 	GDriver(UINT Id, const CHAR *Name);
 	virtual ~GDriver();

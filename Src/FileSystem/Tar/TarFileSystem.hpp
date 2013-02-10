@@ -61,7 +61,7 @@ public:
 	VOID Open(GFILE file);
 	VOID Close(GFILE file);
 	GDirent * ReadDir(GFILE file, UINT index);
-	GFILE FindDir(GFILE file, CONST CHAR *name);
+	GFILE FindDir(CONST CHAR *name);
 	INT Mount(CONST CHAR *fsPath);
 protected:
 private:

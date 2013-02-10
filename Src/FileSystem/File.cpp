@@ -4,14 +4,14 @@
 namespace Generix {
 
 GFile::GFile() :
-		m_ui_id(ZERO), m_us_attributes(ZERO), m_ui_size(ZERO), m_pc_data(ZERO) {
-	m_e_type = eUnknownFile;
+		m_ui_magic(__FILE_MAGIC__), m_ui_id(ZERO), m_us_attributes(ZERO), m_ui_size(ZERO), m_pc_data(ZERO) {
+	m_i_type = FS_UNKNOWN;
 	memset(m_c_fileName, ZERO, MAX_FILE_NAME);
 }
 
-GFile::GFile(UINT ID, CHAR* name, eFileType type, UCHAR attributes,
+GFile::GFile(UINT ID, CONST CHAR* name, INT type, UCHAR attributes,
 		UINT fileSize, CHAR *data) :
-		m_ui_id(ID), m_e_type(type), m_us_attributes(attributes), m_ui_size(
+		m_ui_magic(__FILE_MAGIC__), m_ui_id(ID), m_i_type(type), m_us_attributes(attributes), m_ui_size(
 				fileSize), m_pc_data(data) {
 	strcpy(m_c_fileName, name);
 }
@@ -28,8 +28,8 @@ CHAR * GFile::GetFileName() const {
 	return (CHAR*) m_c_fileName;
 }
 
-eFileType GFile::GetFileType() const {
-	return m_e_type;
+INT GFile::GetFileType() const {
+	return m_i_type;
 }
 
 UCHAR GFile::GetFileAttributes() const {
@@ -42,6 +42,10 @@ UINT GFile::GetSize() const {
 
 CHAR* GFile::GetData() {
 	return m_pc_data;
+}
+
+BOOL GFile::isValid() {
+	return (m_ui_magic == __FILE_MAGIC__);
 }
 
 }

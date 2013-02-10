@@ -48,7 +48,7 @@ public:
 	virtual VOID Open(GFILE file) = 0;
 	virtual VOID Close(GFILE file) = 0;
 	virtual GDirent * ReadDir(GFILE file, UINT index) = 0;
-	virtual GFILE FindDir(GFILE file, CONST CHAR *name) = 0;
+	virtual GFILE FindDir(CONST CHAR *name) = 0;
 
 protected:
 private:

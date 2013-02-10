@@ -86,6 +86,7 @@ EXTERN C INT _kMain(INT argc, CHAR ** argv) {
 
 	GTarFileSystem tarFS(multiBootInfo.Modules[0].ModuleStart, multiBootInfo.Modules[0].ModuleEnd);
 	//tarFS.Read(0,0,0,0);
+	tarFS.Mount(ROOT_DIR);
 
 	return EXIT_SUCCESS;
 }

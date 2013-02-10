@@ -23,6 +23,10 @@
           <in>CpioFileSystem.cpp</in>
           <in>CpioFileSystem.hpp</in>
         </df>
+        <df name="DevFS">
+          <in>DevFileSystem.cpp</in>
+          <in>DevFileSystem.hpp</in>
+        </df>
         <df name="Ext2">
           <in>Ext2FileSystem.cpp</in>
         </df>

@@ -66,11 +66,11 @@ VOID GVideo::Refresh() {
 	m_textMode.Refresh();
 }
 
-INT GVideo::Write(CHAR *buffer, UINT size, ULLONG offset) {
+INT GVideo::Write(CHAR *buffer, UINT size, ULONG64 offset) {
 	return 0;
 }
 
-INT GVideo::Read(CHAR *buffer, UINT size, ULLONG offset) {
+INT GVideo::Read(CHAR *buffer, UINT size, ULONG64 offset) {
 	return 0;
 }
 
