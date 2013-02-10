@@ -1,3 +1,5 @@
+#For Auto Dependacy Refered: `scottmcpeak.com/autodepend/autodepend.html`
+
 include config.mk
 include rules.mk
 
@@ -15,8 +17,13 @@ include FileSystem/FileSystem.mk
 include Drivers/drivers.mk
 include Kernel/kernel.mk
 
+OBJS = $(KERNELOBJ) $(MEMOBJ) $(FILESYSTEM) $(DRIVEROBJ)
+
+# pull in dependency info for *existing* .o files
+-include $(OBJS:.o=.d)
+
 link:
-	$(LD) $(LDFLAGS) -o $(KERNEL) $(KERNELOBJ) $(MEMOBJ) $(FILESYSTEM) $(DRIVEROBJ) $(addprefix $(LIBPATH),$(LIBS))
+	$(LD) $(LDFLAGS) -o $(KERNEL) $(OBJS) $(addprefix $(LIBPATH),$(LIBS))
 
 driverclean:
 	@#rm -f $(DRIVEROBJ) && echo -e "\031[33m[RM]\033[36m       $(DRIVEROBJ)\033[0m";
@@ -37,5 +44,6 @@ clean:
 		rm -f $$i && echo "[RM]       $$i"; \
 	done
 	@#rm -f $$i && echo -e "\033[31m[RM]\033[36m       $$i\033[0m";
+	rm $(shell find . -name "*.d")
 
 clean-all: distclean libclean clean

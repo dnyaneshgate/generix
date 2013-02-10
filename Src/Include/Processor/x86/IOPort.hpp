@@ -1,24 +1,23 @@
 #ifndef __GENERIX_X86_IOPORT_HPP__
 #define __GENERIX_X86_IOPORT_HPP__
 
-#include <Types.hpp>
-#include <Macros.hpp>
+namespace Generix {
 
 class GIOPort {
 public:
-	STATIC BOOL ReadByte(PortId port, UCHAR *result);
-	STATIC BOOL ReadWord(PortId port, USHORT *result);
-	STATIC BOOL ReadLong(PortId port, ULONG *result);
+	STATIC BOOL ReadByte(PORT port, UCHAR *result);STATIC BOOL ReadWord(
+			PORT port, USHORT *result);STATIC BOOL ReadLong(PORT port,
+			ULONG *result);
 
-	STATIC BOOL WriteByte(PortId port, UCHAR value);
-	STATIC BOOL WriteWord(PortId port, USHORT value);
-	STATIC BOOL WriteLong(PortId port, ULONG value);
+	STATIC BOOL WriteByte(PORT port, UCHAR value);STATIC BOOL WriteWord(
+			PORT port, USHORT value);STATIC BOOL WriteLong(PORT port,
+			ULONG value);
 
-	STATIC BOOL ReadCRX(INT X, ULONG *result);
-	STATIC BOOL WriteCRX(INT X, ULONG value);
+	STATIC BOOL ReadCRX(INT X, ULONG *result);STATIC BOOL WriteCRX(INT X,
+			ULONG value);
 
-	STATIC BOOL LoadIdtr(Type base, USHORT limit);
-	STATIC BOOL LoadGdtr(Type base, USHORT limit);
+	STATIC BOOL LoadIdtr(Type base, USHORT limit);STATIC BOOL LoadGdtr(
+			Type base, USHORT limit);
 protected:
 	GIOPort();
 	virtual ~GIOPort();
@@ -39,5 +38,6 @@ private:
 #define CLI()             __ASM__ __VOLATILE__("cli;")  //disable interrupt
 #define STI()             __ASM__ __VOLATILE__("sti;")  //enable interrupt
 #define HLT()             __ASM__ __VOLATILE__("hlt;")  //halt system
+}
 
 #endif //__GENERIX_X86_IOPORT_HPP__

@@ -3,11 +3,11 @@
 
 #ifndef __ASSEMBLER__
 
-#ifndef __cplusplus
+#ifndef CPP
 
 typedef enum {
 	false, true
-} bool;
+}bool;
 #endif
 
 typedef enum {
@@ -58,7 +58,7 @@ typedef ULONG Address;
 typedef USHORT UserId;
 typedef USHORT GroupId;
 typedef USHORT ProcessId;
-typedef USHORT PortId;
+typedef USHORT PORT;
 typedef ULONG Error;
 typedef Address PAddress;
 typedef Address VAddress;
@@ -83,5 +83,4 @@ typedef const char *PCCHAR;
 typedef const char *CSTRING;
 
 #endif //__ASSEMBLER__
-
 #endif //__GENERIX_TYPES_HPP__

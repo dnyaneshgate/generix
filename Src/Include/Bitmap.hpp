@@ -16,7 +16,7 @@ class GBitMap {
 public:
 
 	GBitMap() :
-	m_MAP(ZERO), m_SIZE(ZERO), m_FREE(ZERO) {
+			m_MAP(ZERO), m_SIZE(ZERO), m_FREE(ZERO) {
 	}
 
 	~GBitMap() {

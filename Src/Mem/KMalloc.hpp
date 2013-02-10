@@ -17,46 +17,46 @@ namespace Generix {
 
 #define CHUNK_MAGIC  0x123456ABCD
 
-	typedef struct strucHEAP {
-		UINT Start;
-		UINT End;
-		UINT Size;
-		UINT Top;
-	} __PACKED__ HEAP, *PHEAP;
+typedef struct strucHEAP {
+	UINT Start;
+	UINT End;
+	UINT Size;
+	UINT Top;
+}__PACKED__ HEAP, *PHEAP;
 
-	typedef struct strucCHUNK {
-		UINT Magic;
-		UINT Used : 1;
-		UINT Size;
-		strucCHUNK * Next;
-		strucCHUNK * Prev;
-	} __PACKED__ CHUNK, *PCHUNK;
+typedef struct strucCHUNK {
+	UINT Magic;
+	UINT Used :1;
+	UINT Size;
+	strucCHUNK * Next;
+	strucCHUNK * Prev;
+}__PACKED__ CHUNK, *PCHUNK;
 
 #define CHUNKSIZE sizeof(CHUNK)
 
-	class GKMalloc : public GAllocator, public GSingleton<GKMalloc> {
-		friend class GSingleton<GKMalloc>;
-	public:
-		VOID * Alloc(Size sz);
-		VOID Free(VOID * address);
-	protected:
-	private:
-		GKMalloc();
-		~GKMalloc();
-	};
+class GKMalloc: public GAllocator, public GSingleton<GKMalloc> {
+	friend class GSingleton<GKMalloc> ;
+public:
+	VOID * Alloc(Size sz);
+	VOID Free(VOID * address);
+protected:
+private:
+	GKMalloc();
+	~GKMalloc();
+};
 
 #ifdef CPP
-	EXTERN "C"
-	{
+EXTERN "C"
+{
 #endif
 
-		EXTERN VOID * kmalloc(Size size);
-		EXTERN VOID kfree(VOID * address);
+	EXTERN VOID * kmalloc(Size size);
+	EXTERN VOID kfree(VOID * address);
 
 #ifdef CPP
 	}
 #endif
 
-}
+	}
 
 #endif	//__GENERIX_MEM_KMALLOC_HPP__

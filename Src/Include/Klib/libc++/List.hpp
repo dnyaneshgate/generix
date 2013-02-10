@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   List.hpp
  * Author: dnyaneshg
  *
@@ -15,16 +15,17 @@
 template<class T> class ListIterator;
 template<class T> class List;
 
-template <class T>
+template<class T>
 class ListNode {
-	friend class List<T>;
-	friend class ListIterator<T>;
+	friend class List<T> ;
+	friend class ListIterator<T> ;
 	//member functions
 public:
 protected:
 private:
 
-	ListNode<T>(ListNode<T> * next, const T& data, ListNode<T> * prev) : Next(next), Data(data), Prev(prev) {
+	ListNode<T>(ListNode<T> * next, const T& data, ListNode<T> * prev) :
+			Next(next), Data(data), Prev(prev) {
 	}
 
 	~ListNode<T>() {
@@ -39,9 +40,9 @@ private:
 	ListNode<T> *Prev;
 };
 
-template <class T>
+template<class T>
 class ListIterator {
-	friend class List<T>;
+	friend class List<T> ;
 	//member functions
 public:
 
@@ -50,7 +51,8 @@ public:
 protected:
 private:
 
-	ListIterator<T>(ListNode<T> * pointer) : Pointer(pointer) {
+	ListIterator<T>(ListNode<T> * pointer) :
+			Pointer(pointer) {
 	}
 	//member variables
 public:
@@ -88,7 +90,8 @@ protected:
 public:
 	typedef ListIterator<T> iterator;
 
-	List() : head(ZERO), tail(ZERO) {
+	List() :
+			head(ZERO), tail(ZERO) {
 	}
 
 	~List() {
@@ -102,11 +105,11 @@ public:
 	T& pop_back();
 
 	iterator begin() {
-		return (ListIterator<T > (head));
+		return (ListIterator<T>(head));
 	}
 
 	iterator end() {
-		return ListIterator<T > (ZERO);
+		return ListIterator<T>(ZERO);
 	}
 };
 
@@ -127,7 +130,7 @@ void List<T>::clear() {
 
 template<class T>
 void List<T>::push_front(const T& elem) {
-	ListNode<T> *newnode = new ListNode<T > (ZERO, &elem, ZERO);
+	ListNode<T> *newnode = new ListNode<T>(ZERO, &elem, ZERO);
 	ASSERT(newnode != ZERO);
 	if (head == ZERO)
 		head = newnode;
@@ -140,7 +143,7 @@ void List<T>::push_front(const T& elem) {
 
 template<class T>
 void List<T>::push_back(const T& elem) {
-	ListNode<T> *newnode = new ListNode<T > (ZERO, elem, ZERO);
+	ListNode<T> *newnode = new ListNode<T>(ZERO, elem, ZERO);
 	//printk("newnode = %x\n", (UINT)newnode);
 	ASSERT(newnode != ZERO);
 	if (head == ZERO)

@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Vga.hpp
  * Author: dnyanesh
  *
@@ -7,8 +7,6 @@
 
 #ifndef VGA_HPP
 #define	VGA_HPP
-
-
 
 #endif	/* VGA_HPP */
 

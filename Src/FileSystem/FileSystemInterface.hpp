@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   FileSystemInterface.hpp
  * Author: dnyaneshg
  *
@@ -17,36 +17,35 @@
 
 namespace Generix {
 
-	class fs_node {
-		//member functions
-	public:
-		fs_node(CONST CHAR *Name);
-		fs_node(CONST CHAR *Name, UCHAR Type, USHORT Permissions);
-		fs_node(CONST CHAR *Name, UCHAR Type, USHORT Permissions, fs_node *Parent);
-		~fs_node();
-		BOOL AddChild(fs_node *child);
-		BOOL DelChild(fs_node *child);
-		BOOL Destroy();
-		fs_node *Next();
-		fs_node *Prev();
-		fs_node *Parent();
-		fs_node *Child();
-		CONST CHAR* Name();
-		USHORT Permissions();
-		UINT   TotalChilds();
-	protected:
-	private:
+class fs_node {
+	//member functions
+public:
+	fs_node(CONST CHAR *Name);
+	fs_node(CONST CHAR *Name, UCHAR Type, USHORT Permissions);
+	fs_node(CONST CHAR *Name, UCHAR Type, USHORT Permissions, fs_node *Parent);
+	~fs_node();
+	BOOL AddChild(fs_node *child);
+	BOOL DelChild(fs_node *child);
+	BOOL Destroy();
+	fs_node *Next();
+	fs_node *Prev();
+	fs_node *Parent();
+	fs_node *Child();CONST CHAR* Name();
+	USHORT Permissions();
+	UINT TotalChilds();
+protected:
+private:
 
-		//member variables
-	public:
-	protected:
-	private:
-		CHAR m_c_Name[MAX_NAME_SIZE];
-		UCHAR m_uc_Type;
-		USHORT m_us_Permissions;
-		UINT m_ui_NoOfChilds;
-		fs_node *m_p_Next, *m_p_Prev, *m_p_Parent, *m_p_Child;
-	};
+	//member variables
+public:
+protected:
+private:
+	CHAR m_c_Name[MAX_NAME_SIZE];
+	UCHAR m_uc_Type;
+	USHORT m_us_Permissions;
+	UINT m_ui_NoOfChilds;
+	fs_node *m_p_Next, *m_p_Prev, *m_p_Parent, *m_p_Child;
+};
 
 }
 

@@ -5,7 +5,8 @@ char* strcpy(char* dest, const char* src) {
 		return dest;
 
 	char* str = dest;
-	while ((*str++ = *src++));
+	while ((*str++ = *src++))
+		;
 	*str = 0;
 	return dest;
 }

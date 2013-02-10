@@ -1,7 +1,11 @@
+#include <Types.hpp>
+#include <Macros.hpp>
 #include <Processor/Processor.hpp>
 #include <string.h>
 #include <stdarg.h>
-#include "ScreenIo.hpp"
+#include <ScreenIo.hpp>
+
+using namespace Generix;
 
 EXTERN "C" INT vsprintf(char * buf, const char * fmt, va_list args);
 STATIC CHAR BUFF[BUFFSIZE];
@@ -16,7 +20,8 @@ PRIVATE USHORT *TEXTBUFFER = (USHORT*) 0xB8000;
 PRIVATE Color FontColor = LIGHTGRAY;
 PRIVATE Color BackColor = BLUE;
 PRIVATE INT GraphicsMode = 0;
-PRIVATE VOID __PUTCHAR(INT X, INT Y, CCHAR CH);
+PRIVATE CCHAR __GETCHAR(INT X, INT Y, Color *fontColor, Color *backColor);
+PRIVATE VOID __PUTCHAR(INT X, INT Y, CCHAR CH, Color fontColor, Color backColor);
 
 PRIVATE VOID UpdateCursor() {
 	unsigned temp;
@@ -34,6 +39,7 @@ PRIVATE VOID ScrollUp() {
 			memmove_w(buffer, buffer + WIDTH, WIDTH);
 			buffer += WIDTH;
 		}
+		memset_w(buffer - WIDTH, (USHORT)(' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8)), WIDTH);
 		--Ypos;
 		UpdateCursor();
 	}
@@ -41,8 +47,8 @@ PRIVATE VOID ScrollUp() {
 
 VOID Clear() {
 	if (GraphicsMode == TEXT_MODE) {
-		memset_w(TEXTBUFFER,
-				(' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8)), BUFFERSIZE);
+		memset_w(TEXTBUFFER, (' ' | SHL(ATTRIBUTE(FontColor, BackColor), 8)),
+		BUFFERSIZE);
 		Xpos = Ypos = ZERO;
 		UpdateCursor();
 	}
@@ -99,7 +105,7 @@ INT Write(CSTRING format, ...) {
 	vsprintf(BUFF, format, args);
 	va_end(args);
 
-	CSTRING  str = BUFF;
+	CSTRING str = BUFF;
 	while (*str)
 		Putch(*str++);
 	return BUFF - str;
@@ -137,7 +143,7 @@ VOID Putch(CCHAR ch) {
 	case '\b':
 		if (Xpos > 0) {
 			--Xpos;
-			__PUTCHAR(Xpos, Ypos, ' ');
+			__PUTCHAR(Xpos, Ypos, ' ', FontColor, BackColor);
 		}
 		break;
 	default:
@@ -149,7 +155,7 @@ VOID Putch(CCHAR ch) {
 		if (Ypos >= HEIGHT)
 			ScrollUp();
 
-		__PUTCHAR(Xpos, Ypos, ch);
+		__PUTCHAR(Xpos, Ypos, ch, FontColor, BackColor);
 
 		++Xpos;
 		break;
@@ -157,12 +163,23 @@ VOID Putch(CCHAR ch) {
 	UpdateCursor();
 }
 
-PRIVATE VOID __PUTCHAR(INT X, INT Y, CCHAR CH) {
+PRIVATE VOID __PUTCHAR(INT X, INT Y, CCHAR CH, Color fontColor, Color backColor) {
 	if (GraphicsMode == TEXT_MODE) {
 		TEXTBUFFER[X + WIDTH * Y] = (USHORT) (CH
-				| SHL(ATTRIBUTE(FontColor, BackColor), 8));
+				| SHL(ATTRIBUTE(fontColor, backColor), 8));
 	}
 }
+
+PRIVATE CCHAR __GETCHAR(INT X, INT Y, Color *fontColor, Color *backColor) {
+	if (GraphicsMode == TEXT_MODE) {
+		USHORT ch = TEXTBUFFER[X + WIDTH * Y];
+		*fontColor = (Color)(SHR(ch, 8) AND 0x0f);
+		*backColor = (Color)(SHR(ch, 12) AND 0x0f);
+		return (CCHAR)(ch AND 0xff);
+	}
+	return (CCHAR)ZERO;
+}
+
 }
 
 INT printk(CSTRING format, ...) {
@@ -173,8 +190,7 @@ INT printk(CSTRING format, ...) {
 	return Console::Write("%s", BUFF);
 }
 
-INT dprintk(INT flag, CSTRING file, const INT line, const CHAR* format,
-		...) {
+INT dprintk(INT flag, CSTRING file, const INT line, const CHAR* format, ...) {
 	INT n = 0;
 
 	va_list args;

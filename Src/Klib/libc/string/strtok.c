@@ -7,15 +7,13 @@ char *strtok(char *s, const char *delim) {
 	char *tok;
 	static char *last;
 
-
 	if (s == NULL && (s = last) == NULL)
 		return (NULL);
 
 	/*
 	 * Skip (span) leading delimiters (s += strspn(s, delim), sort of).
 	 */
-cont:
-	c = *s++;
+	cont: c = *s++;
 	for (spanp = delim; (sc = *spanp++) != 0;) {
 		if (c == sc)
 			goto cont;

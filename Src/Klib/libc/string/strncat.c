@@ -5,9 +5,11 @@ char* strncat(char* dest, const char* src, size_t n) {
 		return dest;
 
 	char* str = dest;
-	while (*str++);
+	while (*str++)
+		;
 	str--;
-	while ((*str++ = *src++) && n--);
+	while ((*str++ = *src++) && n--)
+		;
 	*str = 0;
 	return dest;
 }

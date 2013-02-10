@@ -2,20 +2,20 @@
 /*
  * cpp-kernel
  * Copyright (C) Dnyanesh Gate 2012 <dnyanesh@localhost.localdomain>
- * 
+ *
  */
 
 #ifndef __GENERIX_LIBC_VALIST_H__
 #define __GENERIX_LIBC_VALIST_H__
 
-#ifdef __cplusplus
+#ifdef CPP
 extern "C" {
 #endif
 
-	/* va list parameter list */
-	typedef unsigned char *va_list;
+/* va list parameter list */
+typedef unsigned char *va_list;
 
-#ifdef __cplusplus
+#ifdef CPP
 }
 #endif
 

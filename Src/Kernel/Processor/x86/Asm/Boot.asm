@@ -1,3 +1,4 @@
+#include <Macros.hpp>
 #include <Multiboot.hpp>
 #include <Processor/x86/CPU.hpp>
 #include <Processor/x86/Memory.hpp>
@@ -156,7 +157,7 @@ pic:
 	add dx, 1
 	out dx, al
 
-	/* Fill in IDT entries 0 - 16, and 32 - 47. */
+	;/* Fill in IDT entries 0 - 16, and 32 - 47. */
 	idtEntry 0, 0x8f
 	idtEntry 1, 0x8f
 	idtEntry 2, 0x8f

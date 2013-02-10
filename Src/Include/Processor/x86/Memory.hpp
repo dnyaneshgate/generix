@@ -1,9 +1,6 @@
 #ifndef __GENERIX_X86_MEMORY_HPP__
 #define __GENERIX_X86_MEMORY_HPP__
 
-#include <Types.hpp>
-#include <Macros.hpp>
-
 #define USER_STACK_BOTTOM  0xB0000000
 #define USER_STACK_TOP     0xC0000000
 #define KERNEL_OFFSET      0xC0000000
@@ -45,38 +42,35 @@
 #define FLUSHTLB(page) \
 				__ASM__ __VOLATILE__ ("invlpg (%0)" : : "a" (page & PAGE_MASK))
 #endif //__ASSEMBLER__
-
 #ifndef __ASSEMBLER__
 
-#include <Singleton.hpp>
 #include <Mem/Memory.hpp>
+#include <Singleton.hpp>
 
 namespace Generix {
 
-	class x86GMemory : public GMemory, public GSingleton<x86GMemory> {
-		friend class GSingleton<x86GMemory>;
-		friend class GKernel;
-		/*member functions*/
-	public:
-		Address mapVirtual(PAddress pAddr, VAddress vAddr, UINT flag);
-		VOID umapVirtual(VAddress vAddr, UINT flags = PAGE_WRITE);
-		PAddress getPhyPage(VAddress vAddr);
-		VOID Init();
-	protected:
-		x86GMemory();
-		~x86GMemory();
-		VAddress findFree();
-	private:
+class x86GMemory: public GMemory, public GSingleton<x86GMemory> {
+	friend class GSingleton<x86GMemory> ;
+	friend class GKernel;
+	/*member functions*/
+public:
+	Address mapVirtual(PAddress pAddr, VAddress vAddr, UINT flag);
+	VOID umapVirtual(VAddress vAddr, UINT flags = PAGE_WRITE);
+	PAddress getPhyPage(VAddress vAddr);
+	VOID Init();
+protected:
+	x86GMemory();
+	~x86GMemory();
+	VAddress findFree();STATIC VOID pageFaultHandler(REG reg);
+private:
 
-		/*member variables*/
-	public:
-	protected:
-	private:
-	};
-
-	EXTERN x86GMemory * Memory;
+	/*member variables*/
+public:
+protected:
+private:
+};
+EXTERN x86GMemory * Memory;
 
 }
 #endif //__ASSEMBLER__
-
 #endif //__GENERIX_X86_MEMORY_HPP__

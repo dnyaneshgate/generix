@@ -1,10 +1,11 @@
+#include <Types.hpp>
+#include <Macros.hpp>
 #include <Main.hpp>
 #include <Support.hpp>
 #include <Kernel.hpp>
 #include <stdlib.h>
 #include <ScreenIo.hpp>
 #include <FileSystem/Tar/TarFileSystem.hpp>
-#include <FileSystem/CPIO/CpioFileSystem.hpp>
 
 using namespace Generix;
 EXTERN MULTIBOOTHEADER multiBootHeader;
@@ -12,9 +13,9 @@ EXTERN MULTIBOOTINFO multiBootInfo;
 EXTERN UINT KEndAddress;
 ULONG __INIT_ESP;
 
-EXTERN "C" INT _kMain(INT argc, CHAR ** argv);
+EXTERN C INT _kMain(INT argc, CHAR ** argv);
 
-EXTERN "C" VOID __init(void) {
+EXTERN C VOID __init(void) {
 	EXTERN VOID (*__INIT_START__)();
 	EXTERN VOID (*__INIT_END__)();
 
@@ -66,7 +67,7 @@ EXTERN C INT _kMain(INT argc, CHAR ** argv) {
 	Console::Writeln("Generix");
 	Console::SetFontColor(fgCol);
 	Console::Write("Version : ");
-	Console::Writeln (__GENERIX_VERSION__);
+	Console::Writeln(__GENERIX_VERSION__);
 
 	GKernel *kernel = GKernel::Instance(); //get kernel instance
 	GProcessor *CPU = kernel->GetCpu(); //get processor instance
@@ -83,10 +84,8 @@ EXTERN C INT _kMain(INT argc, CHAR ** argv) {
 	//CPU->GetProcessorInfo("Brand", brand);
 	//Console::Writeln("Brand : %s", brand);
 
-	//GTarFileSystem tarFS(multiBootInfo.Modules[0].ModuleStart, multiBootInfo.Modules[0].ModuleEnd);
+	GTarFileSystem tarFS(multiBootInfo.Modules[0].ModuleStart, multiBootInfo.Modules[0].ModuleEnd);
 	//tarFS.Read(0,0,0,0);
-
-	//ListDir("/");
 
 	return EXIT_SUCCESS;
 }

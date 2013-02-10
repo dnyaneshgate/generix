@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   Main.hpp
  * Author: dnyaneshg
  *
@@ -15,4 +15,3 @@
   \\____|\\___|_| |_|\\___|_|  |_/_/\\_\\___/|____/ "
 
 #endif	//__GENERIX_MAIN_HPP__
-

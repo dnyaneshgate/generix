@@ -1,13 +1,11 @@
 #ifndef __GENERIX_LIBC_LIMITS_H__
 #define __GENERIX_LIBC_LIMITS_H__
 
-#ifdef __cplusplus
+#ifdef CPP
 extern "C" {
 #endif
 
-
-
-#ifdef __cplusplus
+#ifdef CPP
 }
 #endif
 

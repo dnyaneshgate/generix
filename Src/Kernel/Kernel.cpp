@@ -1,3 +1,6 @@
+#include <Types.hpp>
+#include <Macros.hpp>
+#include <Singleton.hpp>
 #include <Kernel.hpp>
 
 namespace Generix {

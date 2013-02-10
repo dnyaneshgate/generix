@@ -4,46 +4,48 @@
  *  Created on: Oct 1, 2012
  *      Author: dnyanesh
  */
-
-#include <Processor/Arch/Timer.hpp>
+#include <Types.hpp>
+#include <Macros.hpp>
+#include <Processor/Arch/CPU.hpp>
 #include <Processor/Arch/IOPort.hpp>
+#include <Processor/Arch/Timer.hpp>
 
 namespace Generix {
 
-	UINT GTimer::m_TickCount = 0;
+UINT GTimer::m_TickCount = 0;
 
-	GTimer::GTimer() :
-	m_Frequency(ZERO) {
-	}
+GTimer::GTimer() :
+		m_Frequency(ZERO) {
+}
 
-	GTimer::~GTimer() {
-	}
+GTimer::~GTimer() {
+}
 
-	VOID GTimer::Initialise() {
-		ULONG devisor = 1193180 / m_Frequency;
-		OUTB(0x43, 0x36);
+VOID GTimer::Initialise() {
+	ULONG devisor = 1193180 / m_Frequency;
+	OUTB(0x43, 0x36);
 
-		UCHAR low = (UCHAR) (devisor & 0xff);
-		UCHAR high = (UCHAR) (SHR(devisor, 8) & 0xff);
+	UCHAR low = (UCHAR) (devisor & 0xff);
+	UCHAR high = (UCHAR) (SHR(devisor, 8) & 0xff);
 
-		OUTB(0x40, low);
-		OUTB(0x40, high);
-	}
+	OUTB(0x40, low);
+	OUTB(0x40, high);
+}
 
-	VOID GTimer::SetFrequency(ULONG freq) {
-		m_Frequency = freq;
-	}
+VOID GTimer::SetFrequency(ULONG freq) {
+	m_Frequency = freq;
+}
 
-	ULONG GTimer::GetFrequency() {
-		return m_Frequency;
-	}
+ULONG GTimer::GetFrequency() {
+	return m_Frequency;
+}
 
-	VOID GTimer::TimerHandler(REG reg) {
-		++m_TickCount;
-	}
+VOID GTimer::TimerHandler(REG reg) {
+	++m_TickCount;
+}
 
-	UINT GTimer::GetTickCount() {
-		return m_TickCount;
-	}
+UINT GTimer::GetTickCount() {
+	return m_TickCount;
+}
 
 }

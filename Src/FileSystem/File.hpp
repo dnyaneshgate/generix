@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   File.hpp
  * Author: dnyaneshg
  *
@@ -15,39 +15,50 @@
 #define MAX_DATETIME_SIZE 15
 
 typedef enum {
-	eDirectory = 0, eRegular
+	eRegularFile = 0,
+	eHardLink,
+	eSymbolicLink,
+	eCharacterSpecial,
+	eBlockSpecial,
+	eDirectoryFile,
+	eFIFO,
+	eContiguousFile,
+	eUnknownFile
 } eFileType;
 
 namespace Generix {
 
-	class GFile {
-		// member functions
-	public:
-		GFile();
-		GFile(UINT ID, CHAR * name, eFileType type = eRegular, UCHAR attributes = 0);
-		~GFile();
-		UINT GetFileId() const;
-		CHAR * GetFileName() const;
-		eFileType GetFileType() const;
-		UCHAR GetFileAttributes() const;
-	protected:
-	private:
+class GFile {
+	// member functions
+public:
+	GFile();
+	GFile(UINT ID, CHAR * name, eFileType type, UCHAR attributes, UINT fileSize,
+			CHAR *data);
+	~GFile();
+	UINT GetFileId() const;
+	CHAR * GetFileName() const;
+	eFileType GetFileType() const;
+	UCHAR GetFileAttributes() const;
+	CHAR* GetData();
+	UINT GetSize() const;
+protected:
+private:
 
-		// member variables
-	public:
-	protected:
-	private:
-		UINT m_ui_Id;
-		CHAR m_c_FileName[MAX_FILE_NAME];
-		eFileType m_e_Type;
-		USHORT m_uc_Attributes;
-		UCHAR m_uc_TimeCreated[MAX_DATETIME_SIZE];
-		UCHAR m_uc_LastModified[MAX_DATETIME_SIZE];
+	// member variables
+public:
+protected:
+private:
+	UINT m_ui_id;
+	CHAR m_c_fileName[MAX_FILE_NAME];
+	eFileType m_e_type;
+	USHORT m_us_attributes;
+	ULONG m_uc_timeCreated;
+	ULONG m_uc_lastModified;
+	UINT m_ui_size;
+	CHAR * m_pc_data;
+};
 
-		UINT Size;
-		CHAR * Data;
-		GFile *Next, *Prev;
-	};
+typedef VOID *GFILE;
 
 }
 

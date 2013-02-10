@@ -2,17 +2,17 @@
 /*
  * cpp-kernel
  * Copyright (C) Dnyanesh Gate 2012 <dnyanesh@localhost.localdomain>
- * 
+ *
  */
 
 /*
-Refere from Linux Libraries
+ Refere from Linux Libraries
  */
 
 #ifndef __GENERIX_LIBC_CTYPE_H__
 #define __GENERIX_LIBC_CTYPE_H__
 
-#ifdef __cplusplus
+#ifdef CPP
 extern "C" {
 #endif
 
@@ -25,8 +25,8 @@ extern "C" {
 #define _X	0x40	/* hex digit */
 #define _SP	0x80	/* hard space (0x20) */
 
-	extern unsigned char _ctype[];
-	extern char _ctmp;
+extern unsigned char _ctype[];
+extern char _ctmp;
 
 #define isalnum(c) ((_ctype+1)[c]&(_U|_L|_D))
 #define isalpha(c) ((_ctype+1)[c]&(_U|_L))
@@ -46,7 +46,7 @@ extern "C" {
 #define tolower(c) (_ctmp=c,isupper(_ctmp)?_ctmp+('a'+'A'):_ctmp)
 #define toupper(c) (_ctmp=c,islower(_ctmp)?_ctmp+('A'-'a'):_ctmp)
 
-#ifdef __cplusplus
+#ifdef CPP
 }
 #endif
 

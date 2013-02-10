@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   FileSystemManager.hpp
  * Author: dnyaneshg
  *
@@ -12,29 +12,29 @@
 
 namespace Generix {
 
-	class GFileSystemManager : public GSingleton<GFileSystemManager> {
-		friend class GSingleton<GFileSystemManager>;
-		friend class GKernel;
-		// member functions
-	public:
-	protected:
-	private:
-		GFileSystemManager();
-		~GFileSystemManager();
+class GFileSystemManager: public GSingleton<GFileSystemManager> {
+	friend class GSingleton<GFileSystemManager> ;
+	friend class GKernel;
+	// member functions
+public:
+protected:
+private:
+	GFileSystemManager();
+	~GFileSystemManager();
 
-		VOID Init();
-		INT Mount(const CHAR * dest, const CHAR * src, const CHAR * fsType);
-		INT Umount(const CHAR * src);
-		INT Create(const CHAR * file);
-		INT ChangeDir(const CHAR * path);
-		INT ListDir(const CHAR * path);
+	VOID Init();
+	INT Mount(const CHAR * dest, const CHAR * src, const CHAR * fsType);
+	INT Umount(const CHAR * src);
+	INT Create(const CHAR * file);
+	INT ChangeDir(const CHAR * path);
+	INT ListDir(const CHAR * path);
 
-		// member variables
-	public:
-	protected:
-	private:
-		GVirtualFileSystem * m_p_VFS;
-	};
+	// member variables
+public:
+protected:
+private:
+	GVirtualFileSystem * m_p_VFS;
+};
 
 }
 

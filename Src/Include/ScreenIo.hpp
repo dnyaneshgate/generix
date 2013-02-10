@@ -7,10 +7,8 @@
 
 namespace Console {
 
-EXTERN "C" INT Write(CSTRING str, ...)
-		__attribute__((format(printf, 1, 2)));
-EXTERN "C" INT Writeln(CSTRING str, ...)
-		__attribute__((format(printf, 1, 2)));
+EXTERN "C" INT Write(CSTRING str, ...) __attribute__((format(printf, 1, 2)));
+EXTERN "C" INT Writeln(CSTRING str, ...) __attribute__((format(printf, 1, 2)));
 EXTERN "C" VOID Putch(CCHAR ch);
 EXTERN "C" VOID Clear();
 EXTERN "C" VOID SetColor(Color fgColor, Color bgColor);

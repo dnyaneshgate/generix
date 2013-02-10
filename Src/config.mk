@@ -1,19 +1,18 @@
-
 ifeq ($(V),1)
 CC                  = gcc
 CXX                 = g++
 AS                  = nasm
 LD                  = ld
-AR                  = gcc-ar
-RANLIB              = gcc-ranlib
+AR                  = ar
+RANLIB              = ranlib
 RM                  = rm -f
 else
 CC                  = @echo "[CC]       $<" && gcc
 CXX                 = @echo "[CXX]      $<" && g++
 AS                  = @echo "[NASM]     $<" && nasm
 LD                  = @echo "[LD]       $(KERNEL)" && ld
-AR                  = @echo "[AR]       $@" && gcc -ar
-RANLIB              = @echo "[RANLIB]   $@" && gcc -ranlib
+AR                  = @echo "[AR]       $@" && ar
+RANLIB              = @echo "[RANLIB]   $@" && ranlib
 RM                  = @echo "Cleaning...  " && rm -f
 
 #CC                  = @echo -e "\033[33m[CC]\033[32m       $<\033[0m" && gcc
@@ -26,10 +25,22 @@ RM                  = @echo "Cleaning...  " && rm -f
 endif
 
 .cpp.o:
-	$(CXX) -c $(CXXFLAGS) -o $@ $<
+	$(CXX) -c $(CXXFLAGS)    -o $*.o $*.cpp
+	$(CXX) -MM $(CXXFLAGS)    $*.cpp > $*.d
+	@mv -f $*.d $*.d.tmp
+	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
+	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \
+	sed -e 's/^ *//' -e 's/$$/:/' >> $*.d
+	@rm -f $*.d.tmp
 
 .c.o:
-	$(CC) -c $(CFLAGS)    -o $@ $<
+	$(CC) -c $(CFLAGS)    -o $*.o $*.c
+	@$(CC) -MM $(CFLAGS)    $*.c > $*.d
+	@mv -f $*.d $*.d.tmp
+	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
+	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \
+	sed -e 's/^ *//' -e 's/$$/:/' >> $*.d
+	@rm -f $*.d.tmp
 
 #%.o: %.asm
 #	$(AS)  $(ASFLAGS)  -o $@ $<

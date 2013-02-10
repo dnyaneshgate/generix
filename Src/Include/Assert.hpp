@@ -2,7 +2,7 @@
 #define __GENERIX_ASSERT_HPP__
 
 #include <ScreenIo.hpp>
-#include <Processor/Processor.hpp>
+#include <Processor/Arch/IOPort.hpp>
 
 inline static void _assert(const char *file, const int line, const char *expr) {
 	CLI();

@@ -97,14 +97,14 @@ typedef struct strucELFHEADERTABLE {
 	unsigned int size; //Size of each section header
 	unsigned int addr; //The address of the first section header
 	unsigned int shndx; //Section header string table index
-} __attribute__((packed)) ELFHEADERTABLE, *PELFHEADER;
+}__attribute__((packed)) ELFHEADERTABLE, *PELFHEADER;
 
 typedef struct strucAOUTSYMBOLTABLE {
 	unsigned int tabsize;
 	unsigned int strsize;
 	unsigned int addr;
 	unsigned int reserved;
-} __attribute__((packed)) AOUTSYMBOLTABLE, *PAOUTSYMBOLTABLE;
+}__attribute__((packed)) AOUTSYMBOLTABLE, *PAOUTSYMBOLTABLE;
 
 //Bochs 2.4 doesn't provide a ROM configuration table. Virtual PC does.
 
@@ -113,45 +113,45 @@ typedef struct strucROMCONFIGURATIONTABLE {
 	unsigned char Model;
 	unsigned char Submodel;
 	unsigned char BiosRevision;
-	bool DualBus : 1;
-	bool MicroChannelBus : 1;
-	bool EBDAExists : 1;
-	bool WaitForExternalEventSupported : 1;
-	bool Reserved0 : 1;
-	bool HasRTC : 1;
-	bool MultipleInterruptControllers : 1;
-	bool BiosUsesDMA3 : 1;
-	bool Reserved1 : 1;
-	bool DataStreamingSupported : 1;
-	bool NonStandardKeyboard : 1;
-	bool BiosControlCpu : 1;
-	bool BiosGetMemoryMap : 1;
-	bool BiosGetPosData : 1;
-	bool BiosKeyboard : 1;
-	bool DMA32Supported : 1;
-	bool ImlSCSISupported : 1;
-	bool ImlLoad : 1;
-	bool InformationPanelInstalled : 1;
-	bool SCSISupported : 1;
-	bool RomToRamSupported : 1;
-	bool Reserved2 : 3;
-	bool ExtendedPOST : 1;
-	bool MemorySplit16MB : 1;
-	unsigned char Reserved3 : 1;
-	unsigned char AdvancedBIOSPresence : 3;
-	bool EEPROMPresent : 1;
-	bool Reserved4 : 1;
-	bool FlashEPROMPresent : 1;
-	bool EnhancedMouseMode : 1;
-	unsigned char Reserved5 : 6;
-} __attribute__((packed)) ROMCONFIGURATIONTABLE, *PROMCONFIGURATIONTABLE;
+	bool DualBus :1;
+	bool MicroChannelBus :1;
+	bool EBDAExists :1;
+	bool WaitForExternalEventSupported :1;
+	bool Reserved0 :1;
+	bool HasRTC :1;
+	bool MultipleInterruptControllers :1;
+	bool BiosUsesDMA3 :1;
+	bool Reserved1 :1;
+	bool DataStreamingSupported :1;
+	bool NonStandardKeyboard :1;
+	bool BiosControlCpu :1;
+	bool BiosGetMemoryMap :1;
+	bool BiosGetPosData :1;
+	bool BiosKeyboard :1;
+	bool DMA32Supported :1;
+	bool ImlSCSISupported :1;
+	bool ImlLoad :1;
+	bool InformationPanelInstalled :1;
+	bool SCSISupported :1;
+	bool RomToRamSupported :1;
+	bool Reserved2 :3;
+	bool ExtendedPOST :1;
+	bool MemorySplit16MB :1;
+	unsigned char Reserved3 :1;
+	unsigned char AdvancedBIOSPresence :3;
+	bool EEPROMPresent :1;
+	bool Reserved4 :1;
+	bool FlashEPROMPresent :1;
+	bool EnhancedMouseMode :1;
+	unsigned char Reserved5 :6;
+}__attribute__((packed)) ROMCONFIGURATIONTABLE, *PROMCONFIGURATIONTABLE;
 
 typedef struct strucMODULE {
 	int ModuleStart;
 	int ModuleEnd;
 	char *Name;
 	unsigned int Reserved;
-} __attribute__((packed)) MODULE, *PMODULE;
+}__attribute__((packed)) MODULE, *PMODULE;
 
 typedef struct strucMEMORYMAP {
 	unsigned int Size;
@@ -160,7 +160,7 @@ typedef struct strucMEMORYMAP {
 	unsigned int LengthLow;
 	unsigned int LengthHigh;
 	unsigned int Type;
-} __attribute__((packed)) MEMORYMAP, *PMEMORYMAP;
+}__attribute__((packed)) MEMORYMAP, *PMEMORYMAP;
 
 typedef struct strucDRIVESTRUCTURE {
 	unsigned int Size;
@@ -169,7 +169,7 @@ typedef struct strucDRIVESTRUCTURE {
 	unsigned short Cylinders;
 	unsigned char Heads;
 	unsigned char Sectors; //Following this field is a list of ports used by the drive, terminating in zero. This means that the Size field has to be used, not sizeof()
-} __attribute__((packed)) DRIVESTRUCTURE, *PDRIVESTRUCTURE;
+}__attribute__((packed)) DRIVESTRUCTURE, *PDRIVESTRUCTURE;
 
 typedef struct strucAPMTABLE {
 	unsigned short Version;
@@ -181,7 +181,7 @@ typedef struct strucAPMTABLE {
 	unsigned short CSLength;
 	unsigned short CS16BitLength;
 	unsigned short DSLength;
-} __attribute__((packed)) APMTABLE, *PAPMTABLE;
+}__attribute__((packed)) APMTABLE, *PAPMTABLE;
 
 typedef struct strucVBEINFOBLOCK {
 	char Signature[4];
@@ -190,7 +190,7 @@ typedef struct strucVBEINFOBLOCK {
 	unsigned char Capabilities[4];
 	short VideoModes[2];
 	short TotalMemory;
-} __attribute__((packed)) VBEINFOBLOCK, *PVBEINFOBLOCK;
+}__attribute__((packed)) VBEINFOBLOCK, *PVBEINFOBLOCK;
 
 typedef struct strucVBEMODEINFO {
 	unsigned short Attributes;
@@ -229,7 +229,7 @@ typedef struct strucVBEMODEINFO {
 	unsigned char DirectColorAttributes;
 
 	unsigned int FrameBuffer;
-} __attribute__((packed)) VBEMODEINFO, *PVBEMODEINFO;
+}__attribute__((packed)) VBEMODEINFO, *PVBEMODEINFO;
 
 typedef struct strucMULTIBOOTINFO {
 	unsigned int Flags;
@@ -256,7 +256,7 @@ typedef struct strucMULTIBOOTINFO {
 	unsigned short VBEMode;
 	unsigned int VBEInterfaceAddress;
 	unsigned short VBEInterfaceLength;
-} __attribute__((packed)) MULTIBOOTINFO, *PMULTIBOOTINFO;
+}__attribute__((packed)) MULTIBOOTINFO, *PMULTIBOOTINFO;
 
 typedef struct strucMULTIBOOTHEADER {
 	/* Must be MULTIBOOT_MAGIC - see above. */
@@ -280,8 +280,7 @@ typedef struct strucMULTIBOOTHEADER {
 	int width;
 	int height;
 	int depth;
-} __attribute__((packed)) MULTIBOOTHEADER, *PMULTIBOOTHEADER;
+}__attribute__((packed)) MULTIBOOTHEADER, *PMULTIBOOTHEADER;
 
 #endif //__ASSEMBLER__
-
 #endif //__GENERIX_MULTIBOOT_HPP__

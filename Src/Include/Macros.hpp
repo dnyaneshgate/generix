@@ -35,7 +35,7 @@
 #define AND                    &
 #define OR                     |
 #define XOR                    ^
-#define NEG(x)                 ~(x)
+#define NEG(x)                 (~(x))
 #define LT                     <
 #define GT                     >
 #define LTE                    <=
