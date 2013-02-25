@@ -1,7 +1,6 @@
 #For Auto Dependacy Refered: `scottmcpeak.com/autodepend/autodepend.html`
-
-include config.mk
 include rules.mk
+include config.mk
 
 ##.SILENT:
 .PHONY: all world lib kernel driver usage
@@ -44,6 +43,6 @@ clean:
 		rm -f $$i && echo "[RM]       $$i"; \
 	done
 	@#rm -f $$i && echo -e "\033[31m[RM]\033[36m       $$i\033[0m";
-	rm $(shell find . -name "*.d")
+	@rm -f $(shell find . -name "*.d")
 
 clean-all: distclean libclean clean

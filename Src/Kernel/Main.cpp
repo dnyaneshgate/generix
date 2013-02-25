@@ -84,8 +84,8 @@ EXTERN C INT _kMain(INT argc, CHAR ** argv) {
 	//CPU->GetProcessorInfo("Brand", brand);
 	//Console::Writeln("Brand : %s", brand);
 
-	GTarFileSystem tarFS(multiBootInfo.Modules[0].ModuleStart, multiBootInfo.Modules[0].ModuleEnd);
-	//tarFS.Read(0,0,0,0);
+	GTarFileSystem tarFS(multiBootInfo.Modules[0].ModuleStart,
+			multiBootInfo.Modules[0].ModuleEnd);
 	tarFS.Mount(ROOT_DIR);
 
 	return EXIT_SUCCESS;

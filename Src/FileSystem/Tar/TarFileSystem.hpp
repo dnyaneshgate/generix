@@ -24,7 +24,7 @@
 
 namespace Generix {
 
-struct TarHeader {
+typedef struct strucTarHeader {
 	CHAR Name[TARNAMESIZE];
 	CHAR Mode[8];
 	CHAR UID[8];
@@ -41,7 +41,7 @@ struct TarHeader {
 	CHAR DevMajor[8];
 	CHAR DevMinor[8];
 	CHAR Prefix[TARPREFIXSIZE];
-};
+} TarHeader;
 
 union TarRecord {
 	TarHeader Header;
@@ -54,14 +54,14 @@ public:
 	GTarFileSystem(const CHAR * fsPath);
 	GTarFileSystem(UINT Start, UINT End);
 	~GTarFileSystem();
-	INT Read(GFILE file, CHAR * buffer, UINT offset = 0,
-			UINT size = BUFFSIZE);
-	INT Write(GFILE file, CHAR * buffer, UINT offset = 0,
-			UINT size = BUFFSIZE);
-	VOID Open(GFILE file);
+	INT Read(GFILE file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE);
+	INT Write(GFILE file, CHAR * buffer, UINT offset = 0, UINT size = BUFFSIZE);
+	GFILE Open(CONST CHAR *pFile);
 	VOID Close(GFILE file);
-	GDirent * ReadDir(GFILE file, UINT index);
+	GDIRENT ReadDir(GDIR dfd);
 	GFILE FindDir(CONST CHAR *name);
+	GDIR OpenDir(CONST CHAR *pPath);
+	VOID CloseDir(GDIR dir);
 	INT Mount(CONST CHAR *fsPath);
 protected:
 private:

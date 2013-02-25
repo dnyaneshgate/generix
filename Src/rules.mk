@@ -16,6 +16,7 @@ ARCH                := x86
 ## Include Directories
 INCLUDE             :=  -I./ \
 						-I./Include \
+						-I./Include/C++ \
 						-I./Include/Klib/libc \
 						-I./Include/Klib/libc++ \
 						-I./Include/Klib/liballoc \
@@ -58,5 +59,3 @@ endif
 CFLAGS              += $(CPPFLAGS) ## C Compiler Flags
 CXXFLAGS            := $(CFLAGS) -DCPP -fno-stack-protector -fno-exceptions -fno-rtti -std=c++11 ## C++ Compiler Flags
 ARFLAGS             := rcs
-
-##export KERNELPATH OBJPATH DRIVERPATH BOOTPATH LINKERPATH VERSION ARCH INCLUDE WARNINGS KERNEL CPPFLAGS CFLAGS CXXFLAGS ASFLAGS LDFLAGS ARFLAGS DFLAGS

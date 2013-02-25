@@ -24,7 +24,6 @@
 #define FS_SYMLINK     0x06
 #define FS_HARDLINK    0x07
 #define FS_MOUNTPOINT  0x08 // Is the file an active mountpoint?
-
 namespace Generix {
 
 class GFile {
@@ -32,15 +31,18 @@ class GFile {
 public:
 	GFile();
 	GFile(UINT ID, CONST CHAR * name, INT type, UCHAR attributes, UINT fileSize,
-			CHAR *data);
+			CHAR *data, PVOID fsDriver = ZERO);
 	~GFile();
 	UINT GetFileId() const;
 	CHAR * GetFileName() const;
 	INT GetFileType() const;
 	UCHAR GetFileAttributes() const;
-	CHAR* GetData();
+	CHAR* GetData() const;
 	UINT GetSize() const;
-	BOOL isValid();
+	BOOL isValid() const;
+	PVOID GetFSDriver() const {
+		return m_p_fsDriver;
+	}
 protected:
 private:
 
@@ -58,6 +60,7 @@ private:
 	UINT m_ui_size;
 	CHAR * m_pc_data;
 	ULONG64 m_ull_offset;
+	PVOID m_p_fsDriver;
 };
 
 typedef VOID *GFILE;

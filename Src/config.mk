@@ -24,23 +24,23 @@ RM                  = @echo "Cleaning...  " && rm -f
 #RM                  = @echo "Cleaning...  " && rm -f
 endif
 
-.cpp.o:
-	$(CXX) -c $(CXXFLAGS)    -o $*.o $*.cpp
-	$(CXX) -MM $(CXXFLAGS)    $*.cpp > $*.d
-	@mv -f $*.d $*.d.tmp
-	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
-	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \
-	sed -e 's/^ *//' -e 's/$$/:/' >> $*.d
-	@rm -f $*.d.tmp
+#.cpp.o:
+#	$(CXX) -c $(CXXFLAGS)    -o $*.o $*.cpp
+#	$(CXX) -MM $(CXXFLAGS)    $*.cpp > $*.d
+#	@mv -f $*.d $*.d.tmp
+#	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
+#	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \
+#	sed -e 's/^ *//' -e 's/$$/:/' >> $*.d
+#	@rm -f $*.d.tmp
 
-.c.o:
-	$(CC) -c $(CFLAGS)    -o $*.o $*.c
-	@$(CC) -MM $(CFLAGS)    $*.c > $*.d
-	@mv -f $*.d $*.d.tmp
-	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
-	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \
-	sed -e 's/^ *//' -e 's/$$/:/' >> $*.d
-	@rm -f $*.d.tmp
+#.c.o:
+#	$(CC) -c $(CFLAGS)    -o $*.o $*.c
+#	@$(CC) -MM $(CFLAGS)    $*.c > $*.d
+#	@mv -f $*.d $*.d.tmp
+#	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
+#	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \
+#	sed -e 's/^ *//' -e 's/$$/:/' >> $*.d
+#	@rm -f $*.d.tmp
 
 #%.o: %.asm
 #	$(AS)  $(ASFLAGS)  -o $@ $<
@@ -55,3 +55,21 @@ endif
 	$(CPP) $(CPPFLAGS) -o $@ -x assembler-with-cpp $<
 
 ##export CC CXX AS LD AR RANLIB RM
+
+.cpp.o:
+	@g++ -MM $(CXXFLAGS)    $*.cpp > $*.d
+	@mv -f $*.d $*.d.tmp
+	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
+	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \
+	sed -e 's/^ *//' -e 's/$$/:/' >> $*.d
+	@rm -f $*.d.tmp
+	$(CXX) -c $(CXXFLAGS)    -o $*.o $*.cpp
+
+.c.o:
+	@gcc -MM $(CFLAGS)    $*.c > $*.d
+	@mv -f $*.d $*.d.tmp
+	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
+	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \
+	sed -e 's/^ *//' -e 's/$$/:/' >> $*.d
+	@rm -f $*.d.tmp
+	$(CC) -c $(CFLAGS)    -o $*.o $*.c

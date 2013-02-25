@@ -77,6 +77,20 @@
 #define _PASTE(x,y)				x##y
 #define PASTE(x,y)				_PASTE(x,y)
 
+#define SAFE_DELETE_OBJECT(x) \
+	if(x)\
+	{\
+		delete x;\
+		x = ZERO;\
+	}
+
+#define SAFE_DELETE_ARRAY(x) \
+	if(x)\
+	{\
+		delete[] x;\
+		x = ZERO;\
+	}
+
 #define SWAP(x,y) \
 		{ \
 			if((x) != (y)) { \

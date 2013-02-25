@@ -12,8 +12,6 @@
 #define FILE_SEPERATOR '/'
 #define ROOT_DIR "/"
 
-#include <Types.hpp>
-#include <Macros.hpp>
 #include <List.hpp>
 #include <FileSystem/File.hpp>
 
@@ -27,6 +25,15 @@ public:
 	UINT m_i_inode;
 };
 
+class GDir {
+public:
+	INT fd;
+	GDirent d;
+};
+
+typedef GDirent *GDIRENT;
+typedef VOID *GDIR;
+
 class GFileSystem {
 	// member functions
 public:
@@ -35,7 +42,7 @@ public:
 	virtual ~GFileSystem();
 	BOOL IsMounted() const;
 	CHAR *GetMountPath() const;
-	INT  SetMountPath(CONST CHAR *fsPath);
+	INT SetMountPath(CONST CHAR *fsPath);
 	GFILE GetRoot() const;
 	VOID SetRoot(GFILE file);
 	INT AddFile(GFILE file);
@@ -45,20 +52,28 @@ public:
 			BUFFSIZE) = 0;
 	virtual INT Write(GFILE file, CHAR * buffer, UINT offset = 0, UINT size =
 			BUFFSIZE) = 0;
-	virtual VOID Open(GFILE file) = 0;
+	virtual GFILE Open(CONST CHAR *pFile) = 0;
 	virtual VOID Close(GFILE file) = 0;
-	virtual GDirent * ReadDir(GFILE file, UINT index) = 0;
+	virtual GDIRENT ReadDir(GDIR dfd) = 0;
 	virtual GFILE FindDir(CONST CHAR *name) = 0;
+	virtual GDIR OpenDir(CONST CHAR *pPath) = 0;
+	virtual VOID CloseDir(GDIR dir) = 0;
 
 protected:
+	UINT GetNextId() const {
+		return ++Id;
+	}
+	UINT GetNextFd() const {
+		return ++FD;
+	}
 private:
 
 	// member variables
 public:
 protected:
-	STATIC UINT Id;
 	List<GFILE> m_p_listOfFiles;
 private:
+	STATIC UINT Id;STATIC UINT FD;
 	UINT m_ui_fileCount;
 	BOOL m_b_isMounted;
 	USHORT m_us_fsOptions;

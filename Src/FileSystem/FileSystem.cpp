@@ -1,9 +1,12 @@
+#include <Types.hpp>
+#include <Macros.hpp>
 #include <FileSystem/FileSystem.hpp>
 #include <string.h>
 
 namespace Generix {
 
 UINT GFileSystem::Id = 0;
+UINT GFileSystem::FD = 0;
 
 GFileSystem::GFileSystem() :
 		m_ui_fileCount(ZERO), m_b_isMounted(false), m_us_fsOptions(ZERO) {

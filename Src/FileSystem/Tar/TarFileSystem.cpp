@@ -1,3 +1,5 @@
+#include <Types.hpp>
+#include <Macros.hpp>
 #include <FileSystem/Tar/TarFileSystem.hpp>
 #include <string.h>
 
@@ -59,8 +61,6 @@ GTarFileSystem::GTarFileSystem(UINT Start, UINT End) {
 
 		INT sz = GetSize(fileHeader->Size);
 
-		Id++;
-
 		CHAR *fileData = ZERO;
 		INT fileType;
 
@@ -95,8 +95,8 @@ GTarFileSystem::GTarFileSystem(UINT Start, UINT End) {
 			break;
 		}
 
-		GFile * file = new GFile(Id, fileHeader->Name, fileType, 0, sz,
-				fileData);
+		GFile * file = new GFile(GetNextId(), fileHeader->Name, fileType, 0, sz,
+				fileData, this);
 		AddFile(file);
 		fsPtr += ((sz / TARRECORDSIZE) + 1) * TARRECORDSIZE;
 
@@ -111,56 +111,74 @@ GTarFileSystem::~GTarFileSystem() {
 }
 
 INT GTarFileSystem::Read(GFILE file, CHAR * buffer, UINT offset, UINT size) {
-	if(ZERO == file)
+	if (ZERO == file)
 		return ERROR;
 
 	List<GFILE>::iterator begin = m_p_listOfFiles.begin();
 	List<GFILE>::iterator end = m_p_listOfFiles.end();
-	GFile *fp = (GFile*)file;
+	GFile *fp = (GFile*) file;
 
-	if(NOT fp->isValid())
+	if ((NOT fp->isValid()) or (FS_FILE != fp->GetFileType()))
 		return ERROR;
 
-	while (begin != end) {
-		GFile * filePtr = (GFile*)*begin;
-		if (strequ(fp->GetFileName(), filePtr->GetFileName())) {
-			if(size > filePtr->GetSize()) {
-				size = filePtr->GetSize();
-			}
-			memcpy(buffer, filePtr->GetData(), size);
-			return size;
-		}
-		++begin;
-	}
+	INT readBytes = (size > fp->GetSize()) ? fp->GetSize() : size;
 
-	return ERROR;
+	memcpy(buffer, fp->GetData(), readBytes);
+
+	return readBytes;
 }
 
 INT GTarFileSystem::Write(GFILE file, CHAR * buffer, UINT offset, UINT size) {
 	return ZERO;
 }
 
-VOID GTarFileSystem::Open(GFILE file) {
+GFILE GTarFileSystem::Open(CONST CHAR *pFile) {
+	return ZERO;
 }
 
 VOID GTarFileSystem::Close(GFILE file) {
 }
 
-GDirent * GTarFileSystem::ReadDir(GFILE file, UINT index) {
+GDIR GTarFileSystem::OpenDir(CONST CHAR *pPath) {
+	if ((NOT pPath) or (strlen(pPath)))
+		return ZERO;
+
+	GFile *dir = (GFile*) FindDir(pPath);
+	if (ZERO EQU dir)
+		return ZERO;
+
+	if (FS_DIRECTORY != dir->GetFileType())
+		return ZERO;
+
+	GDir *newDir = new GDir();
+	ASSERT(newDir != ZERO);
+	newDir->fd = dir->GetFileId();
+	strcpy(newDir->d.m_c_name, dir->GetFileName());
+	newDir->d.m_i_inode = dir->GetFileId();
+
+	return (GDIR) newDir;
+}
+
+VOID GTarFileSystem::CloseDir(GDIR dir) {
+	GDir *pDir = (GDir*) dir;
+	SAFE_DELETE_OBJECT(pDir);
+}
+
+GDIRENT GTarFileSystem::ReadDir(GDIR dfd) {
 	return ZERO;
 }
 
 GFILE GTarFileSystem::FindDir(CONST CHAR *name) {
-	if(ZERO == name)
+	if (ZERO EQU name)
 		return ZERO;
 
 	List<GFILE>::iterator begin = m_p_listOfFiles.begin();
 	List<GFILE>::iterator end = m_p_listOfFiles.end();
 	GFile *node = ZERO;
 
-	while(begin != end) {
-		GFile * filePtr = (GFile*)*begin;
-		if(strequ(filePtr->GetFileName(), name)) {
+	while (begin != end) {
+		GFile * filePtr = (GFile*) *begin;
+		if (strequ(filePtr->GetFileName(), name)) {
 			node = filePtr;
 			break;
 		}
@@ -170,7 +188,8 @@ GFILE GTarFileSystem::FindDir(CONST CHAR *name) {
 
 INT GTarFileSystem::Mount(CONST CHAR *fsPath) {
 	SetMountPath(fsPath);
-	GFile *root = new GFile(++Id, fsPath, eDirectoryFile, ZERO, ZERO, ZERO);
+	GFile *root = new GFile(GetNextId(), fsPath, eDirectoryFile, ZERO, ZERO,
+			ZERO);
 	m_p_listOfFiles.push_front(root);
 	SetRoot(root);
 	return ZERO;

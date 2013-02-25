@@ -4,15 +4,17 @@
 namespace Generix {
 
 GFile::GFile() :
-		m_ui_magic(__FILE_MAGIC__), m_ui_id(ZERO), m_us_attributes(ZERO), m_ui_size(ZERO), m_pc_data(ZERO) {
+		m_ui_magic(__FILE_MAGIC__), m_ui_id(ZERO), m_us_attributes(ZERO), m_ui_size(
+				ZERO), m_pc_data(ZERO), m_p_fsDriver(ZERO) {
 	m_i_type = FS_UNKNOWN;
 	memset(m_c_fileName, ZERO, MAX_FILE_NAME);
 }
 
 GFile::GFile(UINT ID, CONST CHAR* name, INT type, UCHAR attributes,
-		UINT fileSize, CHAR *data) :
-		m_ui_magic(__FILE_MAGIC__), m_ui_id(ID), m_i_type(type), m_us_attributes(attributes), m_ui_size(
-				fileSize), m_pc_data(data) {
+		UINT fileSize, CHAR *data, PVOID fsDriver) :
+		m_ui_magic(__FILE_MAGIC__), m_ui_id(ID), m_i_type(type), m_us_attributes(
+				attributes), m_ui_size(fileSize), m_pc_data(data), m_p_fsDriver(
+				fsDriver) {
 	strcpy(m_c_fileName, name);
 }
 
@@ -40,11 +42,11 @@ UINT GFile::GetSize() const {
 	return m_ui_size;
 }
 
-CHAR* GFile::GetData() {
+CHAR* GFile::GetData() const {
 	return m_pc_data;
 }
 
-BOOL GFile::isValid() {
+BOOL GFile::isValid() const {
 	return (m_ui_magic == __FILE_MAGIC__);
 }
 
