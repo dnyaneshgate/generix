@@ -1,0 +1,8 @@
+
+ADD_SUBDIRECTORY( CPIO )
+ADD_SUBDIRECTORY( DevFS )
+ADD_SUBDIRECTORY( Ext2 )
+ADD_SUBDIRECTORY( FAT )
+ADD_SUBDIRECTORY( Tar )
+
+ADD_FILESYSTEM_SRC( FileSystem File.cpp FileSystem.cpp FileSystemInterface.cpp VirtualFileSystem.cpp )
