@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../Src/Klib/liballoc.a  CMakeFiles/alloc.dir/liballoc/Allocator.cpp.o
+/usr/bin/ranlib ../../../Src/Klib/liballoc.a

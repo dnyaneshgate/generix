@@ -1,0 +1,4 @@
+/home/DnyaneshG/MyProjects/Generix/build/Src/CMakeFiles/%.o.dir
+/home/DnyaneshG/MyProjects/Generix/build/Src/Klib/CMakeFiles/alloc.dir
+/home/DnyaneshG/MyProjects/Generix/build/Src/CMakeFiles/kernel.dir
+/home/DnyaneshG/MyProjects/Generix/build/Src/Klib/CMakeFiles/stdc.dir

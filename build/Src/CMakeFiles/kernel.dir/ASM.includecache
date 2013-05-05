@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../Src/Include/Klib/libc++/Singleton.hpp
+
+../Src/Include/Macros.hpp
+
+../Src/Include/Multiboot.hpp
+
+../Src/Include/Processor/x86/CPU.hpp
+
+../Src/Include/Processor/x86/Memory.hpp
+Mem/Memory.hpp
+-
+Singleton.hpp
+-
+
+../Src/Mem/Memory.hpp
+
+/home/DnyaneshG/MyProjects/Generix/Src/Kernel/Processor/x86/Asm/Boot.asm
+Macros.hpp
+-
+Multiboot.hpp
+-
+Processor/x86/CPU.hpp
+-
+Processor/x86/Memory.hpp
+-
+

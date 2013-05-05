@@ -67,7 +67,7 @@ EXTERN C INT _kMain(INT argc, CHAR ** argv) {
 	Console::Writeln("Generix");
 	Console::SetFontColor(fgCol);
 	Console::Write("Version : ");
-	Console::Writeln(__GENERIX_VERSION__);
+	//Console::Writeln(__GENERIX_VERSION__);
 
 	GKernel *kernel = GKernel::Instance(); //get kernel instance
 	GProcessor *CPU = kernel->GetCpu(); //get processor instance
